@@ -42,7 +42,7 @@ const SignInUp = () => {
 
                 {errors.password && errors.password.message}
 
-                <button type={"submit"}>{"Submit"}</button>
+                <button type="submit">{"Submit"}</button>
             </form>
 
             <form onSubmit={handleSubmit(onSubmit)}>
