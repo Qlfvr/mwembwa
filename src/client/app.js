@@ -8,8 +8,11 @@
 
 import * as React from "react";
 import ReactDOM from "react-dom";
-
 import Map from "./components/map";
 import "./styles/main.scss";
-
-ReactDOM.render(<Map />, document.querySelector("#app"));
+ReactDOM.render(
+    <>
+        <Map />
+    </>,
+    document.querySelector("#app"),
+);
