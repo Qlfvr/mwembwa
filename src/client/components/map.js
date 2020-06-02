@@ -1,18 +1,16 @@
 import React from "react";
-import {Map, Marker, Popup, TileLayer} from "react-leaflet";
+import {Map, TileLayer} from "react-leaflet";
 // import {Icon} from "leaflet";
 // import * as parkData from "./data/skateboard-parks.json";
 
 const MyMap = () => {
     return (
-        
-        <Map center={[50.6246191, 5.5290555]} zoom={12}>,
+        <Map center={[50.6246191, 5.5290555]} zoom={12}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
         </Map>
-        
     );
 };
 

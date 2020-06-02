@@ -10,7 +10,9 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 
 import Map from "./components/map";
-import './styles/style.css';
+import SignInUp from "./components/sign-in-up/sign-in-up";
 
+import "./styles/style.css";
 
 ReactDOM.render(<Map />, document.querySelector("#app"));
+ReactDOM.render(<SignInUp />, document.querySelector("#app"));
