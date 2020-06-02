@@ -1,8 +1,8 @@
 import React from "react";
 import {Map, TileLayer} from "react-leaflet";
 
-const MyMap = () => (
-    <>
+const MyMap = () => {
+    return (
         <Map center={[50.6246191, 5.5290555]} zoom={12}>
             <TileLayer
                 url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
@@ -11,7 +11,7 @@ const MyMap = () => (
                 }
             />
         </Map>
-    </>
-);
+    );
+};
 
 export default MyMap;
