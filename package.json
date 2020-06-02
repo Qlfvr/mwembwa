@@ -48,6 +48,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "leaflet": "^1.6.0",
+    "mongoose": "^5.9.16",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.7.0"
