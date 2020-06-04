@@ -11,11 +11,13 @@ import ReactDOM from "react-dom";
 import Map from "./components/map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import "./styles/main.scss";
+import Leaderboard from "./components/leaderboard/leaderboard";
 
 ReactDOM.render(
     <>
         <Map />
         <SignInUp />
+        <Leaderboard />
     </>,
     document.querySelector("#app"),
 );
