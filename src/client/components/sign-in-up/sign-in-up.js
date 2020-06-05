@@ -17,10 +17,13 @@ const SignInUp = () => {
         setHex(randomColor);
     };
     return (
-        <div>
+        <div className={"homePage"}>
             <div className={"head"}>
                 <h1>{"Mwembwa"}</h1>
-                <button type={"button"} onClick={() => setModalIsOpen(true)}>
+                <button
+                    className={"buttonSign"}
+                    type={"button"}
+                    onClick={() => setModalIsOpen(true)}>
                     {" Sign In / Sign Up"}
                 </button>
 
@@ -84,20 +87,26 @@ const SignInUp = () => {
                         {errors.password && errors.password.message}
 
                         <button
+                            className={"buttonSign"}
                             type={"button"}
                             onClick={randomizedHex}
                             style={{backgroundColor: `${hex}`}}>
                             {"Pick a Color !"}
                         </button>
 
-                        <button type={"submit"}>{"Go !"}</button>
+                        <button className={"buttonSign"} type={"submit"}>
+                            {"Go !"}
+                        </button>
                     </form>
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <h1>{"Connexion"}</h1>
                         <h2>{"Happy to see you again !"}</h2>
                         <div>
-                            <i className={"fas fa-user-alt"} />
+                            <i
+                                id={"pictureConnexion"}
+                                className={"fas fa-user-alt"}
+                            />
                         </div>
 
                         <label>{"Email / Username"}</label>
@@ -127,7 +136,9 @@ const SignInUp = () => {
 
                         {errors.password && errors.password.message}
 
-                        <button type={"submit"}>{"Go !"}</button>
+                        <button className={"buttonSign"} type={"submit"}>
+                            {"Go !"}
+                        </button>
                     </form>
                 </Modal>
             </div>

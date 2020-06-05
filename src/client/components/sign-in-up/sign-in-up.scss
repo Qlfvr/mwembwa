@@ -1,4 +1,4 @@
-div {
+.homePage {
     text-align: center;
     font-family: "Amaranth", sans-serif;
 
@@ -22,7 +22,7 @@ div {
     height: auto;
     width: auto;
     display: flex;
-    //background-color: black;
+
     justify-content: center;
     text-align: center;
     font-family: "Amaranth", sans-serif;
@@ -56,11 +56,7 @@ input {
     font-family: "Amaranth", sans-serif;
 }
 
-h2 {
-    font-size: 15px;
-}
-
-i {
+#pictureConnexion {
     height: 120px;
     width: 120px;
     background-color: white;
@@ -71,16 +67,13 @@ i {
     margin-top: 15px;
 }
 
-button {
-    position: relative;
-    width: auto;
+.buttonSign {
     height: 50px;
 
     background: #f8e3c7;
     border-radius: 50px;
-    border: none;
-    //margin-left: 25px;
+
     margin: 10px 40px 10px 40px;
-    font-family: "Amaranth", sans-serif;
+
     font-size: 20px;
 }
