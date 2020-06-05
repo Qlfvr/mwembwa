@@ -56,7 +56,8 @@
     "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.7.2",
-    "react-leaflet": "^2.7.0"
+    "react-leaflet": "^2.7.0",
+    "react-modal": "^3.11.2"
   },
   "husky": {
     "hooks": {
