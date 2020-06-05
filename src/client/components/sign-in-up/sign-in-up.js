@@ -141,7 +141,7 @@ const SignInUp = () => {
                 </p>
                 <p>
                     {
-                        "Mais attention! Toutes les 15' tu recevras une quantité de feuilles égale au total de chacun de ses arbres et toutes les heures, tu perdras la moitié de tes feuilles!"
+                        "Mais attention! Toutes les 15' tu recevras une quantité de feuilles égale au total de chacun de tes arbres et toutes les heures, tu perdras la moitié de tes feuilles!"
                     }
                 </p>
                 <p>
