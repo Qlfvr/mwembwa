@@ -12,12 +12,14 @@ import Map from "./components/map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import "./styles/main.scss";
 import Leaderboard from "./components/leaderboard/leaderboard";
+import Gamelog from "./components/gamelog/gamelog";
 
 ReactDOM.render(
     <>
         <Map />
         <SignInUp />
         <Leaderboard />
+        <Gamelog />
     </>,
     document.querySelector("#app"),
 );
