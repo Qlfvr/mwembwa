@@ -1,22 +1,40 @@
-#form-container {
-    height: 600px;
-    width: 100%;
-    display: flex;
-    /*background-color: black ;*/
+div {
+    text-align: center;
+    font-family: "Amaranth", sans-serif;
 
     justify-content: center;
-    font-family: "Amaranth", sans-serif;
-    position: absolute;
-    background: none;
 }
+
+.head {
+    background-color: grey;
+    margin: 10px 20px 10px 20px;
+    padding: 10px 0 10px 0;
+    border-radius: 30px;
+}
+.rules {
+    background-color: #bde6d2;
+    margin: 10px 20px 10px 20px;
+    padding: 10px 0 10px 0;
+    border-radius: 30px;
+}
+
+#form-container {
+    height: auto;
+    width: auto;
+    display: flex;
+    //background-color: black;
+    justify-content: center;
+    text-align: center;
+    font-family: "Amaranth", sans-serif;
+}
+
 form {
     border-radius: 30px;
     background-color: #bde6d2;
-    height: 800px;
+    height: auto;
     width: 250px;
     margin: 10px;
 
-    text-align: center;
     flex-direction: column;
     display: flex;
     padding: 10px;
@@ -30,35 +48,39 @@ label {
 }
 input {
     height: 30px;
-    width: 100%;
+    width: auto;
     background: #f8e3c7;
     border-radius: 30px;
     margin-bottom: 10px;
     border: none;
+    font-family: "Amaranth", sans-serif;
+}
+
+h2 {
+    font-size: 15px;
 }
 
 i {
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
     background-color: white;
-    border-radius: 60px;
+    border-radius: 100px;
     position: relative;
-    text-align: center;
-    justify-content: center;
-    margin-left: 70px;
-    margin-bottom: 20px;
+
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
+
 button {
     position: relative;
-    width: 197px;
+    width: auto;
     height: 50px;
-    text-align: center;
-    justify-content: center;
+
     background: #f8e3c7;
     border-radius: 50px;
     border: none;
-    margin-left: 25px;
-    margin-top: 10px;
+    //margin-left: 25px;
+    margin: 10px 40px 10px 40px;
     font-family: "Amaranth", sans-serif;
     font-size: 20px;
 }
