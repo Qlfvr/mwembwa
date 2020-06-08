@@ -8,7 +8,19 @@
 
 import express from "express";
 import path from "path";
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
+const treeRoutes = require("./routes/tree");
+const userRoutes = require("./routes/user");
+const bodyParser = require("body-parser");
+
+mongoose
+    .connect("mongodb://dev:dev@mongo:27017/", {
+        dbName: "mwenbwa",
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log("Connection to MongoDB successful"))
+    .catch(() => console.log("Connection to MongoDB failed"));
 
 const {APP_PORT} = process.env;
 
@@ -16,19 +28,10 @@ const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
-app.get("/hello", (req, res) => {
-    console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
-    res.send("Hello, World!"); 
-});
+app.use(bodyParser.json());
 
-//Connexion à la base de donnée
-
-mongoose.connect("mongodb://mongo:27017/mwenbwa", { useNewUrlParser: true });
-var db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", function () {
-    console.log("successfully connected to database");
-});
+app.use("/api/auth", userRoutes);
+app.use("/api/tree", treeRoutes);
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
