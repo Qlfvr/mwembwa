@@ -32,7 +32,7 @@ const SignInUp = () => {
                     onRequestClose={() => setModalIsOpen(false)}
                     style={{
                         overlay: {
-                            background: "grey",
+                            background: "#001011",
                         },
                     }}
                     id={"form-container"}>
@@ -143,7 +143,7 @@ const SignInUp = () => {
                 </Modal>
             </div>
             <div className={"rules"}>
-                <h2>{"Rules of the game"}</h2>
+                <h3>{"Rules of the game"}</h3>
                 <p>{"Créé ton profil et choisis une couleur."}</p>
                 <p>
                     {

@@ -12,7 +12,7 @@
     border-radius: 10px;
 }
 h1 {
-    color: #454b66;
+    color: #d6a2ad;
 }
 .rules {
     background-color: #454b66;
@@ -32,8 +32,8 @@ h1 {
 }
 
 form {
-    border-radius: 30px;
-    background-color: #bde6d2;
+    border-radius: 10px;
+    background-color: #322a26;
     height: auto;
     width: 250px;
     margin: 10px;
@@ -52,7 +52,7 @@ label {
 input {
     height: 30px;
     width: auto;
-    background: D6A2AD;
+    background: #d6a2ad;
     border-radius: 30px;
     margin-bottom: 10px;
     border: none;
@@ -72,11 +72,14 @@ input {
 
 .buttonSign {
     height: 40px;
-    width: 300px;
+    width: auto;
     background: #d6a2ad;
     border-radius: 10px;
 
     margin: 10px 40px 10px 40px;
 
     font-size: 20px;
+}
+h2 {
+    color: #d6a2ad;
 }
