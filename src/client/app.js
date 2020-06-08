@@ -11,6 +11,7 @@ import ReactDOM from "react-dom";
 import Map from "./components/map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import "./styles/main.scss";
+import axios from "axios";
 
 ReactDOM.render(
     <>
