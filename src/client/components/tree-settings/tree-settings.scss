@@ -1,0 +1,99 @@
+.TreeSettings {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: auto;
+    background: #f4c287;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+}
+.TreeFree {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px;
+}
+.TreeClosed {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px;
+}
+.TreeLocked {
+    display: flex;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px;
+}
+.TreeFree i {
+    height: 50px;
+    width: 50px;
+    background-color: green;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
+.TreeClosed i {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
+.TreeLocked i {
+    height: 50px;
+    width: 50px;
+    background-color: orange;
+    border-radius: 10px;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#buyTreeFree {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: auto;
+    height: auto;
+    width: auto;
+}
+.buyTreeHeader {
+    background: #f4c287;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 5px;
+}
+.buyTreeHeader i {
+    background-color: lightblue;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+.buyTreeUser {
+    background: #f4c287;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}

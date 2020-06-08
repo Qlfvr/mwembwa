@@ -11,6 +11,7 @@ import ReactDOM from "react-dom";
 import Map from "./components/map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import GamePage from "./components/game-page/game-page";
+import TreeSettings from "./components/tree-settings/tree-settings";
 import "./styles/main.scss";
 
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Map />
         <SignInUp />
         <GamePage />
+        <TreeSettings />
     </>,
     document.querySelector("#app"),
 );
