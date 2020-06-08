@@ -1,21 +1,24 @@
 .homePage {
     text-align: center;
     font-family: "Amaranth", sans-serif;
-
+    background-color: #001011;
     justify-content: center;
+    padding: 5px;
 }
 
 .head {
-    background-color: grey;
     margin: 10px 20px 10px 20px;
-    padding: 10px 0 10px 0;
-    border-radius: 30px;
+    padding: 10px;
+    border-radius: 10px;
+}
+h1 {
+    color: #454b66;
 }
 .rules {
-    background-color: #bde6d2;
+    background-color: #454b66;
     margin: 10px 20px 10px 20px;
     padding: 10px 0 10px 0;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 #form-container {
@@ -49,7 +52,7 @@ label {
 input {
     height: 30px;
     width: auto;
-    background: #f8e3c7;
+    background: D6A2AD;
     border-radius: 30px;
     margin-bottom: 10px;
     border: none;
@@ -68,10 +71,10 @@ input {
 }
 
 .buttonSign {
-    height: 50px;
-
-    background: #f8e3c7;
-    border-radius: 50px;
+    height: 40px;
+    width: 300px;
+    background: #d6a2ad;
+    border-radius: 10px;
 
     margin: 10px 40px 10px 40px;
 
