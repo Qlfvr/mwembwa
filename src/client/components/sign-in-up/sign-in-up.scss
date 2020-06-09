@@ -1,39 +1,36 @@
-.homePage {
+div {
     text-align: center;
     font-family: "Amaranth", sans-serif;
-    background-color: #001011;
+
     justify-content: center;
-    padding: 5px;
 }
 
 .head {
-    margin: 10px 20px 10px 20px;
-    padding: 10px;
-    border-radius: 10px;
-}
-h1 {
-    color: #d6a2ad;
-}
-.rules {
-    background-color: #454b66;
+    background-color: grey;
     margin: 10px 20px 10px 20px;
     padding: 10px 0 10px 0;
-    border-radius: 10px;
+    border-radius: 30px;
+}
+.rules {
+    background-color: #bde6d2;
+    margin: 10px 20px 10px 20px;
+    padding: 10px 0 10px 0;
+    border-radius: 30px;
 }
 
 #form-container {
     height: auto;
     width: auto;
     display: flex;
-
+    //background-color: black;
     justify-content: center;
     text-align: center;
     font-family: "Amaranth", sans-serif;
 }
 
 form {
-    border-radius: 10px;
-    background-color: #322a26;
+    border-radius: 30px;
+    background-color: #bde6d2;
     height: auto;
     width: 250px;
     margin: 10px;
@@ -52,14 +49,18 @@ label {
 input {
     height: 30px;
     width: auto;
-    background: #d6a2ad;
+    background: #f8e3c7;
     border-radius: 30px;
     margin-bottom: 10px;
     border: none;
     font-family: "Amaranth", sans-serif;
 }
 
-#pictureConnexion {
+#h2 {
+    font-size: 15px;
+}
+
+#icon {
     height: 120px;
     width: 120px;
     background-color: white;
@@ -70,16 +71,16 @@ input {
     margin-top: 15px;
 }
 
-.buttonSign {
-    height: 40px;
+button {
+    position: relative;
     width: auto;
-    background: #d6a2ad;
-    border-radius: 10px;
+    height: 50px;
 
+    background: #f8e3c7;
+    border-radius: 50px;
+    border: none;
+    //margin-left: 25px;
     margin: 10px 40px 10px 40px;
-
+    font-family: "Amaranth", sans-serif;
     font-size: 20px;
-}
-h2 {
-    color: #d6a2ad;
 }
