@@ -22,7 +22,7 @@ const GamePage = () => (
                     <i className={"fas fa-user-cog"} />
                 </button>
 
-                <div id={"profilePicture"} />
+                <div className={"profilePicture"} />
                 <h1>{"User Name"}</h1>
             </div>
         </div>
