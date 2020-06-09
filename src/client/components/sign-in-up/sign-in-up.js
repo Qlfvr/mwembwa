@@ -36,7 +36,9 @@ const SignInUp = () => {
                         },
                     }}
                     id={"form-container"}>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form
+                        className={"formInscription"}
+                        onSubmit={handleSubmit(onSubmit)}>
                         <h1>{"Inscription"}</h1>
                         <label>{"Email"}</label>
                         <input
@@ -99,7 +101,9 @@ const SignInUp = () => {
                         </button>
                     </form>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form
+                        className={"formConnexion"}
+                        onSubmit={handleSubmit(onSubmit)}>
                         <h1>{"Connexion"}</h1>
 
                         <div>
