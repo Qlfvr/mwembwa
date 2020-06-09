@@ -101,12 +101,9 @@ const SignInUp = () => {
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <h1>{"Connexion"}</h1>
-                        <h2>{"Happy to see you again !"}</h2>
+
                         <div>
-                            <i
-                                id={"pictureConnexion"}
-                                className={"fas fa-user-alt"}
-                            />
+                            <i id={"icon"} className={"fas fa-user-alt"} />
                         </div>
 
                         <label>{"Email / Username"}</label>
