@@ -70,12 +70,14 @@
     width: auto;
     height: auto;
     width: auto;
+    text-align: center;
+    justify-content: center;
 }
 .buyTreeHeader {
     background: #f4c287;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
-    padding: 10px;
+    padding: 20px;
     justify-content: center;
     text-align: center;
     margin-bottom: 5px;
@@ -85,6 +87,9 @@
     height: 50px;
     width: 50px;
     border-radius: 10px;
+    text-align: center;
+    float: left;
+    margin: 5px;
 }
 .buyTreeUser {
     background: #f4c287;
@@ -95,5 +100,29 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.buyTreeUser i {
+    display: flex;
+    flex-direction: column;
+}
+.buyTreeUser::-webkit-scrollbar {
+    display: block;
+}
+.buyTreeUser::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: white;
+}
+.buyTreeUser::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 30px;
+}
+
+.buyTreeUser::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 30px;
 }

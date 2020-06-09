@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import Modal from "react-modal";
-import PerfectScrollbar from "react-perfect-scrollbar";
 
 import "./tree-settings.scss";
 
@@ -53,17 +52,42 @@ const TreeSettings = () => {
                                     </a>
                                 </div>
                                 <div className={"buyTreeUser"}>
-                                    <PerfectScrollbar>
-                                        <i className={"fas fa-user-alt"}>
-                                            <h3>{"User name"}</h3>
-                                        </i>
-                                        <i className={"fas fa-user-alt"}>
-                                            <h3>{"User name"}</h3>
-                                        </i>
-                                        <i className={"fas fa-user-alt"}>
-                                            <h3>{"User name"}</h3>
-                                        </i>
-                                    </PerfectScrollbar>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
+                                    <i className={"fas fa-user-alt"}>
+                                        <h3>{"User name"}</h3>
+                                    </i>
                                 </div>
                             </div>
                         </Modal>
