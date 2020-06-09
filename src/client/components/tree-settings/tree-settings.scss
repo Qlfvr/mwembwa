@@ -187,14 +187,8 @@
     margin-top: 30px;
 }
 .formComment {
-<<<<<<< HEAD
-    float: right;
-    height: 200px;
-    width: 300px;
-=======
     height: 200px;
     width: 280px;
->>>>>>> features/treesettings
     margin-left: 0px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     background-color: #bde6d2;
@@ -208,18 +202,10 @@
     justify-content: space-around;
     input {
         width: 250px;
-<<<<<<< HEAD
-        border-radius: 20px;
-        border: none;
-        background-color: #f4c287;
-        margin: 10px;
-        height: 30px;
-=======
         height: 30px;
         border-radius: 20px;
         background-color: #f8e3c7;
         border: none;
->>>>>>> features/treesettings
     }
     i {
         font-size: 25px;
@@ -234,11 +220,7 @@
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
-<<<<<<< HEAD
-    height: 150px;
-=======
     margin-top: 20px;
->>>>>>> features/treesettings
 
     output {
         background-color: white;
