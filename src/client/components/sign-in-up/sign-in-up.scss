@@ -28,7 +28,7 @@ div {
     font-family: "Amaranth", sans-serif;
 }
 
-form {
+.formInscription {
     border-radius: 30px;
     background-color: #bde6d2;
     height: auto;
@@ -39,21 +39,42 @@ form {
     display: flex;
     padding: 10px;
     box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+    input {
+        height: 30px;
+        width: auto;
+        background: #f8e3c7;
+        border-radius: 30px;
+        margin-bottom: 10px;
+        border: none;
+        font-family: "Amaranth", sans-serif;
+    }
+}
+.formConnexion {
+    border-radius: 30px;
+    background-color: #bde6d2;
+    height: auto;
+    width: 250px;
+    margin: 10px;
+
+    flex-direction: column;
+    display: flex;
+    padding: 10px;
+    box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+    input {
+        height: 30px;
+        width: auto;
+        background: #f8e3c7;
+        border-radius: 30px;
+        margin-bottom: 10px;
+        border: none;
+        font-family: "Amaranth", sans-serif;
+    }
 }
 label {
     font-family: "Amaranth", sans-serif;
     text-align: left;
     margin-left: 10px;
     font-size: 15px;
-}
-input {
-    height: 30px;
-    width: auto;
-    background: #f8e3c7;
-    border-radius: 30px;
-    margin-bottom: 10px;
-    border: none;
-    font-family: "Amaranth", sans-serif;
 }
 
 #h2 {
