@@ -1,16 +1,16 @@
-div {
+.homePage {
     text-align: center;
     font-family: "Amaranth", sans-serif;
 
     justify-content: center;
+    .head {
+        background-color: grey;
+        margin: 10px 20px 10px 20px;
+        padding: 10px 0 10px 0;
+        border-radius: 30px;
+    }
 }
 
-.head {
-    background-color: grey;
-    margin: 10px 20px 10px 20px;
-    padding: 10px 0 10px 0;
-    border-radius: 30px;
-}
 .rules {
     background-color: #bde6d2;
     margin: 10px 20px 10px 20px;
@@ -28,7 +28,7 @@ div {
     font-family: "Amaranth", sans-serif;
 }
 
-form {
+.formInscription {
     border-radius: 30px;
     background-color: #bde6d2;
     height: auto;
@@ -39,36 +39,60 @@ form {
     display: flex;
     padding: 10px;
     box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+    .inputInscription {
+        height: 30px;
+        width: auto;
+        background: #f8e3c7;
+        border-radius: 30px;
+        margin-bottom: 10px;
+        border: none;
+        font-family: "Amaranth", sans-serif;
+    }
+    .inputLabel {
+        font-family: "Amaranth", sans-serif;
+        text-align: left;
+        margin-left: 10px;
+        font-size: 15px;
+    }
 }
-label {
-    font-family: "Amaranth", sans-serif;
-    text-align: left;
-    margin-left: 10px;
-    font-size: 15px;
-}
-input {
-    height: 30px;
-    width: auto;
-    background: #f8e3c7;
+.formConnexion {
     border-radius: 30px;
-    margin-bottom: 10px;
-    border: none;
-    font-family: "Amaranth", sans-serif;
-}
+    background-color: #bde6d2;
+    height: auto;
+    width: 250px;
+    margin: 10px;
 
-#h2 {
-    font-size: 15px;
-}
-
-#icon {
-    height: 120px;
-    width: 120px;
-    background-color: white;
-    border-radius: 100px;
-    position: relative;
-
-    margin-bottom: 15px;
-    margin-top: 15px;
+    flex-direction: column;
+    display: flex;
+    padding: 10px;
+    box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+    .inputConnexion {
+        height: 30px;
+        width: auto;
+        background: #f8e3c7;
+        border-radius: 30px;
+        margin-bottom: 10px;
+        border: none;
+        font-family: "Amaranth", sans-serif;
+    }
+    .inputLabel {
+        font-family: "Amaranth", sans-serif;
+        text-align: left;
+        margin-left: 10px;
+        font-size: 15px;
+    }
+    a {
+        margin-bottom: 50px;
+    }
+    #icon {
+        font-size: 50px;
+        height: 120px;
+        width: 120px;
+        background-color: white;
+        border-radius: 100px;
+        position: relative;
+        margin-bottom: 2px;
+    }
 }
 
 button {
