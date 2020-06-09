@@ -148,6 +148,7 @@
     overflow-x: hidden;
     width: 310px;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 #buyerTreeUser {
     display: flex;
@@ -181,7 +182,8 @@
     margin-top: 30px;
 }
 .formComment {
-    height: 150px;
+    float: right;
+    height: 200px;
     width: 300px;
     margin-left: 0px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
@@ -195,10 +197,15 @@
     justify-content: space-around;
     input {
         width: 250px;
+        border-radius: 20px;
+        border: none;
+        background-color: #f4c287;
+        margin: 10px;
+        height: 30px;
     }
     i {
         font-size: 25px;
-        margin-top: 3px;
+        margin-top: 10px;
     }
 }
 .outputComment {
@@ -208,7 +215,7 @@
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-top: 80px;
+    height: 150px;
 
     output {
         background-color: white;
@@ -216,7 +223,9 @@
         padding: 5px;
         height: 30px;
         width: 250px;
-        margin-bottom: 5px;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
 
         i {
             margin-left: 10px;
