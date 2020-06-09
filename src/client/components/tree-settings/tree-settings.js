@@ -21,11 +21,6 @@ const TreeSettings = () => {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
-                style={{
-                    overlay: {
-                        background: "none",
-                    },
-                }}
                 id={"buyTree"}>
                 <div className={"TreeSettings"}>
                     <div className={"TreeFree"}>
@@ -39,11 +34,6 @@ const TreeSettings = () => {
                         <Modal
                             isOpen={modalTreeIsOpen}
                             onRequestClose={() => setModalTreeIsOpen(false)}
-                            style={{
-                                overlay: {
-                                    background: "none",
-                                },
-                            }}
                             id={"buyTreeFree"}>
                             <div>
                                 <div className={"buyTreeHeader"}>
@@ -55,27 +45,27 @@ const TreeSettings = () => {
                                     </a>
                                 </div>
                                 <div className={"buyTreeUser"}>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
@@ -150,27 +140,27 @@ const TreeSettings = () => {
                                     </a>
                                 </div>
                                 <div className={"buyTreeUser"}>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
@@ -245,27 +235,27 @@ const TreeSettings = () => {
                                     </a>
                                 </div>
                                 <div className={"buyTreeUser"}>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
-                                    <div id={"buyTreeUser"}>
+                                    <div id={"buyerTreeUser"}>
                                         <i className={"fas fa-user-alt"} />
                                         <h3>{"User name"}</h3>
                                     </div>
