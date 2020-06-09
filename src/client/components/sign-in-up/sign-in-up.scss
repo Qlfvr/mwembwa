@@ -69,27 +69,24 @@ div {
         border: none;
         font-family: "Amaranth", sans-serif;
     }
+    a {
+        margin-bottom: 50px;
+    }
+    #icon {
+        font-size: 50px;
+        height: 120px;
+        width: 120px;
+        background-color: white;
+        border-radius: 100px;
+        position: relative;
+        margin-bottom: 2px;
+    }
 }
 label {
     font-family: "Amaranth", sans-serif;
     text-align: left;
     margin-left: 10px;
     font-size: 15px;
-}
-
-#h2 {
-    font-size: 15px;
-}
-
-#icon {
-    height: 120px;
-    width: 120px;
-    background-color: white;
-    border-radius: 100px;
-    position: relative;
-
-    margin-bottom: 15px;
-    margin-top: 15px;
 }
 
 button {
