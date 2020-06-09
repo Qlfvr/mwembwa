@@ -1,18 +1,23 @@
+.tree {
+    font-family: "Amaranth", sans-serif;
+}
 #buyTree {
     width: 320px;
     height: 310px;
-}
-.TreeSettings {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+    font-family: "Amaranth", sans-serif;
+    .treeSettings {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
 
-    background: #f4c287;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 30px;
-    padding: 10px;
+        background: #f4c287;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 30px;
+        padding: 10px;
+    }
 }
-.TreeFree {
+
+.treeFree {
     display: flex;
     border: 2px solid #85355c;
     border-radius: 20px;
@@ -35,14 +40,14 @@
         width: auto;
         height: 50px;
         background: #f8e3c7;
-        border-radius: 50px;
+        border-radius: 10px;
         border: none;
         margin: 10px 0px 10px 0px;
         font-family: "Amaranth", sans-serif;
         font-size: 20px;
     }
 }
-.TreeClosed {
+.treeClosed {
     display: flex;
     border: 2px solid #85355c;
     border-radius: 20px;
@@ -65,14 +70,14 @@
         width: auto;
         height: 50px;
         background: #f8e3c7;
-        border-radius: 50px;
+        border-radius: 10px;
         border: none;
         margin: 10px 0px 10px 0px;
         font-family: "Amaranth", sans-serif;
         font-size: 20px;
     }
 }
-.TreeLocked {
+.treeLocked {
     display: flex;
     border: 2px solid #85355c;
     border-radius: 20px;
@@ -95,7 +100,7 @@
         width: auto;
         height: 50px;
         background: #f8e3c7;
-        border-radius: 50px;
+        border-radius: 10px;
         border: none;
         margin: 10px 0px 10px 0px;
         font-family: "Amaranth", sans-serif;
@@ -112,6 +117,7 @@
     justify-content: center;
 }
 .buyTreeHeader {
+    font-family: "Amaranth", sans-serif;
     background: #f4c287;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -130,6 +136,7 @@
 }
 
 .buyTreeUser {
+    font-family: "Amaranth", sans-serif;
     background: #f4c287;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     border-radius: 30px;
@@ -145,8 +152,10 @@
     overflow-x: hidden;
     width: 310px;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 #buyerTreeUser {
+    font-family: "Amaranth", sans-serif;
     display: flex;
     justify-content: space-evenly;
     margin: 10px;
@@ -178,20 +187,25 @@
     margin-top: 30px;
 }
 .formComment {
-    height: 150px;
-    width: 300px;
+    height: 200px;
+    width: 280px;
     margin-left: 0px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
     background-color: #bde6d2;
     border-radius: 30px;
-    padding: 10px;
+    padding: 20px;
 }
 .inputComment {
+    font-family: "Amaranth", sans-serif;
     text-align: center;
     display: flex;
     justify-content: space-around;
     input {
         width: 250px;
+        height: 30px;
+        border-radius: 20px;
+        background-color: #f8e3c7;
+        border: none;
     }
     i {
         font-size: 25px;
@@ -199,13 +213,14 @@
     }
 }
 .outputComment {
+    font-family: "Amaranth", sans-serif;
     text-align: center;
     display: flex;
-
+    height: 150px;
     flex-direction: column;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-top: 80px;
+    margin-top: 20px;
 
     output {
         background-color: white;
