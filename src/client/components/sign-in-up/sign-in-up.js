@@ -17,10 +17,13 @@ const SignInUp = () => {
         setHex(randomColor);
     };
     return (
-        <div>
+        <div className={"homePage"}>
             <div className={"head"}>
                 <h1>{"Mwembwa"}</h1>
-                <button type={"button"} onClick={() => setModalIsOpen(true)}>
+                <button
+                    className={"buttonSign"}
+                    type={"button"}
+                    onClick={() => setModalIsOpen(true)}>
                     {" Sign In / Sign Up"}
                 </button>
 
@@ -29,14 +32,17 @@ const SignInUp = () => {
                     onRequestClose={() => setModalIsOpen(false)}
                     style={{
                         overlay: {
-                            background: "grey",
+                            background: "#001011",
                         },
                     }}
                     id={"form-container"}>
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form
+                        className={"formInscription"}
+                        onSubmit={handleSubmit(onSubmit)}>
                         <h1>{"Inscription"}</h1>
-                        <label>{"Email"}</label>
+                        <label className={"inputLabel"}>{"Email"}</label>
                         <input
+                            className={"inputInscription"}
                             name={"email"}
                             ref={register({
                                 required: "Required",
@@ -47,8 +53,9 @@ const SignInUp = () => {
                             })}
                         />
                         {errors.email && errors.email.message}
-                        <label>{"Username"}</label>
+                        <label className={"inputLabel"}>{"Username"}</label>
                         <input
+                            className={"inputInscription"}
                             name={"username"}
                             ref={register({
                                 validate: value =>
@@ -56,8 +63,9 @@ const SignInUp = () => {
                             })}
                         />
                         {errors.username && errors.username.message}
-                        <label>{"Password"}</label>
+                        <label className={"inputLabel"}>{"Password"}</label>
                         <input
+                            className={"inputInscription"}
                             name={"password"}
                             ref={register({
                                 required: "Required",
@@ -70,8 +78,11 @@ const SignInUp = () => {
 
                         {errors.password && errors.password.message}
 
-                        <label>{"Validation Password"}</label>
+                        <label className={"inputLabel"}>
+                            {"Validation Password"}
+                        </label>
                         <input
+                            className={"inputInscription"}
                             name={"val-password"}
                             ref={register({
                                 required: "Required",
@@ -84,24 +95,32 @@ const SignInUp = () => {
                         {errors.password && errors.password.message}
 
                         <button
+                            className={"buttonSign"}
                             type={"button"}
                             onClick={randomizedHex}
                             style={{backgroundColor: `${hex}`}}>
                             {"Pick a Color !"}
                         </button>
 
-                        <button type={"submit"}>{"Go !"}</button>
+                        <button className={"buttonSign"} type={"submit"}>
+                            {"Go !"}
+                        </button>
                     </form>
 
-                    <form onSubmit={handleSubmit(onSubmit)}>
+                    <form
+                        className={"formConnexion"}
+                        onSubmit={handleSubmit(onSubmit)}>
                         <h1>{"Connexion"}</h1>
 
                         <div>
                             <i id={"icon"} className={"fas fa-user-alt"} />
                         </div>
 
-                        <label>{"Email / Username"}</label>
+                        <label className={"inputLabel"}>
+                            {"Email / Username"}
+                        </label>
                         <input
+                            className={"inputConnexion"}
                             name={"email / username"}
                             ref={register({
                                 required: "Required",
@@ -113,8 +132,9 @@ const SignInUp = () => {
                         />
                         {errors.email && errors.email.message}
                         {errors.username && errors.email.massage}
-                        <label>{"Password"}</label>
+                        <label className={"inputLabel"}>{"Password"}</label>
                         <input
+                            className={"inputConnexion"}
                             name={"password"}
                             ref={register({
                                 required: "Required",
@@ -126,13 +146,15 @@ const SignInUp = () => {
                         />
 
                         {errors.password && errors.password.message}
-
-                        <button type={"submit"}>{"Go !"}</button>
+                        <a href={"src"}>{"Forgot your password?"}</a>
+                        <button className={"buttonSign"} type={"submit"}>
+                            {"Go !"}
+                        </button>
                     </form>
                 </Modal>
             </div>
             <div className={"rules"}>
-                <h2>{"Rules of the game"}</h2>
+                <h3>{"Rules of the game"}</h3>
                 <p>{"Créé ton profil et choisis une couleur."}</p>
                 <p>
                     {
