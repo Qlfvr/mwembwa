@@ -13,7 +13,8 @@ import SignInUp from "./components/sign-in-up/sign-in-up";
 import "./styles/main.scss";
 import Leaderboard from "./components/leaderboard/leaderboard";
 import Gamelog from "./components/gamelog/gamelog";
-import axios from "axios";
+import AccountSettings from "./components/account-settings/account-settings";
+//import axios from "axios";
 
 ReactDOM.render(
     <>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <SignInUp />
         <Leaderboard />
         <Gamelog />
+        <AccountSettings />
     </>,
     document.querySelector("#app"),
 );

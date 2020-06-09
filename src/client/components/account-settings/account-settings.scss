@@ -1,0 +1,27 @@
+.account-settings{
+      display: flex;
+      /*justify-content: center;*/
+      flex-direction: column;
+      text-align: center;
+      background-color: #85375C;
+      height: 400px;
+      width: 300px;
+      margin: auto;
+      color: white;
+      border-radius: 2rem;
+      font-family: sans-serif;
+      
+      border:solid 10px #85375C;
+      
+
+
+            h1{
+                  font-size: 50px;
+                  margin-top: 0px;
+                  padding-bottom: 10px;
+                  margin-bottom: 10px;
+                  background-color: #85375C;
+                  position: sticky;
+                  top: 0px;
+            }
+}
