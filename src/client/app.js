@@ -11,6 +11,7 @@ import ReactDOM from "react-dom";
 import Map from "./components/map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import GamePage from "./components/game-page/game-page";
+import TreeSettings from "./components/tree-settings/tree-settings";
 import "./styles/main.scss";
 import Leaderboard from "./components/leaderboard/leaderboard";
 import Gamelog from "./components/gamelog/gamelog";
@@ -23,6 +24,7 @@ ReactDOM.render(
         <GamePage />
         <Leaderboard />
         <Gamelog />
+        <TreeSettings />
     </>,
     document.querySelector("#app"),
 );
