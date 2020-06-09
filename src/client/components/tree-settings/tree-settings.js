@@ -22,8 +22,8 @@ const TreeSettings = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setModalIsOpen(false)}
                 id={"buyTree"}>
-                <div className={"TreeSettings"}>
-                    <div className={"TreeFree"}>
+                <div className={"treeSettings"}>
+                    <div className={"treeFree"}>
                         <i className={"fas fa-tree"} />
                         <h3>{"145"}</h3>
                         <button
@@ -113,7 +113,7 @@ const TreeSettings = () => {
                             </div>
                         </Modal>
                     </div>
-                    <div className={"TreeClosed"}>
+                    <div className={"treeClosed"}>
                         <i className={"fas fa-tree"} />
                         <h3>{"60"}</h3>
                         <button
@@ -208,7 +208,7 @@ const TreeSettings = () => {
                             </div>
                         </Modal>
                     </div>
-                    <div className={"TreeLocked"}>
+                    <div className={"treeLocked"}>
                         <i className={"fas fa-tree"} />
                         <h3>{"10"}</h3>
                         <button
