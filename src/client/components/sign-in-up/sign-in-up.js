@@ -40,8 +40,9 @@ const SignInUp = () => {
                         className={"formInscription"}
                         onSubmit={handleSubmit(onSubmit)}>
                         <h1>{"Inscription"}</h1>
-                        <label>{"Email"}</label>
+                        <label className={"inputLabel"}>{"Email"}</label>
                         <input
+                            className={"inputInscription"}
                             name={"email"}
                             ref={register({
                                 required: "Required",
@@ -52,8 +53,9 @@ const SignInUp = () => {
                             })}
                         />
                         {errors.email && errors.email.message}
-                        <label>{"Username"}</label>
+                        <label className={"inputLabel"}>{"Username"}</label>
                         <input
+                            className={"inputInscription"}
                             name={"username"}
                             ref={register({
                                 validate: value =>
@@ -61,8 +63,9 @@ const SignInUp = () => {
                             })}
                         />
                         {errors.username && errors.username.message}
-                        <label>{"Password"}</label>
+                        <label className={"inputLabel"}>{"Password"}</label>
                         <input
+                            className={"inputInscription"}
                             name={"password"}
                             ref={register({
                                 required: "Required",
@@ -75,8 +78,11 @@ const SignInUp = () => {
 
                         {errors.password && errors.password.message}
 
-                        <label>{"Validation Password"}</label>
+                        <label className={"inputLabel"}>
+                            {"Validation Password"}
+                        </label>
                         <input
+                            className={"inputInscription"}
                             name={"val-password"}
                             ref={register({
                                 required: "Required",
@@ -110,8 +116,11 @@ const SignInUp = () => {
                             <i id={"icon"} className={"fas fa-user-alt"} />
                         </div>
 
-                        <label>{"Email / Username"}</label>
+                        <label className={"inputLabel"}>
+                            {"Email / Username"}
+                        </label>
                         <input
+                            className={"inputConnexion"}
                             name={"email / username"}
                             ref={register({
                                 required: "Required",
@@ -123,8 +132,9 @@ const SignInUp = () => {
                         />
                         {errors.email && errors.email.message}
                         {errors.username && errors.email.massage}
-                        <label>{"Password"}</label>
+                        <label className={"inputLabel"}>{"Password"}</label>
                         <input
+                            className={"inputConnexion"}
                             name={"password"}
                             ref={register({
                                 required: "Required",
