@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Map, TileLayer, Marker, Popup} from "react-leaflet";
 
+import MarkerClusterGroup from "react-leaflet-markercluster";
 import axios from "axios";
 
-const MyMap = () => {
+
+const MarkerCluster = () => {
     const [trees, setTrees] = useState({});
 
     useEffect(() => {
@@ -27,8 +29,8 @@ const MyMap = () => {
             return (
                 <Marker position={[tree.location.lat, tree.location.lon]}>
                     <Popup>
-                       latitude : {tree.location.lat}
-                       longitude : {tree.location.lon}
+                        latitude : {tree.location.lat}
+                        longitude : {tree.location.lon}
                     </Popup>
                 </Marker>
             );
@@ -37,17 +39,7 @@ const MyMap = () => {
 
     console.log(treeMarkers);
 
-    return (
-        <Map center={[50.6246191, 5.5290555]} zoom={12}>
-            <TileLayer
-                url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-                attribution={
-                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }
-            />
-            {treeMarkers}
-        </Map>
-    );
+    return treeMarkers;
 };
 
-export default MyMap;
+export default MarkerCluster;
