@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Map, TileLayer, Marker, Popup} from "react-leaflet";
+import {Map, TileLayer} from "react-leaflet";
 
 
-import MarkerCluster from "../marker-cluster/marker-cluster"
+import MarkerCluster from "../marker-cluster/marker-cluster.js"
 
 const GameMap = () => {
     
