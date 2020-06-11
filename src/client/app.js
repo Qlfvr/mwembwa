@@ -13,6 +13,7 @@ import GameMap from "./components/game-map/game-map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import GamePage from "./components/game-page/game-page";
 import Homepage from "./components/homepage/homepage";
+import Settings from "./components/settings/settings";
 import "./styles/main.scss";
 
 ReactDOM.render(
@@ -25,6 +26,7 @@ ReactDOM.render(
                 <Route exact path={"/game-page"} component={GamePage} />
             </div>
         </BrowserRouter>
+        <Settings />
     </>,
     document.querySelector("#app"),
 );

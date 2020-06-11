@@ -1,0 +1,82 @@
+.settings{
+      display: flex;
+      flex-direction: column;
+      //align-items: center;
+      background-color: #85375C;
+      height: 600px;
+      width: 300px;
+      margin: auto;
+      color: white;
+      border-radius: 2rem;
+      overflow-y:scroll;
+      overflow-x: hidden;
+      border:solid 10px #85375C;
+      
+            h1{
+                  text-align: center;
+                  font-size: 50px;
+                  margin-top: 0px;
+                  padding-bottom: 10px;
+                  margin-bottom: 10px;
+                  background-color: #85375C;
+                  
+            }
+            i{
+                  text-align: center;
+                  font-size: 150px;
+            }
+            form{
+                  display: flex;
+                  flex-direction: column;
+                  margin: 0 25px;
+                  h2{
+                        font-size: 30px;
+                        margin: 10px 0px;
+                  }
+            }
+            button{
+                  position: relative;
+                  width: auto;
+                  height: 50px;
+                  background: #f8e3c7;
+                  border-radius: 50px;
+                  border: none;
+                  //margin-left: 25px;
+                  margin: 10px 40px 10px 40px;
+                  font-family: "Amaranth", sans-serif;
+                  font-size: 20px;
+            }
+            .info{
+                  display: flex;
+                  justify-content: space-around;
+                  
+                  p{
+                        font-size: 20px;
+                  }
+                  i{
+                        font-size: 20px;
+                  }
+            }
+            
+}
+
+.settings::-webkit-scrollbar{
+      display: block;
+      width:10px;
+      height: 100px;
+      
+}
+.settings::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: white; 
+}
+.settings::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 30px; 
+}
+
+.settings::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 30px;
+}
