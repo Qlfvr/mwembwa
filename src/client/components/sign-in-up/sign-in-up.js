@@ -10,7 +10,6 @@ const SignInUp = () => {
     const [redirect, setRedirect] = useState(false);
     const {handleSubmit, register, errors} = useForm();
     const onSubmit = (values) => {
-        console.log("qqchose");
         axios
             .post("/api/auth/login", {
                 email: values.email,
@@ -18,12 +17,12 @@ const SignInUp = () => {
             })
             // eslint-disable-next-line no-unused-vars
             .then((response) => {
-                console.log(response);
+                // console.log(response);
                 setRedirect(true);
             })
             // eslint-disable-next-line no-unused-vars
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
     };
     const [hex, setHex] = useState("#ffffff");
