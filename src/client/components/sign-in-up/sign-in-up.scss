@@ -8,6 +8,7 @@
     h1 {
         text-align: center;
     }
+
     #form-container {
         height: auto;
         width: auto;
@@ -17,7 +18,7 @@
     }
 
     .formInscription {
-        border-radius: 30px;
+        border-radius: 20px;
         background-color: #bde6d2;
         height: auto;
         width: 250px;
@@ -26,6 +27,7 @@
         display: flex;
         padding: 10px;
         box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+
         .inputInscription {
             height: 30px;
             width: auto;
@@ -34,14 +36,16 @@
             margin-bottom: 10px;
             border: none;
         }
+
         .inputLabel {
             text-align: left;
             margin-left: 10px;
             font-size: 15px;
         }
     }
+
     .formConnexion {
-        border-radius: 30px;
+        border-radius: 20px;
         background-color: #bde6d2;
         height: auto;
         width: 250px;
@@ -50,6 +54,7 @@
         display: flex;
         padding: 10px;
         box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+        justify-content: center;
 
         .inputConnexion {
             height: 30px;
@@ -59,36 +64,39 @@
             margin-bottom: 10px;
             border: none;
         }
+
         .inputLabel {
             text-align: left;
             margin-left: 10px;
             font-size: 15px;
         }
-        a {
-            margin-bottom: 50px;
-        }
-        #icon {
-            font-size: 50px;
+
+        i {
             height: 120px;
             width: 120px;
             background-color: white;
             border-radius: 100px;
             position: relative;
             margin-bottom: 2px;
+            margin-left: 65px;
+        }
+
+        #icon {
+            font-size: 50px;
+            text-align: center;
         }
     }
 }
 
-.buttonSign {
-    position: relative;
-    width: auto;
-    height: 50px;
-
-    background: #f8e3c7;
-    border-radius: 50px;
-    border: none;
-    //margin-left: 25px;
-    margin: 10px 40px 10px 40px;
-    font-family: "Amaranth", sans-serif;
-    font-size: 20px;
+.inputInscription:required:valid {
+    background-color: lightgreen;
+}
+.inputConnexion:required:valid {
+    background-color: lightgreen;
+}
+.inputInscription:required:invalid {
+    background-color: red;
+}
+.inputConnexion:required:invalid {
+    background-color: red;
 }

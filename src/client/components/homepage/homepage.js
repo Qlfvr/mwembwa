@@ -8,14 +8,15 @@ Modal.setAppElement("#app");
 const Homepage = () => (
     <div className={"homepage"}>
         <div className={"head"}>
-            <h1>{"Mwembwa"}</h1>
+            <h1>{"Trouver un nom sympa"}</h1>
             <Link to={"/sign-in-up"}>
-                {" "}
                 <button className={"btn"} type={"button"}>
                     {" Sign In / Sign Up"}
                 </button>
             </Link>
+            <div className={"foot"}>{"@ Team Estermont 2020"} </div>
         </div>
+
         <div className={"rules"}>
             <h3>{"Rules of the game"}</h3>
             <p>{"Créé ton profil et choisis une couleur."}</p>

@@ -10,20 +10,20 @@ const SignInUp = () => {
     console.log("qqchose");
     const [redirect, setRedirect] = useState(false);
     const {handleSubmit, register, errors} = useForm();
-    const onSubmit = values => {
+    const onSubmit = (values) => {
         axios
             .post("/api/auth/login", {
                 email: values.email,
                 password: values.password,
             })
             // eslint-disable-next-line no-unused-vars
-            .then(response => {
+            .then((response) => {
                 // console.log(response);
                 setRedirect(true);
                 return <Redirect to={"/"} />;
             })
             // eslint-disable-next-line no-unused-vars
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
             });
     };
@@ -45,41 +45,43 @@ const SignInUp = () => {
                 <h1>{"Inscription"}</h1>
                 <label className={"inputLabel"}>{"Email"}</label>
                 <input
+                    type={"text"}
                     className={"inputInscription"}
                     name={"email"}
-                    // ref={register({
-                    //     required: "Required",
-                    //     pattern: {
-                    //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    //         message: "invalid email address",
-                    //     },
-                    // })}
+                    ref={register({
+                        //required: "Required",
+                        pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                            // message: "invalid email address",
+                        },
+                    })}
+                    required
                 />
-                {/* {errors.email && errors.email.message} */}
+                {/*errors.email && errors.email.message*/}
                 <label className={"inputLabel"}>{"Username"}</label>
                 <input
                     className={"inputInscription"}
                     name={"username"}
-                    // ref={register({
-                    //     validate: (value) => value !== "admin" || "Nice try!",
-                    // })}
+                    ref={register({
+                        validate: (value) => value !== "admin" || "Nice try!",
+                    })}
+                    required
                 />
                 {/* {errors.username && errors.username.message} */}
                 <label className={"inputLabel"}>{"Password"}</label>
                 <input
                     className={"inputInscription"}
                     name={"password"}
-                    // ref={register({
-                    //     required: "Required",
-                    //     pattern: {
-                    //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    //         message: "invalid password",
-                    //     },
-                    // })}
+                    ref={register({
+                        // required: "Required",
+                        pattern: {
+                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
+                            message: "invalid password",
+                        },
+                    })}
+                    required
                 />
-
-                {/* {errors.password && errors.password.message} */}
-
+                {/*errors.password && errors.password.message*/}
                 <button
                     className={"btn"}
                     type={"button"}
@@ -87,7 +89,6 @@ const SignInUp = () => {
                     style={{backgroundColor: `${hex}`}}>
                     {"Pick a Color !"}
                 </button>
-
                 <button className={"btn"} type={"submit"}>
                     {"Go !"}
                 </button>
@@ -105,29 +106,32 @@ const SignInUp = () => {
                     className={"inputConnexion"}
                     name={"email"}
                     ref={register({
-                        required: "Required",
+                        //required: "Required",
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: "invalid email address",
+                            // message: "invalid email address",
                         },
                     })}
+                    required
                 />
-                {errors.email && errors.email.message}
-                {errors.username && errors.email.massage}
+                {/*errors.email && errors.email.message*/}
+                {/*errors.username && errors.email.massage*/}
                 <label className={"inputLabel"}>{"Password"}</label>
                 <input
                     className={"inputConnexion"}
                     name={"password"}
                     ref={register({
-                        required: "Required",
+                        //required: "Required",
                         pattern: {
-                            message: "invalid password",
+                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
+                            //  message: "invalid password",
                         },
                     })}
+                    required
                 />
 
-                {errors.password && errors.password.message}
-                <a href={"src"}>{"Forgot your password?"}</a>
+                {/*errors.password && errors.password.message*/}
+
                 <button className={"btn"} type={"submit"}>
                     {"Go !"}
                 </button>
