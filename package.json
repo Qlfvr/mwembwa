@@ -36,6 +36,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-unicorn": "^20.0.0",
     "file-loader": "^6.0.0",
+    "ghooks": "^2.0.4",
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.3",
@@ -67,7 +68,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx lint-staged"
+      "pre-commit": "npx lint-staged",
+      "post-merge": "npm install"
     }
   }
 }
