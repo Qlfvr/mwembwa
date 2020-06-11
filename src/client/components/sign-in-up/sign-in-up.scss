@@ -8,6 +8,7 @@
     h1 {
         text-align: center;
     }
+
     #form-container {
         height: auto;
         width: auto;
@@ -17,31 +18,7 @@
     }
 
     .formInscription {
-        border-radius: 30px;
-        background-color: #bde6d2;
-        height: auto;
-        width: 250px;
-        margin: 10px;
-        flex-direction: column;
-        display: flex;
-        padding: 10px;
-        box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
-        .inputInscription {
-            height: 30px;
-            width: auto;
-            background: #f8e3c7;
-            border-radius: 30px;
-            margin-bottom: 10px;
-            border: none;
-        }
-        .inputLabel {
-            text-align: left;
-            margin-left: 10px;
-            font-size: 15px;
-        }
-    }
-    .formConnexion {
-        border-radius: 30px;
+        border-radius: 20px;
         background-color: #bde6d2;
         height: auto;
         width: 250px;
@@ -51,6 +28,34 @@
         padding: 10px;
         box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
 
+        .inputInscription {
+            height: 30px;
+            width: auto;
+            background: #f8e3c7;
+            border-radius: 30px;
+            margin-bottom: 10px;
+            border: none;
+        }
+
+        .inputLabel {
+            text-align: left;
+            margin-left: 10px;
+            font-size: 15px;
+        }
+    }
+
+    .formConnexion {
+        border-radius: 20px;
+        background-color: #bde6d2;
+        height: auto;
+        width: 250px;
+        margin: 10px;
+        flex-direction: column;
+        display: flex;
+        padding: 10px;
+        box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+        justify-content: center;
+
         .inputConnexion {
             height: 30px;
             width: auto;
@@ -59,14 +64,15 @@
             margin-bottom: 10px;
             border: none;
         }
+
         .inputLabel {
             text-align: left;
             margin-left: 10px;
             font-size: 15px;
         }
-        a {
-            margin-bottom: 50px;
-        }
+
+
+
         #icon {
             font-size: 50px;
             height: 120px;
@@ -75,6 +81,7 @@
             border-radius: 100px;
             position: relative;
             margin-bottom: 2px;
+            margin-left: 65px;
         }
     }
 }

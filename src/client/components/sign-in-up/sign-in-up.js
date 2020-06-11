@@ -127,7 +127,7 @@ const SignInUp = () => {
                 />
 
                 {errors.password && errors.password.message}
-                <a href={"src"}>{"Forgot your password?"}</a>
+
                 <button className={"btn"} type={"submit"}>
                     {"Go !"}
                 </button>
