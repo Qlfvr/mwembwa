@@ -13,17 +13,19 @@ import GameMap from "./components/game-map/game-map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import GamePage from "./components/game-page/game-page";
 import Homepage from "./components/homepage/homepage";
+import Leaderboard from "./components/leaderboard/leaderboard";
+import Gamelog from "./components/gamelog/gamelog";
 import "./styles/main.scss";
 
 ReactDOM.render(
     <>
         <GameMap />
         <BrowserRouter>
-            <div className={"main-route-place"}>
-                <Route exact path={"/"} component={Homepage} />
-                <Route exact path={"/sign-in-up"} component={SignInUp} />
-                <Route exact path={"/game-page"} component={GamePage} />
-            </div>
+            <Route exact path={"/"} component={Homepage} />
+            <Route exact path={"/sign-in-up"} component={SignInUp} />
+            <Route exact path={"/game-page"} component={GamePage} />
+            <Route exact path={"/leaderboard"} component={Leaderboard} />
+            <Route exact path={"/gamelog"} component={Gamelog} />
         </BrowserRouter>
     </>,
     document.querySelector("#app"),
