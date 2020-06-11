@@ -7,10 +7,10 @@ import "./sign-in-up.scss";
 
 Modal.setAppElement("#app");
 const SignInUp = () => {
-    console.log("qqchose");
     const [redirect, setRedirect] = useState(false);
     const {handleSubmit, register, errors} = useForm();
     const onSubmit = (values) => {
+        console.log("qqchose");
         axios
             .post("/api/auth/login", {
                 email: values.email,
@@ -18,9 +18,8 @@ const SignInUp = () => {
             })
             // eslint-disable-next-line no-unused-vars
             .then((response) => {
-                // console.log(response);
+                console.log(response);
                 setRedirect(true);
-                return <Redirect to={"/"} />;
             })
             // eslint-disable-next-line no-unused-vars
             .catch((error) => {
@@ -122,10 +121,10 @@ const SignInUp = () => {
                     name={"password"}
                     ref={register({
                         //required: "Required",
-                        pattern: {
-                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
-                            //  message: "invalid password",
-                        },
+                        // pattern: {
+                        //     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
+                        //     //  message: "invalid password",
+                        // },
                     })}
                     required
                 />
