@@ -30,6 +30,18 @@ app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
 app.use(bodyParser.json());
 
+app.get("/*", (req, res) => {
+    // eslint-disable-next-line no-sequences
+    res.sendFile(
+        path.resolve(__dirname, "../../bin/client/index.html"),
+        err => {
+            if (err) {
+                res.status(500).send(err);
+            }
+        },
+    );
+});
+
 app.use("/api/auth", userRoutes);
 app.use("/api/tree", treeRoutes);
 

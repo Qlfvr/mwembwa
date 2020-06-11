@@ -62,7 +62,8 @@
     "react-hook-form": "^5.7.2",
     "react-leaflet": "^2.7.0",
     "react-modal": "^3.11.2",
-    "react-perfect-scrollbar": "^1.5.8"
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-router-dom": "^5.2.0"
   },
   "husky": {
     "hooks": {
