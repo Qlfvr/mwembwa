@@ -7,6 +7,7 @@ import "./sign-in-up.scss";
 
 Modal.setAppElement("#app");
 const SignInUp = () => {
+    console.log("qqchose");
     const [redirect, setRedirect] = useState(false);
     const {handleSubmit, register, errors} = useForm();
     const onSubmit = values => {
@@ -23,7 +24,7 @@ const SignInUp = () => {
             })
             // eslint-disable-next-line no-unused-vars
             .catch(error => {
-                // console.log(error);
+                console.log(error);
             });
     };
     const [hex, setHex] = useState("#ffffff");
