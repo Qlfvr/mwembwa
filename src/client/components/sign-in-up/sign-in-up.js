@@ -42,23 +42,6 @@ const SignInUp = () => {
             <form
                 className={"formInscription"}
                 onSubmit={handleSubmit(onSubmit)}>
-<<<<<<< HEAD
-                <h1> {"Inscription"} </h1>{" "}
-                <label className={"inputLabel"}> {"Email"} </label>{" "}
-                <input
-                    className={"inputInscription"}
-                    name={"email"}
-                    ref={register({
-                        required: "Required",
-                        pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: "invalid email address",
-                        },
-                    })}
-                />{" "}
-                {errors.email && errors.email.message}{" "}
-                <label className={"inputLabel"}> {"Username"} </label>{" "}
-=======
                 <h1>{"Inscription"}</h1>
                 <label className={"inputLabel"}>{"Email"}</label>
                 <input
@@ -76,37 +59,20 @@ const SignInUp = () => {
                 />
                 {/*errors.email && errors.email.message*/}
                 <label className={"inputLabel"}>{"Username"}</label>
->>>>>>> features/signinup
                 <input
                     className={"inputInscription"}
                     name={"username"}
                     ref={register({
                         validate: (value) => value !== "admin" || "Nice try!",
                     })}
-<<<<<<< HEAD
-                />{" "}
-                {/* {errors.username && errors.username.message} */}{" "}
-                <label className={"inputLabel"}> {"Password"} </label>{" "}
-=======
                     required
                 />
                 {/* {errors.username && errors.username.message} */}
                 <label className={"inputLabel"}>{"Password"}</label>
->>>>>>> features/signinup
                 <input
                     className={"inputInscription"}
                     name={"password"}
                     ref={register({
-<<<<<<< HEAD
-                        required: "Required",
-                        pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: "invalid password",
-                        },
-                    })}
-                />
-                {errors.password && errors.password.message}
-=======
                         // required: "Required",
                         pattern: {
                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
@@ -116,30 +82,10 @@ const SignInUp = () => {
                     required
                 />
                 {/*errors.password && errors.password.message*/}
->>>>>>> features/signinup
                 <button
                     className={"btn"}
                     type={"button"}
                     onClick={randomizedHex}
-<<<<<<< HEAD
-                    style={{
-                        backgroundColor: `${hex}`,
-                    }}>
-                    {" "}
-                    {"Pick a Color !"}{" "}
-                </button>
-                <button className={"btn"} type={"submit"}>
-                    {" "}
-                    {"Go !"}{" "}
-                </button>{" "}
-            </form>
-            <form className={"formConnexion"} onSubmit={handleSubmit(onSubmit)}>
-                <h1> {"Connexion"} </h1>
-                <div>
-                    <i id={"icon"} className={"fas fa-user-alt avatar__icon"} />{" "}
-                </div>
-                <label className={"inputLabel"}> {"Email"} </label>{" "}
-=======
                     style={{backgroundColor: `${hex}`}}>
                     {"Pick a Color !"}
                 </button>
@@ -156,23 +102,10 @@ const SignInUp = () => {
                 </div>
 
                 <label className={"inputLabel"}>{"Email"}</label>
->>>>>>> features/signinup
                 <input
                     className={"inputConnexion"}
                     name={"email"}
                     ref={register({
-<<<<<<< HEAD
-                        required: "Required",
-                        pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: "invalid email address",
-                        },
-                    })}
-                />{" "}
-                {errors.email && errors.email.message}{" "}
-                {errors.username && errors.email.massage}{" "}
-                <label className={"inputLabel"}> {"Password"} </label>{" "}
-=======
                         //required: "Required",
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -184,25 +117,10 @@ const SignInUp = () => {
                 {/*errors.email && errors.email.message*/}
                 {/*errors.username && errors.email.massage*/}
                 <label className={"inputLabel"}>{"Password"}</label>
->>>>>>> features/signinup
                 <input
                     className={"inputConnexion"}
                     name={"password"}
                     ref={register({
-<<<<<<< HEAD
-                        required: "Required",
-                        pattern: {
-                            message: "invalid password",
-                        },
-                    })}
-                />
-                {errors.password && errors.password.message}
-                <button className={"btn"} type={"submit"}>
-                    {" "}
-                    {"Go !"}{" "}
-                </button>{" "}
-            </form>{" "}
-=======
                         //required: "Required",
                         pattern: {
                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
@@ -218,7 +136,6 @@ const SignInUp = () => {
                     {"Go !"}
                 </button>
             </form>
->>>>>>> features/signinup
         </div>
     );
 };
