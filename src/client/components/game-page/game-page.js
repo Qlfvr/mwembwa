@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import "./game-page.scss";
 
 const GamePage = () => (
@@ -26,12 +27,17 @@ const GamePage = () => (
         </div>
 
         <div className={"actions"}>
-            <button id={"buttonHP"}>
-                <i className={"fas fa-user-shield"} />
-            </button>
-            <button id={"buttonHP"}>
-                <i className={"fas fa-history"} />
-            </button>
+            <Link to={"/leaderboard"}>
+                {" "}
+                <button id={"buttonHP"}>
+                    <i className={"fas fa-user-shield"} />
+                </button>
+            </Link>
+            <Link to={"/gamelog"}>
+                <button id={"buttonHP"}>
+                    <i className={"fas fa-history"} />
+                </button>
+            </Link>
         </div>
     </div>
 );

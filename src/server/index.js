@@ -1,11 +1,3 @@
-/* becodeorg/mwenbwa
- *
- * /src/server/index.js - Server entry point
- *
- * coded by leny@BeCode
- * started at 18/05/2020
- */
-
 import express from "express";
 import path from "path";
 const mongoose = require("mongoose");
@@ -30,11 +22,15 @@ app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
 app.use(bodyParser.json());
 
+
+app.use("/api/auth", userRoutes);
+app.use("/api/tree", treeRoutes);
+
 app.get("/*", (req, res) => {
     // eslint-disable-next-line no-sequences
     res.sendFile(
         path.resolve(__dirname, "../../bin/client/index.html"),
-        err => {
+        (err) => {
             if (err) {
                 res.status(500).send(err);
             }
@@ -42,8 +38,7 @@ app.get("/*", (req, res) => {
     );
 });
 
-app.use("/api/auth", userRoutes);
-app.use("/api/tree", treeRoutes);
+
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
