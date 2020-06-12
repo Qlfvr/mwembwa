@@ -5,34 +5,18 @@
         position: fixed;
         top: 45px;
         left: 45px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 200px;
     }
     .profile {
         position: fixed;
         top: 45px;
         right: 45px;
-        text-align: center;
     }
     .actions {
         position: fixed;
         bottom: 45px;
         left: 45px;
     }
-    #buttonL {
-        background: #f4c287;
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
-        border-radius: 20px;
-        width: 60px;
-        height: 80px;
-        margin: 0 10px 0px 0;
-        cursor: pointer;
-        outline: none;
-        border: none;
-    }
-    #buttonF {
+    #buttonHP {
         background: #f4c287;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
@@ -41,36 +25,18 @@
         margin: 0 10px 0px 0;
         cursor: pointer;
         outline: none;
-        border: none;
-    }
-    #iconL {
-        text-align: center;
-        margin: 0px;
-        margin-left: -35px;
-        height: 0px;
-        width: 0px;
-        font-size: 50px;
-    }
-    #iconF {
-        text-align: center;
-        margin: 0px;
-        margin-left: -20px;
-        height: 0px;
-        width: 0px;
-        font-size: 20px;
     }
     h2 {
         position: absolute;
-        width: 50px;
-        height: 50px;
-
-        margin-top: -20px;
-        margin-left: 20px;
+        width: 40px;
+        height: 40px;
+        left: 30px;
+        top: 30px;
         border-radius: 40px;
         background: #85355c;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
-        font-size: 25px;
-        line-height: 50px;
+        font-size: 24px;
+        line-height: 40px;
         color: #ffffff;
     }
 
@@ -81,24 +47,14 @@
         background-color: #85355c;
         color: white;
         border-radius: 30px;
-        margin-left: 40px;
+        margin-left: 100px;
         cursor: pointer;
         outline: none;
-        border: none;
     }
     #profilePicture {
         height: 150px;
         width: 150px;
-        background-color: white;
+        background-color: #f8e3c7;
         border-radius: 100px;
-        border: solid 15px #f4c287;
-    }
-    #iconR {
-        text-align: center;
-        margin: 0px;
-        margin-left: -20px;
-        height: 0px;
-        width: 0px;
-        font-size: 20px;
     }
 }
