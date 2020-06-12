@@ -8,7 +8,7 @@ Modal.setAppElement("#app");
 const Homepage = () => (
     <div className={"homepage"}>
         <div className={"head"}>
-            <h1> {"Trouver un nom sympa"} </h1>{" "}
+            <h1> {"Mwenbwa"} </h1>{" "}
             <Link to={"/sign-in-up"}>
                 <button className={"btn"} type={"button"}>
                     {" "}
