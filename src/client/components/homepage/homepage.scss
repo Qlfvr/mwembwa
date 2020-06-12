@@ -5,36 +5,42 @@
     z-index: 9999;
     position: relative;
     text-align: center;
+    padding: 100px;
 
     .head {
         background-color: grey;
-        margin: 10px;
+
         margin-right: 5px;
-        padding: 10px;
-        border-radius: 30px;
-        height: 250px;
+
+        border-radius: 20px;
+        height: 270px;
+        box-shadow: 0px 0px 10px 0px grey;
     }
 
     .foot {
-        margin-top: 20px;
+        margin-top: 40px;
     }
 }
 
 .rules {
     background-color: #bde6d2;
-    margin: 10px;
+
     margin-left: 5px;
     padding: 0 10px 0 10px;
-    border-radius: 30px;
+    border-radius: 20px;
     height: 270px;
-
+    width: 800px;
+    box-shadow: 0px 0px 10px 0px #bde6d2;
     h3 {
         background-color: grey;
         height: 30px;
         width: auto;
-        border-radius: 30px;
+        border-radius: 10px;
         padding-top: 5px;
     }
-
-
+    p {
+        text-align: justify;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
