@@ -7,6 +7,7 @@ import "./sign-in-up.scss";
 
 Modal.setAppElement("#app");
 const SignInUp = () => {
+    console.log("qqchose");
     const [redirect, setRedirect] = useState(false);
     const {handleSubmit, register, errors} = useForm();
     const onSubmit = (values) => {
@@ -19,10 +20,11 @@ const SignInUp = () => {
             .then((response) => {
                 // console.log(response);
                 setRedirect(true);
+                return <Redirect to={"/"} />;
             })
             // eslint-disable-next-line no-unused-vars
             .catch((error) => {
-                // console.log(error);
+                console.log(error);
             });
     };
     const [hex, setHex] = useState("#ffffff");
@@ -40,100 +42,94 @@ const SignInUp = () => {
             <form
                 className={"formInscription"}
                 onSubmit={handleSubmit(onSubmit)}>
-                <h1>{"Inscription"}</h1>
-                <label className={"inputLabel"}>{"Email"}</label>
+                <h1> {"Inscription"} </h1>{" "}
+                <label className={"inputLabel"}> {"Email"} </label>{" "}
                 <input
-                    type={"text"}
                     className={"inputInscription"}
                     name={"email"}
-                    ref={register({
-                        //required: "Required",
-                        pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            // message: "invalid email address",
-                        },
-                    })}
-                    required
-                />
-                {/*errors.email && errors.email.message*/}
-                <label className={"inputLabel"}>{"Username"}</label>
+                    // ref={register({
+                    //     required: "Required",
+                    //     pattern: {
+                    //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    //         message: "invalid email address",
+                    //     },
+                    // })}
+                />{" "}
+                {/* {errors.email && errors.email.message} */}{" "}
+                <label className={"inputLabel"}> {"Username"} </label>{" "}
                 <input
                     className={"inputInscription"}
                     name={"username"}
-                    ref={register({
-                        validate: (value) => value !== "admin" || "Nice try!",
-                    })}
-                    required
-                />
-                {/* {errors.username && errors.username.message} */}
-                <label className={"inputLabel"}>{"Password"}</label>
+                    // ref={register({
+                    //     validate: (value) => value !== "admin" || "Nice try!",
+                    // })}
+                />{" "}
+                {/* {errors.username && errors.username.message} */}{" "}
+                <label className={"inputLabel"}> {"Password"} </label>{" "}
                 <input
                     className={"inputInscription"}
                     name={"password"}
-                    ref={register({
-                        // required: "Required",
-                        pattern: {
-                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
-                            message: "invalid password",
-                        },
-                    })}
-                    required
+                    // ref={register({
+                    //     required: "Required",
+                    //     pattern: {
+                    //         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    //         message: "invalid password",
+                    //     },
+                    // })}
                 />
-                {/*errors.password && errors.password.message*/}
+                {/* {errors.password && errors.password.message} */}
                 <button
                     className={"btn"}
                     type={"button"}
                     onClick={randomizedHex}
-                    style={{backgroundColor: `${hex}`}}>
-                    {"Pick a Color !"}
+                    style={{
+                        backgroundColor: `${hex}`,
+                    }}>
+                    {" "}
+                    {"Pick a Color !"}{" "}
                 </button>
                 <button className={"btn"} type={"submit"}>
-                    {"Go !"}
-                </button>
+                    {" "}
+                    {"Go !"}{" "}
+                </button>{" "}
             </form>
-
             <form className={"formConnexion"} onSubmit={handleSubmit(onSubmit)}>
-                <h1>{"Connexion"}</h1>
-
+                <h1> {"Connexion"} </h1>
                 <div>
-                    <i id={"icon"} className={"fas fa-user-alt avatar__icon"} />
+                    <i id={"icon"} className={"fas fa-user-alt avatar__icon"} />{" "}
                 </div>
-
-                <label className={"inputLabel"}>{"Email"}</label>
+                <label className={"inputLabel"}> {"Email"} </label>{" "}
                 <input
                     className={"inputConnexion"}
                     name={"email"}
                     ref={register({
-                        //required: "Required",
+                        required: "Required",
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            // message: "invalid email address",
+                            message: "invalid email address",
                         },
                     })}
-                    required
-                />
-                {/*errors.email && errors.email.message*/}
-                {/*errors.username && errors.email.massage*/}
-                <label className={"inputLabel"}>{"Password"}</label>
+                />{" "}
+                {errors.email && errors.email.message}{" "}
+                {errors.username && errors.email.massage}{" "}
+                <label className={"inputLabel"}> {"Password"} </label>{" "}
                 <input
                     className={"inputConnexion"}
                     name={"password"}
                     ref={register({
-                        //required: "Required",
-                        // pattern: {
-                        //     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
-                        //     //  message: "invalid password",
-                        // },
+                        required: "Required",
+                        pattern: {
+                            message: "invalid password",
+                        },
                     })}
-                    required
                 />
-
-                {/*errors.password && errors.password.message*/}
-
+                {errors.password && errors.password.message}{" "}
+                <a href={"src"}> {"Forgot your password?"} </a>{" "}
                 <button className={"btn"} type={"submit"}>
-                    {"Go !"}
-                </button>
-            </form>
+                    {" "}
+                    {"Go !"}{" "}
+                </button>{" "}
+            </form>{" "}
         </div>
     );
 };
