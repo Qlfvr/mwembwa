@@ -89,14 +89,14 @@
 }
 
 .inputInscription:required:valid {
-    background-color: lightgreen;
+    box-shadow: 0 0 5px 0 lightgreen;
 }
 .inputConnexion:required:valid {
-    background-color: lightgreen;
+    box-shadow: 0 0 5px 0 lightgreen;
 }
 .inputInscription:required:invalid {
-    background-color: red;
+    box-shadow: 0 0 5px 0 red;
 }
 .inputConnexion:required:invalid {
-    background-color: red;
+    box-shadow: 0 0 5px 0 red;
 }
