@@ -36,6 +36,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-unicorn": "^20.0.0",
     "file-loader": "^6.0.0",
+    "ghooks": "^2.0.4",
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.3",
@@ -57,14 +58,19 @@
     "mongoose": "^5.9.16",
     "mongoose-unique-validator": "^2.0.3",
     "react": "^16.13.1",
+    "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.7.2",
     "react-leaflet": "^2.7.0",
-    "react-leaflet-markercluster": "^2.0.0"
+    "react-leaflet-markercluster": "^2.0.0",
+    "react-modal": "^3.11.2",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-router-dom": "^5.2.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx lint-staged"
+      "pre-commit": "npx lint-staged",
+      "post-merge": "npm install"
     }
   }
 }

@@ -1,0 +1,73 @@
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.gamelog {
+    text-align: center;
+    background-color: #85375c;
+    height: 400px;
+    width: 600px;
+    color: white;
+    border-radius: 2rem;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    border: solid 10px #85375c;
+    z-index: 2;
+    position: relative;
+
+    h1 {
+        font-size: 50px;
+        margin-top: 0px;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        background-color: #85375c;
+        position: sticky;
+        top: 0px;
+
+        .closePage {
+            position: relative;
+            left: 140px;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    }
+    table {
+        th {
+            width: 550px;
+            font-size: 25px;
+        }
+        tr {
+            height: 40px;
+        }
+    }
+}
+
+/*.gamelog::-webkit-scrollbar{
+                  display: none;
+            }*/
+.gamelog::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+    height: 100px;
+}
+.gamelog::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: white;
+}
+.gamelog::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 30px;
+}
+
+.gamelog::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 30px;
+}

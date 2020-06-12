@@ -2,14 +2,14 @@ const Tree = require("../models/tree");
 
 exports.getAllTrees = (req, res) => {
     Tree.find()
-        .then((tree) => res.status(200).json(tree))
-        .catch((error) => res.status(404).json({error}));
+        .then(tree => res.status(200).json(tree))
+        .catch(error => res.status(404).json({error}));
 };
 
-exports.getOneTree = (req, res, next) => {
+exports.getOneTree = (req, res) => {
     Tree.findOne({_id: req.params.id})
-        .then((tree) => res.status(200).json(tree))
-        .catch((error) => res.status(404).json({error}));
+        .then(tree => res.status(200).json(tree))
+        .catch(error => res.status(404).json({error}));
 };
 
 // exports.createTree = (req, res, next) => {

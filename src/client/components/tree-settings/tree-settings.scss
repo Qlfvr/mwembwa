@@ -1,0 +1,256 @@
+.tree {
+    font-family: "Amaranth", sans-serif;
+}
+#buyTree {
+    width: 320px;
+    height: 310px;
+    font-family: "Amaranth", sans-serif;
+    .treeSettings {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+
+        background: #f4c287;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 30px;
+        padding: 10px;
+    }
+}
+
+.treeFree {
+    display: flex;
+    border: 2px solid #85355c;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px;
+    i {
+        font-size: 50px;
+        color: green;
+
+        justify-content: center;
+        text-align: center;
+        margin-top: 10px;
+    }
+    h3 {
+        font-size: 25px;
+    }
+    button {
+        position: relative;
+        width: auto;
+        height: 50px;
+        background: #f8e3c7;
+        border-radius: 10px;
+        border: none;
+        margin: 10px 0px 10px 0px;
+        font-family: "Amaranth", sans-serif;
+        font-size: 20px;
+    }
+}
+.treeClosed {
+    display: flex;
+    border: 2px solid #85355c;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px;
+    i {
+        font-size: 60px;
+        color: red;
+
+        justify-content: center;
+        text-align: center;
+        margin-top: 10px;
+    }
+    h3 {
+        font-size: 25px;
+    }
+    button {
+        position: relative;
+        width: auto;
+        height: 50px;
+        background: #f8e3c7;
+        border-radius: 10px;
+        border: none;
+        margin: 10px 0px 10px 0px;
+        font-family: "Amaranth", sans-serif;
+        font-size: 20px;
+    }
+}
+.treeLocked {
+    display: flex;
+    border: 2px solid #85355c;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px;
+    i {
+        font-size: 60px;
+        color: orange;
+
+        justify-content: center;
+        text-align: center;
+        margin-top: 10px;
+    }
+    h3 {
+        font-size: 25px;
+    }
+    button {
+        position: relative;
+        width: auto;
+        height: 50px;
+        background: #f8e3c7;
+        border-radius: 10px;
+        border: none;
+        margin: 10px 0px 10px 0px;
+        font-family: "Amaranth", sans-serif;
+        font-size: 20px;
+    }
+}
+
+#buyTreeFree {
+    height: auto;
+    width: 340px;
+    text-align: center;
+    margin-left: 360px;
+    display: flex;
+    justify-content: center;
+}
+.buyTreeHeader {
+    font-family: "Amaranth", sans-serif;
+    background: #f4c287;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+
+    padding: 10px;
+
+    margin-bottom: 5px;
+    width: 300px;
+    i {
+        border-radius: 10px;
+        text-align: center;
+        float: left;
+        margin: 5px;
+        font-size: 50px;
+    }
+}
+
+.buyTreeUser {
+    font-family: "Amaranth", sans-serif;
+    background: #f4c287;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    border: solid 5px #f4c287;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 150px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 310px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+#buyerTreeUser {
+    font-family: "Amaranth", sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+    width: 250px;
+
+    i {
+        font-size: 20px;
+        margin: 0px;
+    }
+    h3 {
+        margin: 0px;
+    }
+}
+.buyTreeUser::-webkit-scrollbar {
+    display: block;
+}
+.buyTreeUser::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: white;
+}
+.buyTreeUser::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 30px;
+}
+
+.buyTreeUser::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 30px;
+}
+.formComment {
+    height: 200px;
+    width: 280px;
+    margin-left: 0px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    background-color: #bde6d2;
+    border-radius: 30px;
+    padding: 20px;
+}
+.inputComment {
+    font-family: "Amaranth", sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    input {
+        width: 250px;
+        height: 30px;
+        border-radius: 20px;
+        background-color: #f8e3c7;
+        border: none;
+    }
+    i {
+        font-size: 25px;
+        margin-top: 10px;
+    }
+}
+.outputComment {
+    font-family: "Amaranth", sans-serif;
+    text-align: center;
+    display: flex;
+    height: 150px;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 20px;
+
+    output {
+        background-color: white;
+        border-radius: 30px;
+        padding: 5px;
+        height: 30px;
+        width: 250px;
+        margin: 5px;
+        display: flex;
+        justify-content: center;
+
+        i {
+            margin-left: 10px;
+        }
+    }
+}
+.outputComment::-webkit-scrollbar {
+    display: block;
+}
+.outputComment::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: white;
+}
+.outputComment::-webkit-scrollbar-track-piece:end {
+    background: transparent;
+    margin-bottom: 30px;
+}
+
+.outputComment::-webkit-scrollbar-track-piece:start {
+    background: transparent;
+    margin-top: 30px;
+}

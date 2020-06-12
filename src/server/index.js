@@ -1,11 +1,3 @@
-/* becodeorg/mwenbwa
- *
- * /src/server/index.js - Server entry point
- *
- * coded by leny@BeCode
- * started at 18/05/2020
- */
-
 import express from "express";
 import path from "path";
 const mongoose = require("mongoose");
@@ -29,6 +21,18 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
 app.use(bodyParser.json());
+
+app.get("/*", (req, res) => {
+    // eslint-disable-next-line no-sequences
+    res.sendFile(
+        path.resolve(__dirname, "../../bin/client/index.html"),
+        (err) => {
+            if (err) {
+                res.status(500).send(err);
+            }
+        },
+    );
+});
 
 app.use("/api/auth", userRoutes);
 app.use("/api/tree", treeRoutes);

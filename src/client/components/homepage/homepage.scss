@@ -1,0 +1,38 @@
+.homepage {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+
+    .head {
+        background-color: grey;
+        margin: 10px;
+        margin-right: 5px;
+        padding: 10px;
+        border-radius: 30px;
+        height: 250px;
+    }
+
+    .foot {
+        margin-top: 20px;
+    }
+}
+
+.rules {
+    background-color: #bde6d2;
+    margin: 10px;
+    margin-left: 5px;
+    padding: 0 10px 0 10px;
+    border-radius: 30px;
+    height: 270px;
+
+    h3 {
+        background-color: grey;
+        height: 30px;
+        width: auto;
+        border-radius: 30px;
+        padding-top: 5px;
+    }
+}
