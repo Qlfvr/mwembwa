@@ -22,6 +22,10 @@ app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
 app.use(bodyParser.json());
 
+
+app.use("/api/auth", userRoutes);
+app.use("/api/tree", treeRoutes);
+
 app.get("/*", (req, res) => {
     // eslint-disable-next-line no-sequences
     res.sendFile(
@@ -34,8 +38,7 @@ app.get("/*", (req, res) => {
     );
 });
 
-app.use("/api/auth", userRoutes);
-app.use("/api/tree", treeRoutes);
+
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),

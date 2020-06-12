@@ -11,6 +11,9 @@ const TreeMarker = () => {
             .then(function (response) {
                 // handle success
                 setTrees(response.data);
+
+                console.log(response.data);
+                
             })
             .catch(function (error) {
                 // handle error
