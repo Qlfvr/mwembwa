@@ -8,7 +8,7 @@ import TreeMarker from "../tree-marker/tree-marker";
 const MarkerCluster = () => {
     return (
         <MarkerClusterGroup disableClusteringAtZoom={18}>
-            <TreeMarker />
+            <TreeMarker  />
         </MarkerClusterGroup>
     );
 };
