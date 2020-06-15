@@ -1,13 +1,13 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route } from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import GameMap from "./components/map/game-map/game-map";
 import SignInUp from "./components/sign-in-up/sign-in-up";
 import GamePage from "./components/game-page/game-page";
 import Homepage from "./components/homepage/homepage";
 import Leaderboard from "./components/leaderboard/leaderboard";
 import Gamelog from "./components/gamelog/gamelog";
-import Settings from "./components/settings/settings"
+import Settings from "./components/settings/settings";
 import "./styles/main.scss";
 
 ReactDOM.render(
