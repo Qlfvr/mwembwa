@@ -20,7 +20,7 @@ ReactDOM.render(
         <GameMap />
         <BrowserRouter>
             <div className={"main-route-place"}>
-                <Route exact path={"/"} component={Homepage} />
+                <Route exact path={"/homepage"} component={Homepage} />
                 <Route exact path={"/sign-in-up"} component={SignInUp} />
                 <Route exact path={"/game-page"} component={GamePage} />
             </div>

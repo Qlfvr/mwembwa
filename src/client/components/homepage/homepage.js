@@ -17,6 +17,7 @@ const Homepage = () => (
             </Link>{" "}
             <div className={"foot"}> {"@ Team Estermont 2020"} </div>{" "}
         </div>
+        <div className={"line"}></div>
         <div className={"rules"}>
             <h3> {"Rules of the game"} </h3>{" "}
             <p> {"Créé ton profil et choisis une couleur."} </p>{" "}
