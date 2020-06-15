@@ -6,19 +6,16 @@ const treeSchema = mongoose.Schema({
     },
     geoloc: {
         type: Object,
-        required: true,
     },
     diameter: {
         type: Number,
-        required: true,
+    },
+    circumference: {
+        type: Number,
     },
     height: {
         type: Number,
-        required: true,
     },
-    color: {type: String},
-    isLocked: {type: Boolean},
-    user: {type: Object},
 });
 
 module.exports = mongoose.model("Tree", treeSchema);

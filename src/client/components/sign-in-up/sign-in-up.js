@@ -11,7 +11,7 @@ const SignInUp = () => {
     const { handleSubmit, register, errors } = useForm();
     const onSubmit = (values) => {
         axios
-            .post("/api/user/login", {
+            .post("/api/auth/login", {
                 email: values.email,
                 password: values.password,
             })
