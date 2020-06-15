@@ -1,0 +1,44 @@
+[
+  {
+    "diameter": 8,
+    "location": {"lat": 50.622807, "lon": 5.5901527},
+    "name": "Robinia pseudoacacia",
+    "height": 12.3
+  },
+  {
+    "diameter": 8,
+    "location": {"lat": 50.622807, "lon": 5.5901527},
+    "name": "Robinia pseudoacacia",
+    "height": 12.3
+  },
+  {
+    "diameter": 4,
+    "location": {"lat": 50.624046, "lon": 5.584833},
+    "name": "Prunus fructicosa 'Globosum'",
+    "height": 6.5
+  },
+  {
+    "diameter": 12,
+    "location": {"lat": 50.624268, "lon": 5.5849137},
+    "name": "Morus nigra",
+    "height": 18.3
+  },
+  {
+    "diameter": 15,
+    "location": {"lat": 50.62429, "lon": 5.5850115},
+    "name": "Cedrus atlantica 'Glauca'",
+    "height": 16.7
+  },
+  {
+    "diameter": 9,
+    "location": {"lat": 50.624325, "lon": 5.5852857},
+    "name": "Cedrus deodora",
+    "height": 15.0
+  },
+  {
+    "diameter": 16,
+    "location": {"lat": 50.630085, "lon": 5.5751104},
+    "name": "Acer platanoides",
+    "height": 17.2
+  }
+]

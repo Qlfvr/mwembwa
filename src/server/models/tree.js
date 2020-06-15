@@ -16,6 +16,10 @@ const treeSchema = mongoose.Schema({
     height: {
         type: Number,
     },
+    owner: {
+        type: "ObjectId",
+        ref: "User",
+    },
 });
 
 module.exports = mongoose.model("Tree", treeSchema);
