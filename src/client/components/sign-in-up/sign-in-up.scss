@@ -70,19 +70,27 @@
             margin-left: 10px;
             font-size: 15px;
         }
-
-        i {
+        .bg-icone{
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: auto;
             height: 120px;
             width: 120px;
             background-color: white;
             border-radius: 100px;
-            position: relative;
-            margin-bottom: 2px;
-            margin-left: 65px;
+            box-shadow: 2px 2px 6px black;
         }
+        }
+        i {
+            padding-left: 35px ;
+            font-size: 50px;
+            
+
+            
 
         #icon {
-            font-size: 50px;
+            
             text-align: center;
         }
     }
