@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import axios from "axios";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./sign-in-up.scss";
 
 Modal.setAppElement("#app");
 const SignInUp = () => {
     const [redirect, setRedirect] = useState(false);
-    const {handleSubmit, register, errors} = useForm();
+    const { handleSubmit, register, errors } = useForm();
     const onSubmit = (values) => {
         axios
             .post("/api/user/login", {
@@ -84,7 +84,7 @@ const SignInUp = () => {
                     className={"btn"}
                     type={"button"}
                     onClick={randomizedHex}
-                    style={{backgroundColor: `${hex}`}}>
+                    style={{ backgroundColor: `${hex}` }}>
                     {"Pick a Color !"}
                 </button>
                 <button className={"btn"} type={"submit"}>
@@ -95,7 +95,7 @@ const SignInUp = () => {
             <form className={"formConnexion"} onSubmit={handleSubmit(onSubmit)}>
                 <h1>{"Connexion"}</h1>
 
-                <div>
+                <div className="bg-icone">
                     <i id={"icon"} className={"fas fa-user-alt avatar__icon"} />
                 </div>
 
