@@ -27,9 +27,12 @@ const SignInUp = () => {
                 console.log(error);
             });
     };
-    const color = `#${Math.floor((Math.random() * 0xffffff) << 0).toString(
+    const randomColor =
+        "#" + Math.floor((Math.random() * 0xffffff) << 0).toString(16);
+
+    /*const color = `#${Math.floor((Math.random() * 0xffffff) << 0).toString(
         16,
-    )}`;
+    )}`;*/
     /*const randomizedHex = () => {
         const randomColor = `#${Math.floor(
             (Math.random() * 0xffffff) << 0,
@@ -85,26 +88,26 @@ const SignInUp = () => {
                 />
                 {/*errors.password && errors.password.message*/}
                 <div className={"formRandomColor"}>
-                    <input
-                        type={"checkbox"}
+                    <button
                         className={"randomColor"}
-                        style={{backgroundColor: `${color}`}}></input>
-                    <input
-                        type={"checkbox"}
+                        type={"button"}
+                        style={{backgroundColor: `${randomColor}`}}></button>
+                    <button
                         className={"randomColor"}
-                        style={{backgroundColor: `${color}`}}></input>
-                    <input
-                        type={"checkbox"}
+                        type={"button"}
+                        style={{backgroundColor: `${randomColor}`}}></button>
+                    <button
                         className={"randomColor"}
-                        style={{backgroundColor: `${color}`}}></input>
-                    <input
-                        type={"checkbox"}
+                        type={"button"}
+                        style={{backgroundColor: `${randomColor}`}}></button>
+                    <button
                         className={"randomColor"}
-                        style={{backgroundColor: `${color}`}}></input>
-                    <input
-                        type={"checkbox"}
+                        type={"button"}
+                        style={{backgroundColor: `${randomColor}`}}></button>
+                    <button
                         className={"randomColor"}
-                        style={{backgroundColor: `${color}`}}></input>
+                        type={"button"}
+                        style={{backgroundColor: `${randomColor}`}}></button>
                 </div>
 
                 <button className={"btn"} type={"submit"}>
