@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Modal from "react-modal";
-import { useForm } from "react-hook-form";
+import {useForm} from "react-hook-form";
 import axios from "axios";
-<<<<<<< HEAD
-import { Redirect } from "react-router-dom";
-=======
 import {Redirect} from "react-router-dom";
 import {CirclePicker} from "react-color";
->>>>>>> features/signinup
 import "./sign-in-up.scss";
 
 Modal.setAppElement("#app");
 const SignInUp = () => {
     const [redirect, setRedirect] = useState(false);
-    const { handleSubmit, register, errors } = useForm();
+    const {handleSubmit, register, errors} = useForm();
     const onSubmit = (values) => {
         axios
             .post("/api/auth/login", {
@@ -79,15 +75,6 @@ const SignInUp = () => {
                     required
                 />
                 {/*errors.password && errors.password.message*/}
-<<<<<<< HEAD
-                <button
-                    className={"btn"}
-                    type={"button"}
-                    onClick={randomizedHex}
-                    style={{ backgroundColor: `${hex}` }}>
-                    {"Pick a Color !"}
-                </button>
-=======
                 <div className={"formRandomColor"}>
                     <CirclePicker
                         className={"randomColor"}
@@ -136,7 +123,6 @@ const SignInUp = () => {
                     />
                 </div>
 
->>>>>>> features/signinup
                 <button className={"btn"} type={"submit"}>
                     {"Go !"}
                 </button>
