@@ -22,8 +22,7 @@ app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
 app.use(bodyParser.json());
 
-
-app.use("/api/auth", userRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/tree", treeRoutes);
 
 app.get("/*", (req, res) => {
@@ -37,8 +36,6 @@ app.get("/*", (req, res) => {
         },
     );
 });
-
-
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),

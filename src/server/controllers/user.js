@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
+const Tree = require("../models/tree");
 
 exports.signup = (req, res) => {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -11,20 +12,20 @@ exports.signup = (req, res) => {
         });
         user.save()
             .then(() => res.status(201).json({message: "User created"}))
-            .catch(error => res.status(500).json({error}));
+            .catch((error) => res.status(500).json({error}));
     });
     return true;
 };
 
 exports.login = (req, res) => {
     User.findOne({email: req.body.email})
-        .then(user => {
+        .then((user) => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
             }
             bcrypt
                 .compare(req.body.password, user.password)
-                .then(valid => {
+                .then((valid) => {
                     if (!valid) {
                         return res.status(401).json({error: "Wrong password"});
                     }
@@ -38,9 +39,38 @@ exports.login = (req, res) => {
                     });
                     return true;
                 })
-                .catch(error => res.status(500).json({error}));
+                .catch((error) => res.status(500).json({error}));
             return true;
         })
-        .catch(error => res.status(500).json({error}));
+        .catch((error) => res.status(500).json({error}));
     return true;
+};
+
+exports.setRandomTrees = (req, res) => {
+    User.findOne({email: "aaa@hotmail.com"})
+        .then((user) => {
+            if (!user) {
+                return res.status(401).json({error: "User not found"});
+            }
+
+            Tree.aggregate([{$match: {user: null}}, {$sample: {size: 3}}])
+                .then((trees) => {
+                    for (const tree of trees) {
+                        tree["user"] = user;
+
+                        console.log(tree);
+                        tree.save()
+                            .then(() =>
+                                res
+                                    .status(201)
+                                    .json({message: "Random trees generated"}),
+                            )
+                            .catch((error) => res.status(400).json({error}));
+                    }
+                })
+                .catch((error) => res.status(500).json({error}));
+
+            return true;
+        })
+        .catch((error) => res.status(500).json({error}));
 };
