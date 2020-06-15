@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+<<<<<<< HEAD
 import { Redirect } from "react-router-dom";
+=======
+import {Redirect} from "react-router-dom";
+import {CirclePicker} from "react-color";
+>>>>>>> features/signinup
 import "./sign-in-up.scss";
 
 Modal.setAppElement("#app");
@@ -25,13 +30,7 @@ const SignInUp = () => {
                 // console.log(error);
             });
     };
-    const [hex, setHex] = useState("#ffffff");
-    const randomizedHex = () => {
-        const randomColor = `#${Math.floor(Math.random() * 16777215).toString(
-            16,
-        )}`;
-        setHex(randomColor);
-    };
+
     if (redirect) {
         return <Redirect to={"/game-page"} />;
     }
@@ -80,6 +79,7 @@ const SignInUp = () => {
                     required
                 />
                 {/*errors.password && errors.password.message*/}
+<<<<<<< HEAD
                 <button
                     className={"btn"}
                     type={"button"}
@@ -87,11 +87,61 @@ const SignInUp = () => {
                     style={{ backgroundColor: `${hex}` }}>
                     {"Pick a Color !"}
                 </button>
+=======
+                <div className={"formRandomColor"}>
+                    <CirclePicker
+                        className={"randomColor"}
+                        colors={[
+                            "#" +
+                                Math.floor(
+                                    (Math.random() * 0xffffff) << 0,
+                                ).toString(16),
+                        ]}
+                    />
+                    <CirclePicker
+                        className={"randomColor"}
+                        colors={[
+                            "#" +
+                                Math.floor(
+                                    (Math.random() * 0xffffff) << 0,
+                                ).toString(16),
+                        ]}
+                    />
+                    <CirclePicker
+                        className={"randomColor"}
+                        colors={[
+                            "#" +
+                                Math.floor(
+                                    (Math.random() * 0xffffff) << 0,
+                                ).toString(16),
+                        ]}
+                    />
+                    <CirclePicker
+                        className={"randomColor"}
+                        colors={[
+                            "#" +
+                                Math.floor(
+                                    (Math.random() * 0xffffff) << 0,
+                                ).toString(16),
+                        ]}
+                    />
+                    <CirclePicker
+                        className={"randomColor"}
+                        colors={[
+                            "#" +
+                                Math.floor(
+                                    (Math.random() * 0xffffff) << 0,
+                                ).toString(16),
+                        ]}
+                    />
+                </div>
+
+>>>>>>> features/signinup
                 <button className={"btn"} type={"submit"}>
                     {"Go !"}
                 </button>
             </form>
-
+            <div className={"line"}></div>
             <form className={"formConnexion"} onSubmit={handleSubmit(onSubmit)}>
                 <h1>{"Connexion"}</h1>
 
