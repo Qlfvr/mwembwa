@@ -2,10 +2,10 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-    z-index: 9999;
+    z-index: 1;
     position: relative;
     text-align: center;
-    padding: 100px;
+    align-items: center;
 
     .head {
         background-color: grey;
