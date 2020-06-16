@@ -9,20 +9,20 @@ import "./sign-in-up.scss";
 Modal.setAppElement("#app");
 const SignInUp = () => {
     const [redirect, setRedirect] = useState(false);
-    const {handleSubmit, register, errors} = useForm();
-    const onSubmit = (values) => {
+    const {handleSubmit, register} = useForm();
+    const onSubmit = values => {
         axios
             .post("/api/auth/login", {
                 email: values.email,
                 password: values.password,
             })
             // eslint-disable-next-line no-unused-vars
-            .then((response) => {
+            .then(response => {
                 // console.log(response);
                 setRedirect(true);
             })
             // eslint-disable-next-line no-unused-vars
-            .catch((error) => {
+            .catch(error => {
                 // console.log(error);
             });
     };
@@ -43,8 +43,6 @@ const SignInUp = () => {
                     className={"inputInscription"}
                     name={"email"}
                     ref={register({
-                        // required: true,
-
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             // message: "invalid email address",
@@ -59,8 +57,7 @@ const SignInUp = () => {
                     placeholder={"username"}
                     name={"username"}
                     ref={register({
-                        // required: true,
-                        validate: (value) => value !== "admin" || "Nice try!",
+                        validate: value => value !== "admin" || "Nice try!",
                     })}
                     required
                 />
@@ -72,10 +69,8 @@ const SignInUp = () => {
                     type={"password"}
                     name={"password"}
                     ref={register({
-                        //  required: true,
-
                         pattern: {
-                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
+                            // value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
                             message: "invalid password",
                         },
                     })}
@@ -86,46 +81,41 @@ const SignInUp = () => {
                     <CirclePicker
                         className={"randomColor"}
                         colors={[
-                            "#" +
-                                Math.floor(
-                                    (Math.random() * 0xffffff) << 0,
-                                ).toString(16),
+                            `#${Math.floor(
+                                (Math.random() * 0xffffff) << 0,
+                            ).toString(16)}`,
                         ]}
                     />
                     <CirclePicker
                         className={"randomColor"}
                         colors={[
-                            "#" +
-                                Math.floor(
-                                    (Math.random() * 0xffffff) << 0,
-                                ).toString(16),
+                            `#${Math.floor(
+                                (Math.random() * 0xffffff) << 0,
+                            ).toString(16)}`,
                         ]}
                     />
                     <CirclePicker
                         className={"randomColor"}
                         colors={[
-                            "#" +
-                                Math.floor(
-                                    (Math.random() * 0xffffff) << 0,
-                                ).toString(16),
+                            `#${Math.floor(
+                                (Math.random() * 0xffffff) << 0,
+                            ).toString(16)}`,
                         ]}
                     />
                     <CirclePicker
                         className={"randomColor"}
                         colors={[
-                            "#" +
-                                Math.floor(
-                                    (Math.random() * 0xffffff) << 0,
-                                ).toString(16),
+                            `#${Math.floor(
+                                (Math.random() * 0xffffff) << 0,
+                            ).toString(16)}`,
                         ]}
                     />
                     <CirclePicker
                         className={"randomColor"}
                         colors={[
-                            "#" +
-                                Math.floor(
-                                    (Math.random() * 0xffffff) << 0,
-                                ).toString(16),
+                            `#${Math.floor(
+                                (Math.random() * 0xffffff) << 0,
+                            ).toString(16)}`,
                         ]}
                     />
                 </div>
@@ -134,11 +124,11 @@ const SignInUp = () => {
                     {"Go !"}
                 </button>
             </form>
-            <div className={"line"}></div>
+            <div className={"line"} />
             <form className={"formConnexion"} onSubmit={handleSubmit(onSubmit)}>
                 <h1>{"Connexion"}</h1>
 
-                <div className="bg-icone">
+                <div className={"bg-icone"}>
                     <i id={"icon"} className={"fas fa-user-alt avatar__icon"} />
                 </div>
 
@@ -148,8 +138,6 @@ const SignInUp = () => {
                     placeholder={"email"}
                     name={"email"}
                     ref={register({
-                        // required: true,
-
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             // message: "invalid email address",
@@ -166,10 +154,8 @@ const SignInUp = () => {
                     type={"password"}
                     name={"password"}
                     ref={register({
-                        // required: true,
-
                         pattern: {
-                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
+                            // value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{2,64}$/i,
                             //  message: "invalid password",
                         },
                     })}
