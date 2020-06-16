@@ -31,26 +31,3 @@ exports.setRandomTrees = (req, res) => {
         .catch(error => res.status(404).json({error}));
     return true;
 };
-
-// exports.setRandomTrees = (req, res) => {
-//     // eslint-disable-next-line consistent-return
-//     User.findOne({email: "aaa@hotmail.com"}, (err, user) => {
-//         if (!user) {
-//             return res.status(401).json({error: "User not found"});
-//         }
-
-//         Tree.aggregate(
-//             [{$match: {owner: null}}, {$sample: {size: 3}}],
-//             // eslint-disable-next-line no-shadow
-//             (err, trees) => {
-//                 for (const tree of trees) {
-//                     Tree.updateOne({_id: tree._id}, {owner: user._id})
-//                         .then(() =>
-//                             res.json({message: "Random trees generated"}),
-//                         )
-//                         .catch((error) => res.status(404).json({error}));
-//                 }
-//             },
-//         );
-//     });
-// };
