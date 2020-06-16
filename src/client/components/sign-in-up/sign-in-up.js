@@ -39,10 +39,10 @@ const SignInUp = () => {
                 <label className={"inputLabel"}>{"Email"}</label>
                 <input
                     type={"text"}
+                    placeholder={"email"}
                     className={"inputInscription"}
                     name={"email"}
                     ref={register({
-                        //required: "Required",
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             // message: "invalid email address",
@@ -54,6 +54,7 @@ const SignInUp = () => {
                 <label className={"inputLabel"}>{"Username"}</label>
                 <input
                     className={"inputInscription"}
+                    placeholder={"username"}
                     name={"username"}
                     ref={register({
                         validate: (value) => value !== "admin" || "Nice try!",
@@ -64,9 +65,10 @@ const SignInUp = () => {
                 <label className={"inputLabel"}>{"Password"}</label>
                 <input
                     className={"inputInscription"}
+                    placeholder={"*******"}
+                    type={"password"}
                     name={"password"}
                     ref={register({
-                        // required: "Required",
                         pattern: {
                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
                             message: "invalid password",
@@ -138,9 +140,9 @@ const SignInUp = () => {
                 <label className={"inputLabel"}>{"Email"}</label>
                 <input
                     className={"inputConnexion"}
+                    placeholder={"email"}
                     name={"email"}
                     ref={register({
-                        //required: "Required",
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             // message: "invalid email address",
@@ -153,13 +155,14 @@ const SignInUp = () => {
                 <label className={"inputLabel"}>{"Password"}</label>
                 <input
                     className={"inputConnexion"}
+                    placeholder={"*******"}
+                    type={"password"}
                     name={"password"}
                     ref={register({
-                        //required: "Required",
-                        // pattern: {
-                        //     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
-                        //     //  message: "invalid password",
-                        // },
+                        pattern: {
+                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
+                            //  message: "invalid password",
+                        },
                     })}
                     required
                 />
