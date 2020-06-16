@@ -4,7 +4,7 @@ const treeSchema = mongoose.Schema({
     name: {
         type: String,
     },
-    geoloc: {
+    location: {
         type: Object,
     },
     diameter: {
@@ -19,6 +19,9 @@ const treeSchema = mongoose.Schema({
     owner: {
         type: "ObjectId",
         ref: "User",
+    },
+    color: {
+        type: String,
     },
 });
 
