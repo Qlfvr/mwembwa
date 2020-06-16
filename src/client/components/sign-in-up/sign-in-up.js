@@ -45,8 +45,6 @@ const SignInUp = () => {
                     className={"inputInscription"}
                     name={"email"}
                     ref={register({
-                        // required: true,
-
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             // message: "invalid email address",
@@ -61,7 +59,6 @@ const SignInUp = () => {
                     placeholder={"username"}
                     name={"username"}
                     ref={register({
-                        // required: true,
                         validate: (value) => value !== "admin" || "Nice try!",
                     })}
                     required
@@ -74,8 +71,6 @@ const SignInUp = () => {
                     type={"password"}
                     name={"password"}
                     ref={register({
-                        //  required: true,
-
                         pattern: {
                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
                             message: "invalid password",
@@ -150,8 +145,6 @@ const SignInUp = () => {
                     placeholder={"email"}
                     name={"email"}
                     ref={register({
-                        // required: true,
-
                         pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                             // message: "invalid email address",
@@ -168,8 +161,6 @@ const SignInUp = () => {
                     type={"password"}
                     name={"password"}
                     ref={register({
-                        // required: true,
-
                         pattern: {
                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[ -/:-@\[-`{-~]).{6,64}$/i,
                             //  message: "invalid password",
