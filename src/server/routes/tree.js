@@ -6,4 +6,6 @@ const auth = require("../middleware/auth");
 router.get("/", treeCtrl.getAllTrees);
 router.post("/set-random-trees", treeCtrl.setRandomTrees);
 
+router.post("/buy-tree/:id", treeCtrl.buyTree);
+
 module.exports = router;
