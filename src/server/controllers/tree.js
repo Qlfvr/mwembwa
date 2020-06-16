@@ -8,7 +8,7 @@ exports.getAllTrees = (req, res) => {
 };
 
 exports.setRandomTrees = (req, res) => {
-    User.findOne({email: "aaa@hotmail.com"})
+    User.findOne({_id: req.userId})
         .then(user => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
