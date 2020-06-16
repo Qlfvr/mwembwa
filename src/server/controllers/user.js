@@ -44,3 +44,28 @@ exports.login = (req, res) => {
         .catch(error => res.status(500).json({error}));
     return true;
 };
+
+exports.setBonusLeaves = async req => {
+    try {
+        const getTotalLeavesPlayers = await User.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    total: {
+                        $sum: "$leaves",
+                    },
+                },
+            },
+        ]).exec();
+
+        const totalLeavesPlayers = getTotalLeavesPlayers[0].total;
+
+        const amountPlayers = await User.countDocuments({});
+
+        const bonusLeaves = totalLeavesPlayers / amountPlayers;
+
+        User.updateOne({_id: req.userId}, {$inc: {leaves: bonusLeaves}});
+    } catch (error) {
+        console.log(error);
+    }
+};
