@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import "./game-page.scss";
-//hello
 
 const GamePage = () => (
     <div className={"gamePage"}>
