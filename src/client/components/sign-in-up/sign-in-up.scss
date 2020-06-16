@@ -95,12 +95,12 @@
 .inputConnexion:required:valid {
     box-shadow: 0 0 5px 0 lightgreen;
 }
-.inputInscription:required:invalid {
-    box-shadow: 0 0 5px 0 red;
-}
-.inputConnexion:required:invalid {
-    box-shadow: 0 0 5px 0 red;
-}
+//.inputInscription:required:invalid {
+//   box-shadow: 0 0 5px 0 red;
+//}
+//.inputConnexion:required:invalid {
+// box-shadow: 0 0 5px 0 red;
+//}
 .line {
     height: 300px;
     width: 10px;
