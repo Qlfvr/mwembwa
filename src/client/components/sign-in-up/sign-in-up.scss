@@ -94,40 +94,39 @@
         }
     }
 
-    .inputInscription:required:valid {
-        box-shadow: 0 0 5px 0 lightgreen;
-    }
-    .inputConnexion:required:valid {
-        box-shadow: 0 0 5px 0 lightgreen;
-    }
-    .inputInscription:required:invalid {
-        box-shadow: 0 0 5px 0 red;
-    }
-    .inputConnexion:required:invalid {
-        box-shadow: 0 0 5px 0 red;
-    }
-    .line {
-        height: 300px;
-        width: 10px;
-        background-color: #bde6d2;
-        margin-left: 50px;
-        margin-right: 50px;
-        box-shadow: 5px 5px 20px black;
-        border-radius: 5px;
-    }
-    .formRandomColor {
-        display: flex;
-        flex-direction: row;
-        width: 225px;
-        margin: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-        .randomColor {
-            height: 50px;
-            width: 50px;
-            margin-top: 15px;
-            margin-bottom: 15px;
-            border-radius: 25px;
-        }
+.inputInscription:required:valid {
+    box-shadow: 0 0 5px 0 lightgreen;
+}
+.inputConnexion:required:valid {
+    box-shadow: 0 0 5px 0 lightgreen;
+}
+//.inputInscription:required:invalid {
+//   box-shadow: 0 0 5px 0 red;
+//}
+//.inputConnexion:required:invalid {
+// box-shadow: 0 0 5px 0 red;
+//}
+.line {
+    height: 300px;
+    width: 10px;
+    background-color: #bde6d2;
+    margin-left: 50px;
+    margin-right: 50px;
+    box-shadow: 5px 5px 20px black;
+    border-radius: 5px;
+}
+.formRandomColor {
+    display: flex;
+    flex-direction: row;
+    width: 225px;
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    .randomColor {
+        height: 50px;
+        width: 50px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border-radius: 25px;
     }
 }
