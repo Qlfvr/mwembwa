@@ -7,6 +7,7 @@ import GamePage from "./components/game-page/game-page";
 import Homepage from "./components/homepage/homepage";
 import Leaderboard from "./components/leaderboard/leaderboard";
 import Gamelog from "./components/gamelog/gamelog";
+import Settings from "./components/settings/settings";
 import "./styles/main.scss";
 
 ReactDOM.render(
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Route exact path={"/leaderboard"} component={Leaderboard} />
             <Route exact path={"/gamelog"} component={Gamelog} />
         </BrowserRouter>
+        <Settings />
     </>,
     document.querySelector("#app"),
 );

@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: row;
 
     h1 {
         text-align: center;
@@ -26,7 +27,7 @@
         flex-direction: column;
         display: flex;
         padding: 10px;
-        box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+        box-shadow: 5px 5px 20px black;
 
         .inputInscription {
             height: 30px;
@@ -53,7 +54,7 @@
         flex-direction: column;
         display: flex;
         padding: 10px;
-        box-shadow: 10px 10px 10px #bde6d2(0, 0, 0, 0.25);
+        box-shadow: 5px 5px 20px black;
         justify-content: center;
 
         .inputConnexion {
@@ -70,33 +71,63 @@
             margin-left: 10px;
             font-size: 15px;
         }
-
-        i {
+        .bg-icone {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: auto;
             height: 120px;
             width: 120px;
             background-color: white;
             border-radius: 100px;
             position: relative;
-            margin-bottom: 2px;
+            margin-bottom: 10px;
             margin-left: 65px;
         }
-
-        #icon {
+        i {
+            padding-left: 35px;
             font-size: 50px;
-            text-align: center;
+
+            #icon {
+                text-align: center;
+            }
         }
     }
-}
 
-.inputInscription:required:valid {
-    box-shadow: 0 0 5px 0 lightgreen;
-}
-.inputConnexion:required:valid {
-    box-shadow: 0 0 5px 0 lightgreen;
-}
-.inputInscription:required:invalid {
-    box-shadow: 0 0 5px 0 red;
-}
-.inputConnexion:required:invalid {
-    box-shadow: 0 0 5px 0 red;
+    .inputInscription:required:valid {
+        box-shadow: 0 0 5px 0 lightgreen;
+    }
+    .inputConnexion:required:valid {
+        box-shadow: 0 0 5px 0 lightgreen;
+    }
+    //.inputInscription:required:invalid {
+    //   box-shadow: 0 0 5px 0 red;
+    //}
+    //.inputConnexion:required:invalid {
+    // box-shadow: 0 0 5px 0 red;
+    //}
+    .line {
+        height: 300px;
+        width: 10px;
+        background-color: #bde6d2;
+        margin-left: 50px;
+        margin-right: 50px;
+        box-shadow: 5px 5px 20px black;
+        border-radius: 5px;
+    }
+    .formRandomColor {
+        display: flex;
+        flex-direction: row;
+        width: 225px;
+        margin: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        .randomColor {
+            height: 50px;
+            width: 50px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 25px;
+        }
+    }
 }
