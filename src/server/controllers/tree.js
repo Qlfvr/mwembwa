@@ -38,17 +38,30 @@ exports.lockTree = async (req, res) => {
         const tree = await Tree.findOne({_id: req.params.treeId});
         const treeValue = helpers.getTreeValue(tree);
 
-        const treesRadius = await Tree.find({
-            location: {
-                $near: {
-                    $geometry: {
+        // const treesRadius = await Tree.find({
+        //     location: {
+        //         $near: {
+        //             $geometry: {
+        //                 type: "Point",
+        //                 coordinates: tree.location.coordinates,
+        //             },
+        //             $maxDistance: 100,
+        //         },
+        //     },
+        // });
+
+        const treesRadius = await Tree.aggregate([
+            {
+                $geoNear: {
+                    near: {
                         type: "Point",
                         coordinates: tree.location.coordinates,
                     },
-                    $maxDistance: 100,
+                    distanceField: "distance.calculated",
+                    maxDistance: 100,
                 },
             },
-        });
+        ]);
 
         console.log(treesRadius);
 
