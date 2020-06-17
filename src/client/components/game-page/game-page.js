@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./game-page.scss";
 
 const GamePage = () => (
@@ -18,9 +18,12 @@ const GamePage = () => (
             </button>
         </div>
         <div className={"profile"}>
-            <button id={"buttonSettings"} type={"button"}>
-                <i id={"iconR"} className={"fas fa-user-cog"} />
-            </button>
+            <Link to={"/settings"}>
+                <button id={"buttonSettings"} type={"button"}>
+                    <i id={"iconR"} className={"fas fa-user-cog"} />
+                </button>
+            </Link>
+
 
             <div id={"profilePicture"} />
             <h1>{"User Name"}</h1>
