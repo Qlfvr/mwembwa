@@ -37,7 +37,22 @@ exports.lockTree = async (req, res) => {
     try {
         const tree = await Tree.findOne({_id: req.params.treeId});
         const treeValue = helpers.getTreeValue(tree);
-        console.log(treeValue);
+
+        const treesRadius = await Tree.find({
+            location: {
+                $near: {
+                    $geometry: {
+                        type: "Point",
+                        coordinates: tree.location.coordinates,
+                    },
+                    $maxDistance: 100,
+                },
+            },
+        });
+
+        console.log(treesRadius);
+
+        const leavesToPay = treeValue * 10;
     } catch (error) {
         res.status(500).json({error});
     }

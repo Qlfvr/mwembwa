@@ -21,7 +21,6 @@ const TreeMarker = () => {
             });
     }, []);
 
-
     let treeMarkers = [];
     if (Array.isArray(trees)) {
         treeMarkers = trees.slice(0, 100).map((tree) => {
@@ -44,7 +43,10 @@ const TreeMarker = () => {
             return (
                 <Marker
                     icon={icon}
-                    position={[tree.location.lat, tree.location.lon]}
+                    position={[
+                        tree.location.coordinates[0],
+                        tree.location.coordinates[1],
+                    ]}
                     key={tree._id}>
                     <MarkerPopup tree={tree} />
                 </Marker>
