@@ -3,32 +3,32 @@ const User = require("../models/user");
 
 exports.getAllTrees = (req, res) => {
     Tree.find()
-        .then(tree => res.status(200).json(tree))
-        .catch(error => res.status(404).json({error}));
+        .then((tree) => res.status(200).json(tree))
+        .catch((error) => res.status(404).json({error}));
 };
 
 exports.setRandomTrees = (req, res) => {
     User.findOne({_id: req.userId})
-        .then(user => {
+        .then((user) => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
             }
 
             Tree.aggregate([{$match: {owner: null}}, {$sample: {size: 3}}])
-                .then(trees => {
+                .then((trees) => {
                     for (const tree of trees) {
                         Tree.updateOne({_id: tree._id}, {owner: user._id})
                             .then(() =>
                                 res.json({message: "Random trees generated"}),
                             )
-                            .catch(error => res.status(404).json({error}));
+                            .catch((error) => res.status(404).json({error}));
                     }
                     return true;
                 })
-                .catch(error => res.status(404).json({error}));
+                .catch((error) => res.status(404).json({error}));
             return true;
         })
-        .catch(error => res.status(404).json({error}));
+        .catch((error) => res.status(404).json({error}));
     return true;
 };
 
@@ -42,8 +42,8 @@ exports.setRandomTrees = (req, res) => {
 // };
 
 exports.buyTree = (req, res) => {
-    Tree.update({_id: req.params.id}, {color : "red"})
+    Tree.updateOne({_id: req.params.id}, {color: "kikoulol"})
 
-    .then((tree) => res.status(201).json(tree))
-    .catch((error) => res.status(404).json({error}));
+        .then(() => res.status(201).json())
+        .catch((error) => res.status(404).json({error}));
 };
