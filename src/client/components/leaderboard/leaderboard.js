@@ -1,5 +1,5 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import GamePage from "../game-page/game-page";
 import "./leaderboard.scss";
 
@@ -14,7 +14,7 @@ const LeaderBoard = () => {
     return (
         <>
             <GamePage />
-            <div className={"container"}>
+            <div className={"container"} onClick={routeChange}>
                 <div className={"leaderboard"}>
                     <h1>
                         {"Leaderboard"}

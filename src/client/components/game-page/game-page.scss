@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 200px;
+        height: 210px;
     }
     .profile {
         position: fixed;
@@ -43,14 +43,13 @@
         outline: none;
         border: none;
     }
+
     #iconL {
-        text-align: center;
-        margin: 0px;
-        margin-left: -35px;
-        height: 0px;
-        width: 0px;
-        font-size: 50px;
+        height: 55px;
+        width: 55px;
+        margin-top: 10px;
     }
+
     #iconF {
         text-align: center;
         margin: 0px;
@@ -64,7 +63,7 @@
         width: 50px;
         height: 50px;
 
-        margin-top: -20px;
+        margin-top: -10px;
         margin-left: 20px;
         border-radius: 40px;
         background: #85355c;
