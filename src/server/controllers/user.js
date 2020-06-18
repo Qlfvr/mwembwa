@@ -11,20 +11,20 @@ exports.signup = (req, res) => {
         });
         user.save()
             .then(() => res.status(201).json({message: "User created"}))
-            .catch(error => res.status(500).json({error}));
+            .catch((error) => res.status(500).json({error}));
     });
     return true;
 };
 
 exports.login = (req, res) => {
     User.findOne({email: req.body.email})
-        .then(user => {
+        .then((user) => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
             }
             bcrypt
                 .compare(req.body.password, user.password)
-                .then(valid => {
+                .then((valid) => {
                     if (!valid) {
                         return res.status(401).json({error: "Wrong password"});
                     }
@@ -38,9 +38,38 @@ exports.login = (req, res) => {
                     });
                     return true;
                 })
-                .catch(error => res.status(500).json({error}));
+                .catch((error) => res.status(500).json({error}));
             return true;
         })
-        .catch(error => res.status(500).json({error}));
+        .catch((error) => res.status(500).json({error}));
+    return true;
+};
+
+exports.setBonusLeaves = async (req, res) => {
+    try {
+        const getTotalLeavesPlayers = await User.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    total: {
+                        $sum: "$leaves",
+                    },
+                },
+            },
+        ]).exec();
+
+        const totalLeavesPlayers = getTotalLeavesPlayers[0].total;
+
+        const amountPlayers = await User.countDocuments({});
+
+        const bonusLeaves = totalLeavesPlayers / amountPlayers;
+
+        const addBonusLeaveToUser = await User.updateOne(
+            {_id: req.userId},
+            {$inc: {leaves: bonusLeaves}},
+        );
+    } catch (error) {
+        res.status(500).json({error});
+    }
     return true;
 };

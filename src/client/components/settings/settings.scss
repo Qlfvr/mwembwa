@@ -21,6 +21,12 @@
                   background-color: #85375C;
                   position: sticky;
                   top: 0px;
+                  .closePage {
+                  position: relative;
+                  left: 20px;
+                  font-size: 40px;
+                  cursor: pointer;
+                  }
             }
             i{
                   text-align: center;
