@@ -14,7 +14,7 @@ const Settings = () => {
     return (
         <>
             <GamePage />
-            <div className="container">
+            <div className="container" onClick={routeChange}>
                 <div className={"settings"}>
                     <h1>{"Settings"}
                         <i

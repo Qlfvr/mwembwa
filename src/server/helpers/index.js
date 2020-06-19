@@ -1,3 +1,3 @@
 exports.getTreeValue = function (tree) {
-    return tree.diameter * tree.height;
+    return Math.ceil(tree.diameter * tree.height);
 };

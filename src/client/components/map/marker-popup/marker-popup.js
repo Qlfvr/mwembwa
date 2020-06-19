@@ -26,12 +26,12 @@ const MarkerPopup = (props) => {
 
     return (
         <Popup>
-            Id : {props.tree._id}
-            latitude : {props.tree.location.lat}
-            longitude : {props.tree.location.lon}
             <button className={"btn"} type={"submit"} onClick={handleClick}>
                 {"buy tree !"}
             </button>
+            <div>Id : {props.tree._id}</div>
+            <div>latitude : {props.tree.location.coordinates[0]}</div>
+            <div>longitude : {props.tree.location.coordinates[1]}</div>
         </Popup>
     );
 };

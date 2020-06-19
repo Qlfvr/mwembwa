@@ -5,7 +5,8 @@ const treeSchema = mongoose.Schema({
         type: String,
     },
     location: {
-        type: Object,
+        type: {type: String},
+        coordinates: [],
     },
     diameter: {
         type: Number,
@@ -24,5 +25,7 @@ const treeSchema = mongoose.Schema({
         type: String,
     },
 });
+
+treeSchema.index({location: "2dsphere"});
 
 module.exports = mongoose.model("Tree", treeSchema);
