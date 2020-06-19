@@ -141,7 +141,6 @@ exports.lockTree = async (req, res) => {
     return true;
 };
 
-
 exports.buyOne = (req, res) => {
     const treeId = req.params.id;
     const userId = req.userId;
@@ -151,9 +150,17 @@ exports.buyOne = (req, res) => {
         .then((user) => {
             Tree.findById(treeId)
                 .then((tree) => {
-                    const treeValue = getTreeValue(tree);
+                    const currentOwner = tree.owner;
 
-                    if (user.leaves > treeValue && tree.owner != user._id /*&& tree.isLocked == false*/) {
+                    console.warn("current owner : " + currentOwner);
+                    console.warn("user connecté : " + userId);
+
+                    const treeValue = getPrice(tree);
+
+                    if (
+                        user.leaves > treeValue &&
+                        tree.owner != user._id /*&& tree.isLocked == false*/
+                    ) {
                         Tree.updateOne(
                             {_id: treeId},
                             {
@@ -173,10 +180,47 @@ exports.buyOne = (req, res) => {
                             .then(() => res.status(201).json())
                             .catch((error) => res.status(404).json(error));
                     } else {
-                        console.log("Can't buy this tree : not enough leaves or is lock or you already own it");
+                        console.log(
+                            "Can't buy this tree : not enough leaves or is lock or you already own it",
+                        );
                     }
                 })
                 .catch((error) => res.status(404).json(error));
         })
         .catch((error) => res.status(404).json({error}));
 };
+
+function getPrice(tree) {
+    const startPrice = Math.ceil(tree.diameter * tree.height);
+    const currentOwner = tree.owner
+
+
+    if (currentOwner === undefined) {
+        return startPrice;
+    }
+
+    else{
+
+        const price = startPrice
+    }
+
+
+
+    // valeur des arbres du owner actuel dans un rayon de 100m
+
+valueOwnerTreesWithin100M = () => {
+            return {
+                $geoNear: {
+                    near: {
+                        type: "Point",
+                        coordinates: tree.location.coordinates,
+                    },
+                    distanceField: "distance.calculated",
+                    maxDistance: 100,
+                },
+            };
+        };
+
+}
+
+// [value of the targetted tree] + ([value of all the targetted player's trees in 100m radius] × ([amount of trees in 100m radius] / [amount of tree of targetted player in 100m radius])) + [value of all the other players trees in 100m radius] - [value of all your tree in 100m radius].
