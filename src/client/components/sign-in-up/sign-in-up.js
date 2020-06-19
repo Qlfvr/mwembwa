@@ -18,7 +18,13 @@ const SignInUp = () => {
             })
             // eslint-disable-next-line no-unused-vars
             .then(response => {
-                // console.log(response);
+                
+                console.log(response); //response contains token and userId
+
+                localStorage.setItem('currentUser', JSON.stringify(response.data));
+
+                // localStorage.getItem('currentUser')
+
                 setRedirect(true);
             })
             // eslint-disable-next-line no-unused-vars
