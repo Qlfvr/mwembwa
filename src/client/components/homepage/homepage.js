@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./homepage.scss";
-
 
 const Homepage = () => (
     <div className="container">
@@ -18,7 +17,7 @@ const Homepage = () => (
                 </div>
                 <div className={"line"}></div>
                 <div className={"rules"}>
-                    <h3> {"Rules of the game"} </h3>
+                    <h3> {"Règles du jeu"} </h3>
                     <p> {"Créé ton profil et choisis une couleur."} </p>
                     <p>
                         {
@@ -37,10 +36,8 @@ const Homepage = () => (
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
-
 );
 
 export default Homepage;
