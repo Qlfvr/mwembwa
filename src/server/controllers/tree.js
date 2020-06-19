@@ -46,7 +46,7 @@ exports.buyOne = (req, res) => {
                 .then((tree) => {
                     const treeValue = getTreeValue(tree);
 
-                    if (user.leaves > treeValue && tree.owner != user._id && tree.isLocked == false) {
+                    if (user.leaves > treeValue && tree.owner != user._id /*&& tree.isLocked == false*/) {
                         Tree.updateOne(
                             {_id: treeId},
                             {
