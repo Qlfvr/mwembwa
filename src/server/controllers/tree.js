@@ -53,6 +53,12 @@ exports.lockTree = async (req, res) => {
             });
         }
 
+        if (tree.isLocked) {
+            return res.status(403).json({
+                error: "The tree is already locked",
+            });
+        }
+
         const treeValue = helpers.getTreeValue(tree);
 
         const queryGeolocTrees100MeterRadius = () => {
@@ -119,6 +125,13 @@ exports.lockTree = async (req, res) => {
                 error: "The user doesn't have enough leaves to buy this tree",
             });
         }
+
+        await Tree.updateOne({_id: tree._id}, {isLocked: true});
+
+        await User.updateOne(
+            {_id: user._id},
+            {leaves: user.leaves - leavesToPay},
+        );
     } catch (error) {
         res.status(500).json({error});
     }
