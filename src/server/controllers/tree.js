@@ -34,21 +34,6 @@ exports.setRandomTrees = (req, res) => {
     return true;
 };
 
-// exports.buyTree = (req, res) => {
-//     Tree.updateOne({_id: req.params.id}, {color: "test"})
-
-//         .then((res) =>
-//             res.status(201).json({message: "Random trees generated"}),
-//         )
-//         .catch((error) => res.status(400).json({error: "a"}));
-// };
-
-exports.updateOne = (req, res) => {
-    Tree.updateOne({_id: req.params.id}, req.body)
-
-        .then(() => res.status(201).json())
-        .catch((error) => res.status(404).json({error}));
-};
 
 exports.buyOne = (req, res) => {
     const treeId = req.params.id;
