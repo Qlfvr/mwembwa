@@ -57,28 +57,32 @@ exports.buyOne = (req, res) => {
 
     User.findById(userId)
         .then((user) => {
-            Tree.updateOne(
-                {_id: treeId},
-                {
-                    color: user.color,
-                    owner: user._id,
-                },
-            )
-                .then(() => res.status(201).json())
-                .catch((error) => res.status(404).json(error));
-
             Tree.findById(treeId)
                 .then((tree) => {
                     const treeValue = getTreeValue(tree);
 
-                    User.updateOne(
-                        {_id: userId},
-                        {
-                            leaves: user.leaves - treeValue,
-                        },
-                    )
-                        .then(() => res.status(201).json())
-                        .catch((error) => res.status(404).json(error));
+                    if (user.leaves > treeValue && tree.owner != user._id && tree.isLocked == false) {
+                        Tree.updateOne(
+                            {_id: treeId},
+                            {
+                                color: user.color,
+                                owner: user._id,
+                            },
+                        )
+                            .then(() => res.status(201).json())
+                            .catch((error) => res.status(404).json(error));
+
+                        User.updateOne(
+                            {_id: userId},
+                            {
+                                leaves: Math.ceil(user.leaves - treeValue),
+                            },
+                        )
+                            .then(() => res.status(201).json())
+                            .catch((error) => res.status(404).json(error));
+                    } else {
+                        console.log("Can't buy this tree : not enough leaves or is lock or you already own it");
+                    }
                 })
                 .catch((error) => res.status(404).json(error));
         })
