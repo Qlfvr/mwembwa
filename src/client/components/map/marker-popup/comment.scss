@@ -8,12 +8,8 @@
     h1{
         font-size:40px;
     }
-    table{
-        display: flex;
-        flex-direction: column;
-        width:auto;
-        height: 120px;
-        thead{
+    
+        .commentHead{
             width: auto;
             display: flex;
             flex-direction: column;
@@ -37,7 +33,7 @@
                 }
             }
         }
-        tbody{
+        .commentBody{
             width: auto;
             height: auto;
             display: flex;
@@ -46,12 +42,12 @@
                 height: 2px;
                 width: 400px;
             }
-            tr{
+            .commentUser{
                 width: auto;
                 height: auto;
                 display: flex;
                 flex-direction: row;
-                .iconTD{
+                .iconB{
                     height: 20px;
                     width: 20px;
                     background-color: #85355c;
@@ -66,4 +62,3 @@
             }
         }
     }
-}
