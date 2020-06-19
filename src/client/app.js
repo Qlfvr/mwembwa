@@ -8,7 +8,7 @@ import Homepage from "./components/homepage/homepage";
 import Leaderboard from "./components/leaderboard/leaderboard";
 import Gamelog from "./components/gamelog/gamelog";
 import Settings from "./components/settings/settings";
-import MarkerPopup from "./components/map/marker-popup/marker-popup";
+
 import "./styles/main.scss";
 
 ReactDOM.render(
@@ -21,7 +21,6 @@ ReactDOM.render(
             <Route exact path={"/leaderboard"} component={Leaderboard} />
             <Route exact path={"/gamelog"} component={Gamelog} />
             <Route exact path={"/settings"} component={Settings} />
-            <Route exact path={"/marker-popup"} component={MarkerPopup} />
         </BrowserRouter>
     </>,
     document.querySelector("#app"),
