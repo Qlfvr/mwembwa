@@ -1,6 +1,8 @@
 const Tree = require("../models/tree");
 const User = require("../models/user");
 
+import {getTreeValue} from "../helpers/index";
+
 exports.getAllTrees = (req, res) => {
     Tree.find()
         .then((tree) => res.status(200).json(tree))
@@ -41,9 +43,44 @@ exports.setRandomTrees = (req, res) => {
 //         .catch((error) => res.status(400).json({error: "a"}));
 // };
 
-exports.buyTree = (req, res) => {
-    Tree.updateOne({_id: req.params.id}, {color: "kikoulol"})
+exports.updateOne = (req, res) => {
+    Tree.updateOne({_id: req.params.id}, req.body)
 
         .then(() => res.status(201).json())
+        .catch((error) => res.status(404).json({error}));
+};
+
+exports.buyOne = (req, res) => {
+    const treeId = req.params.id;
+    const userId = req.userId;
+    // get user data
+
+    User.findById(userId)
+        .then((user) => {
+            Tree.updateOne(
+                {_id: treeId},
+                {
+                    color: user.color,
+                    owner: user._id,
+                },
+            )
+                .then(() => res.status(201).json())
+                .catch((error) => res.status(404).json(error));
+
+            Tree.findById(treeId)
+                .then((tree) => {
+                    const treeValue = getTreeValue(tree);
+
+                    User.updateOne(
+                        {_id: userId},
+                        {
+                            leaves: user.leaves - treeValue,
+                        },
+                    )
+                        .then(() => res.status(201).json())
+                        .catch((error) => res.status(404).json(error));
+                })
+                .catch((error) => res.status(404).json(error));
+        })
         .catch((error) => res.status(404).json({error}));
 };
