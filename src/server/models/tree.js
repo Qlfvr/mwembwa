@@ -24,6 +24,9 @@ const treeSchema = mongoose.Schema({
     color: {
         type: String,
     },
+    isLocked: {
+        type: Boolean,
+    },
 });
 
 treeSchema.index({location: "2dsphere"});
