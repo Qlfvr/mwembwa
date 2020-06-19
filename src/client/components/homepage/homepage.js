@@ -6,7 +6,7 @@ import "./homepage.scss";
 const Homepage = () => (
     <div className="container">
         <div className={"homepage"}>
-            <div className="responsive">
+            <div className="responsiveHP">
                 <div className={"head"}>
                     <h1> {"Mwenbwa"} </h1>
                     <Link to={"/sign-in-up"}>

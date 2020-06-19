@@ -27,15 +27,18 @@ body,
 }
 .btn {
     height: 50px;
+    min-width: 162px;
     background: #f8e3c7;
     border-radius: 50px;
     border: none;
     margin: 10px 40px 10px 40px;
+    padding: 10px;
     font-size: 20px;
     border: none;
     outline: none;
     cursor: pointer;
     font-family: "Amaranth", sans-serif;
+    box-shadow: 1px 1px 3px black;
 }
 input {
     outline: none;
