@@ -120,11 +120,11 @@ exports.lockTree = async (req, res) => {
             valueTrees100MeterRadius * amountPlayers100MeterRadius -
             valuePlayersTrees100MeterRadius / amountPlayers100MeterRadius;
 
-        const isPlayerHaveEnoughLeavesToBuy =
+        const isPlayerHaveEnoughLeavesToLock =
             user.leaves >= leavesToPay ? true : false;
-        if (!isPlayerHaveEnoughLeavesToBuy) {
+        if (!isPlayerHaveEnoughLeavesToLock) {
             return res.status(401).json({
-                error: "The user doesn't have enough leaves to buy this tree",
+                error: "The user doesn't have enough leaves to lock this tree",
             });
         }
 
@@ -141,7 +141,6 @@ exports.lockTree = async (req, res) => {
     return true;
 };
 
-
 exports.buyOne = (req, res) => {
     const treeId = req.params.id;
     const userId = req.userId;
@@ -153,7 +152,10 @@ exports.buyOne = (req, res) => {
                 .then((tree) => {
                     const treeValue = getTreeValue(tree);
 
-                    if (user.leaves > treeValue && tree.owner != user._id /*&& tree.isLocked == false*/) {
+                    if (
+                        user.leaves > treeValue &&
+                        tree.owner != user._id /*&& tree.isLocked == false*/
+                    ) {
                         Tree.updateOne(
                             {_id: treeId},
                             {
@@ -173,7 +175,9 @@ exports.buyOne = (req, res) => {
                             .then(() => res.status(201).json())
                             .catch((error) => res.status(404).json(error));
                     } else {
-                        console.log("Can't buy this tree : not enough leaves or is lock or you already own it");
+                        console.log(
+                            "Can't buy this tree : not enough leaves or is lock or you already own it",
+                        );
                     }
                 })
                 .catch((error) => res.status(404).json(error));
