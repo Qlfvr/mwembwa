@@ -32,7 +32,6 @@ const SignInUp = () => {
     } = useForm();
 
     const onSubmitRegister = (values) => {
-        console.log(values);
         axios
             .post("/api/auth/signup", {
                 name: values.nameRegister,
@@ -61,7 +60,22 @@ const SignInUp = () => {
                                 },
                             },
                         )
-                        .then(() => {})
+                        .then(() => {
+                            axios
+                                .post(
+                                    "/api/auth/set-bonus-leaves",
+                                    {},
+                                    {
+                                        headers: {
+                                            Authorization: `Bearer ${currentUser.token}`,
+                                        },
+                                    },
+                                )
+                                .then(() => {})
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                        })
                         // eslint-disable-next-line no-unused-vars
                         .catch((error) => {
                             // console.log(error);
