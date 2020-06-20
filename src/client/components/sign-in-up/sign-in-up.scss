@@ -1,5 +1,4 @@
 .signInUp {
-    z-index: 1;
     position: relative;
     display: flex;
     justify-content: center;
@@ -114,6 +113,7 @@
     .line {
         height: 300px;
         width: 10px;
+        min-width: 10px;
         background-color: #bde6d2;
         box-shadow: 5px 5px 20px black;
         border-radius: 5px;
