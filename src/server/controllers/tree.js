@@ -20,7 +20,10 @@ exports.setRandomTrees = (req, res) => {
             Tree.aggregate([{$match: {owner: null}}, {$sample: {size: 3}}])
                 .then((trees) => {
                     for (const tree of trees) {
-                        Tree.updateOne({_id: tree._id}, {owner: user._id})
+                        Tree.updateOne(
+                            {_id: tree._id},
+                            {owner: user._id, color: user.color},
+                        )
                             .then(() =>
                                 res.json({message: "Random trees generated"}),
                             )
