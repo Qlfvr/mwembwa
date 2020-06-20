@@ -8,8 +8,21 @@ import "./sign-in-up.scss";
 
 Modal.setAppElement("#app");
 const SignInUp = () => {
-    const [redirect, setRedirect] = useState(false);
+    const getRandomColor = () => {
+        let letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+    let colorSelected = getRandomColor();
 
+    const handleClickColor = (e) => {
+        colorSelected = e.target.title;
+    };
+
+    const [redirect, setRedirect] = useState(false);
     const {register, errors, handleSubmit} = useForm();
 
     const {
@@ -18,12 +31,14 @@ const SignInUp = () => {
         handleSubmit: handleSubmitSignUp,
     } = useForm();
 
-    const onSubmitRegister = async (values) => {
+    const onSubmitRegister = (values) => {
+        console.log(values);
         axios
             .post("/api/auth/signup", {
                 name: values.nameRegister,
                 email: values.emailRegister,
                 password: values.passwordRegister,
+                color: colorSelected,
             })
             // eslint-disable-next-line no-unused-vars
             .then((response) => {
@@ -59,7 +74,7 @@ const SignInUp = () => {
             });
     };
 
-    const onSubmitLogin = async (values) => {
+    const onSubmitLogin = (values) => {
         return new Promise((resolve, reject) => {
             axios
                 .post("/api/auth/login", {
@@ -133,49 +148,34 @@ const SignInUp = () => {
                     ref={register({required: true})}
                     required
                 />
-                {/* 
+
                 <div className={"formRandomColor"}>
-                    <CirclePicker
-                        className={"randomColor"}
-                        colors={[
-                            `#${Math.floor(
-                                (Math.random() * 0xffffff) << 0,
-                            ).toString(16)}`,
-                        ]}
-                    />
-                    <CirclePicker
-                        className={"randomColor"}
-                        colors={[
-                            `#${Math.floor(
-                                (Math.random() * 0xffffff) << 0,
-                            ).toString(16)}`,
-                        ]}
-                    />
-                    <CirclePicker
-                        className={"randomColor"}
-                        colors={[
-                            `#${Math.floor(
-                                (Math.random() * 0xffffff) << 0,
-                            ).toString(16)}`,
-                        ]}
-                    />
-                    <CirclePicker
-                        className={"randomColor"}
-                        colors={[
-                            `#${Math.floor(
-                                (Math.random() * 0xffffff) << 0,
-                            ).toString(16)}`,
-                        ]}
-                    />
-                    <CirclePicker
-                        className={"randomColor"}
-                        colors={[	
-                            `#${Math.floor(
-                                (Math.random() * 0xffffff) << 0,
-                            ).toString(16)}`,
-                        ]}
-                    />
-                </div> */}
+                    <span
+                        onClick={(e) => handleClickColor(e)}
+                        className={"randomColor"}>
+                        <CirclePicker colors={[getRandomColor()]} />
+                    </span>
+                    <span
+                        onClick={(e) => handleClickColor(e)}
+                        className={"randomColor"}>
+                        <CirclePicker colors={[getRandomColor()]} />
+                    </span>
+                    <span
+                        onClick={(e) => handleClickColor(e)}
+                        className={"randomColor"}>
+                        <CirclePicker colors={[getRandomColor()]} />
+                    </span>
+                    <span
+                        onClick={(e) => handleClickColor(e)}
+                        className={"randomColor"}>
+                        <CirclePicker colors={[getRandomColor()]} />
+                    </span>
+                    <span
+                        onClick={(e) => handleClickColor(e)}
+                        className={"randomColor"}>
+                        <CirclePicker colors={[getRandomColor()]} />
+                    </span>
+                </div>
                 <button className={"btn"} type={"submit"}>
                     {"Go !"}
                 </button>
