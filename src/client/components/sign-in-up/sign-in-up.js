@@ -6,7 +6,6 @@ import {Redirect} from "react-router-dom";
 import {CirclePicker} from "react-color";
 import "./sign-in-up.scss";
 
-Modal.setAppElement("#app");
 const SignInUp = () => {
     const getRandomColor = () => {
         let letters = "0123456789ABCDEF";
