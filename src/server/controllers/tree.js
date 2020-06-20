@@ -10,7 +10,7 @@ exports.getAllTrees = (req, res) => {
         .catch((error) => res.status(404).json({error}));
 };
 
-exports.setRandomTrees = (req, res) => {
+exports.setRandomTrees = (req, res, next) => {
     User.findOne({_id: req.userId})
         .then((user) => {
             if (!user) {
@@ -24,9 +24,7 @@ exports.setRandomTrees = (req, res) => {
                             {_id: tree._id},
                             {owner: user._id, color: user.color},
                         )
-                            .then(() =>
-                                res.json({message: "Random trees generated"}),
-                            )
+                            .then(() => res.status(201).end())
                             .catch((error) => res.status(404).json({error}));
                     }
                     return true;
