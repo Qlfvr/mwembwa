@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Modal from "react-modal";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
