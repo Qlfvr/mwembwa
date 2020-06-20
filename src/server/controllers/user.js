@@ -66,10 +66,9 @@ exports.setBonusLeaves = async (req, res) => {
 
         const bonusLeaves = totalLeavesPlayers / amountPlayers;
 
-        const addBonusLeaveToUser = await User.updateOne(
-            {_id: req.userId},
-            {$inc: {leaves: bonusLeaves}},
-        );
+        await User.updateOne({_id: req.userId}, {$inc: {leaves: bonusLeaves}});
+
+        res.status(201).end();
     } catch (error) {
         res.status(500).json({error});
     }
