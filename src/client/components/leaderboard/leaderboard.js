@@ -57,7 +57,7 @@ const LeaderBoard = () => {
                                 leaderboards.map((leaderboard, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{index}</td>
+                                            <td>{index + 1}</td>
                                             <td>
                                                 {leaderboard.name
                                                     .charAt(0)
