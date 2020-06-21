@@ -93,7 +93,7 @@ const GamePage = () => {
                         </defs>
                     </svg>
 
-                    <h2></h2>
+                    <h2>{userInfos && userInfos.trees}</h2>
                 </button>
 
                 <button id={"buttonL"} type={"button"}>
