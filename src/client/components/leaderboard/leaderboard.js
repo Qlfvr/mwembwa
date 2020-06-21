@@ -1,6 +1,7 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {useHistory} from "react-router-dom";
 import GamePage from "../game-page/game-page";
+import axios from "axios";
 import "./leaderboard.scss";
 
 const LeaderBoard = () => {
@@ -11,13 +12,32 @@ const LeaderBoard = () => {
         history.push(path);
     };
 
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    const [leaderboards, setLeaderboards] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get("/api/auth/leaderboard", {
+                    headers: {
+                        Authorization: `Bearer ${currentUser.token}`,
+                    },
+                });
+                setLeaderboards(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+    }, []);
+
     return (
         <>
             <GamePage />
             <div className={"container"} onClick={routeChange}>
                 <div className={"leaderboard"}>
                     <h1>
-                        {"Leaderboard"}
+                        {"Classement"}
                         <i
                             className={"fas fa-times closePage"}
                             onClick={routeChange}
@@ -27,66 +47,28 @@ const LeaderBoard = () => {
                         <thead>
                             <tr>
                                 <th>{"#"}</th>
-                                <th>{"User"}</th>
-                                <th>{"three"}</th>
-                                <th>{"Leafs"}</th>
+                                <th>{"Nom"}</th>
+                                <th>{"Arbres"}</th>
+                                <th>{"Feuilles"}</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
-                            <tr>
-                                <td>{"1"}</td>
-                                <td>{"User Name"}</td>
-                                <td>{"120"}</td>
-                                <td>{"12k"}</td>
-                            </tr>
+                            {leaderboards &&
+                                leaderboards.map((leaderboard, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{index}</td>
+                                            <td>
+                                                {leaderboard.name
+                                                    .charAt(0)
+                                                    .toUpperCase() +
+                                                    leaderboard.name.slice(1)}
+                                            </td>
+                                            <td>{leaderboard.trees}</td>
+                                            <td>{leaderboard.leaves}</td>
+                                        </tr>
+                                    );
+                                })}
                         </tbody>
                     </table>
                 </div>
