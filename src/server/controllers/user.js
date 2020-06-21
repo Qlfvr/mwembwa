@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const mongoose = require("mongoose");
 const User = require("../models/user");
 
 exports.signup = (req, res) => {
@@ -77,14 +77,31 @@ exports.setBonusLeaves = async (req, res) => {
 
 exports.getUserInfos = async (req, res) => {
     try {
-        const user = await User.findOne({_id: req.userId});
-        if (!user) {
-            return res.status(404).json({error: "User not found"});
-        }
+        const responseGetUserInfos = await User.aggregate([
+            {
+                $match: {_id: mongoose.Types.ObjectId(req.userId)},
+            },
+            {
+                $lookup: {
+                    from: "trees",
+                    localField: "_id",
+                    foreignField: "owner",
+                    as: "trees",
+                },
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    trees: {$size: "$trees"},
+                    leaves: {$sum: "$leaves"},
+                },
+            },
+        ]).exec();
 
-        console.log(user);
+        const userInfos = responseGetUserInfos[0];
 
-        return res.status(200).json(user);
+        return res.status(200).json(userInfos);
     } catch (error) {
         return res.status(500).json({error});
     }
