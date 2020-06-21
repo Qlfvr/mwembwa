@@ -75,33 +75,57 @@ exports.setBonusLeaves = async (req, res) => {
     return true;
 };
 
+const queryPopulateTrees = () => {
+    return {
+        $lookup: {
+            from: "trees",
+            localField: "_id",
+            foreignField: "owner",
+            as: "trees",
+        },
+    };
+};
+
+const queryGetUsersInfos = () => {
+    return {
+        $project: {
+            _id: 1,
+            name: 1,
+            trees: {$size: "$trees"},
+            leaves: {$sum: "$leaves"},
+        },
+    };
+};
+
 exports.getUserInfos = async (req, res) => {
     try {
         const responseGetUserInfos = await User.aggregate([
             {
                 $match: {_id: mongoose.Types.ObjectId(req.userId)},
             },
-            {
-                $lookup: {
-                    from: "trees",
-                    localField: "_id",
-                    foreignField: "owner",
-                    as: "trees",
-                },
-            },
-            {
-                $project: {
-                    _id: 1,
-                    name: 1,
-                    trees: {$size: "$trees"},
-                    leaves: {$sum: "$leaves"},
-                },
-            },
+            queryPopulateTrees(),
+            queryGetUsersInfos(),
         ]).exec();
 
         const userInfos = responseGetUserInfos[0];
 
         return res.status(200).json(userInfos);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
+    return true;
+};
+
+exports.getLeaderboard = async (req, res) => {
+    try {
+        const responseGetLeaderBoards = await User.aggregate([
+            queryPopulateTrees(),
+            queryGetUsersInfos(),
+        ]).exec();
+
+        const getLeaderBoards = responseGetLeaderBoards;
+
+        return res.status(200).json(getLeaderBoards);
     } catch (error) {
         return res.status(500).json({error});
     }
