@@ -23,7 +23,7 @@ const GamePage = () => {
                     //    console.log(error);
                 }
             })();
-        }, 100);
+        }, 500);
     }, []);
 
     return (
