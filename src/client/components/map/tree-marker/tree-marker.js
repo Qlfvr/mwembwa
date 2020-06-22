@@ -1,28 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Marker, Popup} from "react-leaflet";
-import axios from "axios";
 import L from "leaflet"; // Necessary to use custom icons because not included in react-leaflet
 import MarkerPopup from "../marker-popup/marker-popup";
 
-const TreeMarker = () => {
-    const [trees, setTrees] = useState({});
-    useEffect(() => {
-        axios
-            .get("/api/tree/")
-            .then(function (response) {
-                // handle success
-                setTrees(response.data);
-
-                // console.log(response.data);
-            })
-            .catch(function (error) {
-                // handle error
-                // console.log(error);
-            });
-    }, []);
-
+const TreeMarker = ({trees}) => {
     let treeMarkers = [];
-    if (Array.isArray(trees)) {
+    if (trees !== undefined) {
         treeMarkers = trees.map((tree) => {
             const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'><path d='M2,111 h300 l-242.7,176.3 92.7,-285.3 92.7,285.3 z' fill='${tree.color}'/></svg>`;
             let iconUrl = encodeURI("data:image/svg+xml," + svg).replace(
