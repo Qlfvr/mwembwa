@@ -9,18 +9,20 @@ const GamePage = () => {
     const [userInfos, setUserInfos] = useState(null);
 
     useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get("/api/auth/user-infos", {
-                    headers: {
-                        Authorization: `Bearer ${currentUser.token}`,
-                    },
-                });
-                setUserInfos(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        })();
+        setTimeout(() => {
+            (async () => {
+                try {
+                    const response = await axios.get("/api/auth/user-infos", {
+                        headers: {
+                            Authorization: `Bearer ${currentUser.token}`,
+                        },
+                    });
+                    setUserInfos(response.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            })();
+        }, 100);
     }, []);
 
     return (
@@ -93,7 +95,7 @@ const GamePage = () => {
                         </defs>
                     </svg>
 
-                    <h2>{userInfos && userInfos.trees}</h2>
+                    <h2>{userInfos && userInfos.totalTrees | 0}</h2>
                 </button>
 
                 <button id={"buttonL"} type={"button"}>
@@ -163,7 +165,7 @@ const GamePage = () => {
                         </defs>
                     </svg>
 
-                    <h2>{userInfos && userInfos.leaves.toFixed(2)}</h2>
+                    <h2>{userInfos && userInfos.leaves.toFixed(2) | 0}</h2>
                 </button>
             </div>
             <div className={"profile"}>
