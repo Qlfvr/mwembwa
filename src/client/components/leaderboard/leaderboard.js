@@ -64,7 +64,7 @@ const LeaderBoard = () => {
                                                     .toUpperCase() +
                                                     leaderboard.name.slice(1)}
                                             </td>
-                                            <td>{leaderboard.trees}</td>
+                                            <td>{leaderboard.totalTrees}</td>
                                             <td>{leaderboard.leaves}</td>
                                         </tr>
                                     );
