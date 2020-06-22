@@ -227,6 +227,20 @@ const MarkerPopup = props => {
                                     </button>
                                 </div>
                             </div>
+                            <div className={"BLbutton"}>
+                                <button
+                                    className={"btnBL"}
+                                    type={"submit"}
+                                    onClick={handleClick}>
+                                    {"Buy!"}
+                                </button>
+                                <button
+                                    className={"btnBL"}
+                                    type={"submit"}
+                                    onClick={handleClick}>
+                                    {"Lock!"}
+                                </button>
+                            </div>
                             <div className={"lineTree"} />
                             <div className={"previousBuy"}>
                                 <div className={"buyerTreeUser"}>
@@ -262,12 +276,6 @@ const MarkerPopup = props => {
                                     <h3>{"User name"}</h3>
                                 </div>
                             </div>
-                            <button
-                                className={"btn"}
-                                type={"submit"}
-                                onClick={handleClick}>
-                                {"buy tree !"}
-                            </button>
                         </div>
                     ) : (
                         <div className={"comment"}>
