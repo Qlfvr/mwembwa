@@ -1,12 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import "./homepage.scss";
 
-
 const Homepage = () => (
-    <div className="container">
+    <div className={"container"}>
         <div className={"homepage"}>
-            <div className="responsive">
+            <div className={"responsiveHP"}>
                 <div className={"head"}>
                     <h1> {"Mwenbwa"} </h1>
                     <Link to={"/sign-in-up"}>
@@ -16,9 +15,9 @@ const Homepage = () => (
                     </Link>
                     <div className={"foot"}> {"@ Team Estermont 2020"} </div>
                 </div>
-                <div className={"line"}></div>
+                <div className={"line"} />
                 <div className={"rules"}>
-                    <h3> {"Rules of the game"} </h3>
+                    <h3> {"Règles du jeu"} </h3>
                     <p> {"Créé ton profil et choisis une couleur."} </p>
                     <p>
                         {
@@ -37,10 +36,8 @@ const Homepage = () => (
                     </p>
                 </div>
             </div>
-
         </div>
     </div>
-
 );
 
 export default Homepage;

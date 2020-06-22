@@ -1,5 +1,5 @@
-@import '~leaflet/dist/leaflet.css'; // sass
-@import '~react-leaflet-markercluster/dist/styles.min.css'; // sass
+@import "~leaflet/dist/leaflet.css"; // sass
+@import "~react-leaflet-markercluster/dist/styles.min.css"; // sass
 
 html,
 body {
@@ -17,6 +17,19 @@ body,
     height: 100%;
 }
 
+.loading {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    height: 100%;
+    z-index: 4;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 31px;
+}
+
 .leaflet-container {
     width: 100%;
     height: 100vh;
@@ -27,15 +40,18 @@ body,
 }
 .btn {
     height: 50px;
+    min-width: 162px;
     background: #f8e3c7;
     border-radius: 50px;
     border: none;
     margin: 10px 40px 10px 40px;
+    padding: 10px;
     font-size: 20px;
     border: none;
     outline: none;
     cursor: pointer;
     font-family: "Amaranth", sans-serif;
+    box-shadow: 1px 1px 3px black;
 }
 input {
     outline: none;

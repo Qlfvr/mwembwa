@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import {Popup} from "react-leaflet";
 import "./marker-popup.scss";
+import axios from "axios";
 
-const MarkerPopup = () => {
+const MarkerPopup = props => {
     const [stateOnglet, setStateOnglet] = useState(1);
     const infos = () => {
         setStateOnglet(1);
@@ -10,6 +11,29 @@ const MarkerPopup = () => {
     const comments = () => {
         setStateOnglet(2);
     };
+
+    function handleClick() {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        axios
+            .post(
+                `/api/tree/buy-one/${props.tree._id}`,
+                {},
+                {
+                    headers: {Authorization: `Bearer ${currentUser.token}`},
+                },
+            )
+            // eslint-disable-next-line no-unused-vars
+            .then(response => {
+                // handle success
+                //  console.log(response);
+            })
+            // eslint-disable-next-line no-unused-vars
+            .catch(error => {
+                // handle error
+                //console.log(error);
+            });
+    }
     return (
         <>
             <Popup>
@@ -238,6 +262,12 @@ const MarkerPopup = () => {
                                     <h3>{"User name"}</h3>
                                 </div>
                             </div>
+                            <button
+                                className={"btn"}
+                                type={"submit"}
+                                onClick={handleClick}>
+                                {"buy tree !"}
+                            </button>
                         </div>
                     ) : (
                         <div className={"comment"}>

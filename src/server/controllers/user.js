@@ -1,30 +1,32 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const mongoose = require("mongoose");
 const User = require("../models/user");
 
 exports.signup = (req, res) => {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         const user = new User({
+            name: req.body.name,
             email: req.body.email,
             password: hash,
+            color: req.body.color,
         });
         user.save()
             .then(() => res.status(201).json({message: "User created"}))
-            .catch((error) => res.status(500).json({error}));
+            .catch(error => res.status(500).json({error}));
     });
     return true;
 };
 
 exports.login = (req, res) => {
     User.findOne({email: req.body.email})
-        .then((user) => {
+        .then(user => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
             }
             bcrypt
                 .compare(req.body.password, user.password)
-                .then((valid) => {
+                .then(valid => {
                     if (!valid) {
                         return res.status(401).json({error: "Wrong password"});
                     }
@@ -38,10 +40,10 @@ exports.login = (req, res) => {
                     });
                     return true;
                 })
-                .catch((error) => res.status(500).json({error}));
+                .catch(error => res.status(500).json({error}));
             return true;
         })
-        .catch((error) => res.status(500).json({error}));
+        .catch(error => res.status(500).json({error}));
     return true;
 };
 
@@ -64,12 +66,62 @@ exports.setBonusLeaves = async (req, res) => {
 
         const bonusLeaves = totalLeavesPlayers / amountPlayers;
 
-        const addBonusLeaveToUser = await User.updateOne(
-            {_id: req.userId},
-            {$inc: {leaves: bonusLeaves}},
-        );
+        await User.updateOne({_id: req.userId}, {$inc: {leaves: bonusLeaves}});
+
+        return res.status(201).end();
     } catch (error) {
-        res.status(500).json({error});
+        return res.status(500).json({error});
     }
-    return true;
+};
+
+const queryPopulateTrees = () => ({
+    $lookup: {
+        from: "trees",
+        localField: "_id",
+        foreignField: "owner",
+        as: "trees",
+    },
+});
+
+const queryGetUsersInfos = () => ({
+    $project: {
+        _id: 1,
+        name: 1,
+        totalTrees: {$size: "$trees"},
+        leaves: 1,
+    },
+});
+
+exports.getUserInfos = async (req, res) => {
+    try {
+        const responseGetUserInfos = await User.aggregate([
+            {
+                $match: {_id: mongoose.Types.ObjectId(req.userId)},
+            },
+            queryPopulateTrees(),
+            queryGetUsersInfos(),
+        ]).exec();
+
+        const userInfos = responseGetUserInfos[0];
+
+        return res.status(200).json(userInfos);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
+};
+
+exports.getLeaderboard = async (req, res) => {
+    try {
+        const responseGetLeaderBoards = await User.aggregate([
+            queryPopulateTrees(),
+            queryGetUsersInfos(),
+            {$sort: {totalTrees: -1, leaves: -1}},
+        ]).exec();
+
+        const getLeaderBoards = responseGetLeaderBoards;
+
+        return res.status(200).json(getLeaderBoards);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
 };

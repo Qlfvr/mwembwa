@@ -24,6 +24,16 @@ const treeSchema = mongoose.Schema({
     color: {
         type: String,
     },
+    isLocked: {
+        type: Boolean,
+    },
+    comments: {
+        content: {type: String},
+        owner: {
+            type: "ObjectId",
+            ref: "User",
+        },
+    },
 });
 
 treeSchema.index({location: "2dsphere"});
