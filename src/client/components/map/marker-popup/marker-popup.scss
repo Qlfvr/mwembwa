@@ -83,7 +83,24 @@
                 }
             }                
         }
+        
     } 
+    .BLbutton{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        .btnBL{
+            background-color: #bde6d2;
+            border-radius: 20px;
+            border: none;
+            height: 30px;
+            width: 100px;
+            margin-top: 10px;
+            font-family: "Amaranth", sans-serif;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    }
 }
 .lineTree{
         margin: auto;
