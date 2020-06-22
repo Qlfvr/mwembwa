@@ -23,7 +23,7 @@ const TreeMarker = () => {
 
     let treeMarkers = [];
     if (Array.isArray(trees)) {
-        treeMarkers = trees.slice(0, 100).map((tree) => {
+        treeMarkers = trees.map((tree) => {
             const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'><path d='M2,111 h300 l-242.7,176.3 92.7,-285.3 92.7,285.3 z' fill='${tree.color}'/></svg>`;
             let iconUrl = encodeURI("data:image/svg+xml," + svg).replace(
                 "#",
