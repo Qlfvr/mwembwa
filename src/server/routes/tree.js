@@ -8,6 +8,6 @@ router.post("/set-random-trees", auth, treeCtrl.setRandomTrees);
 router.post("/lock-tree/:treeId", auth, treeCtrl.lockTree);
 
 // router.post("/update-one/:id/", auth, treeCtrl.updateOne);
-router.post("/buy-one/:id/",   auth, treeCtrl.buyOne);
+router.post("/buy-one/:id/", auth, treeCtrl.buyOne);
 
 module.exports = router;

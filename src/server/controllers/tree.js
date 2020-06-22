@@ -201,7 +201,10 @@ function getPrice(tree) {
 
     else{
 
-        const price = startPrice
+        const price = startPricebuyOne
+
+        console.log("je suis là");
+        
     }
 
 
