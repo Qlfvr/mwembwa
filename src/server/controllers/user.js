@@ -91,8 +91,8 @@ const queryGetUsersInfos = () => {
         $project: {
             _id: 1,
             name: 1,
-            trees: {$size: "$trees"},
-            leaves: {$sum: "$leaves"},
+            totalTrees: {$size: "$trees"},
+            leaves: 1,
         },
     };
 };
@@ -121,6 +121,7 @@ exports.getLeaderboard = async (req, res) => {
         const responseGetLeaderBoards = await User.aggregate([
             queryPopulateTrees(),
             queryGetUsersInfos(),
+            {$sort: {totalTrees: -1, leaves: -1}},
         ]).exec();
 
         const getLeaderBoards = responseGetLeaderBoards;
