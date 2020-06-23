@@ -20,6 +20,7 @@ const treeSchema = mongoose.Schema({
     owner: {
         type: "ObjectId",
         ref: "User",
+        default: null,
     },
     color: {
         type: String,
