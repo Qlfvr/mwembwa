@@ -13,20 +13,20 @@ exports.signup = (req, res) => {
         });
         user.save()
             .then(() => res.status(201).json({message: "User created"}))
-            .catch(error => res.status(500).json({error}));
+            .catch((error) => res.status(500).json({error}));
     });
     return true;
 };
 
 exports.login = (req, res) => {
     User.findOne({email: req.body.email})
-        .then(user => {
+        .then((user) => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
             }
             bcrypt
                 .compare(req.body.password, user.password)
-                .then(valid => {
+                .then((valid) => {
                     if (!valid) {
                         return res.status(401).json({error: "Wrong password"});
                     }
@@ -40,10 +40,10 @@ exports.login = (req, res) => {
                     });
                     return true;
                 })
-                .catch(error => res.status(500).json({error}));
+                .catch((error) => res.status(500).json({error}));
             return true;
         })
-        .catch(error => res.status(500).json({error}));
+        .catch((error) => res.status(500).json({error}));
     return true;
 };
 
@@ -87,6 +87,7 @@ const queryGetUsersInfos = () => ({
     $project: {
         _id: 1,
         name: 1,
+        email: 1,
         totalTrees: {$size: "$trees"},
         leaves: 1,
     },
