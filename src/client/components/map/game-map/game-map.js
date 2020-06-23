@@ -9,13 +9,13 @@ const GameMap = () => {
     useEffect(() => {
         axios
             .get("/api/tree/")
-            .then(response => {
+            .then((response) => {
                 // handle success
                 setTrees(response.data);
                 setLoading(false);
             })
             // eslint-disable-next-line no-unused-vars
-            .catch(error => {
+            .catch((error) => {
                 // handle error
                 // console.log(error);
             });
@@ -25,8 +25,8 @@ const GameMap = () => {
     if (loading) {
         displayLoading = (
             <div className={"loading"}>
-                <img src={"/images/loading.gif"} />
-                <h3>{"Loading .."}</h3>
+                <div className={"loading__image"}></div>
+                <h3>{"Chargement .."}</h3>
             </div>
         );
     }
