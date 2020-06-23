@@ -3,7 +3,7 @@ import {Popup} from "react-leaflet";
 import "./marker-popup.scss";
 import axios from "axios";
 
-const MarkerPopup = (props) => {
+const MarkerPopup = ({tree}) => {
     const [stateOnglet, setStateOnglet] = useState(1);
     const displaySectionInfos = () => {
         setStateOnglet(1);
@@ -17,16 +17,34 @@ const MarkerPopup = (props) => {
         setCommentToWrite(e.target.value);
     };
 
-    const handleClickSubmitComment = (e) => {
-        console.log(commentToWrite);
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    const handleClickSubmitComment = () => {
+        // console.log(commentToWrite);
+        axios
+            .post(
+                `/api/tree/comment/${tree._id}`,
+                {content: commentToWrite},
+                {
+                    headers: {Authorization: `Bearer ${currentUser.token}`},
+                },
+            )
+            // eslint-disable-next-line no-unused-vars
+            .then((response) => {
+                // handle success
+                //  console.log(response);
+            })
+            // eslint-disable-next-line no-unused-vars
+            .catch((error) => {
+                // handle error
+                //console.log(error);
+            });
     };
 
     function handleClick() {
-        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
         axios
             .post(
-                `/api/tree/buy-one/${props.tree._id}`,
+                `/api/tree/buy-one/${tree._id}`,
                 {},
                 {
                     headers: {Authorization: `Bearer ${currentUser.token}`},
@@ -303,46 +321,31 @@ const MarkerPopup = (props) => {
                             </div>
                             <div className={"lineTree"} />
                             <div className={"commentBody"}>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
+                                {tree.comments.map((comment) => {
+                                    return (
+                                        <>
+                                            <div>
+                                                {new Date(
+                                                    comment.createdAt,
+                                                ).toLocaleDateString("fr-BE", {
+                                                    hour: "numeric",
+                                                    minute: "numeric",
+                                                    second: "numeric",
+                                                })}
+                                            </div>
+                                            <div
+                                                className={"commentUser"}
+                                                key={comment._id}>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt avatar__icon"
+                                                    }
+                                                />
+                                                <p>{comment.content}</p>
+                                            </div>
+                                        </>
+                                    );
+                                })}
                             </div>
                         </div>
                     )}
