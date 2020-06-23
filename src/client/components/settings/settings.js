@@ -1,22 +1,22 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import GamePage from "../game-page/game-page";
 import "./settings.scss";
-
 
 const Settings = () => {
     const history = useHistory();
 
     const routeChange = () => {
-        let path = `/game-page`;
+        const path = `/game-page`;
         history.push(path);
     };
     return (
         <>
             <GamePage />
-            <div className="container" onClick={routeChange}>
+            <div className={"container"} onClick={routeChange}>
                 <div className={"settings"}>
-                    <h1>{"Settings"}
+                    <h1>
+                        {"Settings"}
                         <i
                             className={"fas fa-times closePage"}
                             onClick={routeChange}
@@ -37,6 +37,9 @@ const Settings = () => {
                         <h2>{"Password"}</h2>
                         <input />
                         <button type={"submit"}>{"Save changes"}</button>
+                        <button type={"submit"}>
+                            <i className={"fas fa-power-off"} />
+                        </button>
                     </form>
                 </div>
             </div>
