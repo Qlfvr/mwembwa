@@ -28,9 +28,10 @@
                   cursor: pointer;
                   }
             }
-            i{
-                  text-align: center;
+            #gravatar{
                   font-size: 150px;
+                  margin: auto;
+                  border-radius: 80px;
             }
             form{
                   display: flex;
@@ -66,15 +67,15 @@
             }
             .info{
                   display: flex;
-                  justify-content: space-around;
+                  justify-content: space-evenly;
                   
                   p{
-                        font-size: 20px;
                         margin-bottom: 0px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
                   }
-                  i{
-                        font-size: 20px;
-                  }
+                  
             }
             
 }
