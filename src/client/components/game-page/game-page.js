@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import Gravatar from "react-gravatar";
 import "./game-page.scss";
 
 const GamePage = () => {
@@ -176,7 +177,12 @@ const GamePage = () => {
                     </button>
                 </Link>
 
-                <div id={"profilePicture"} />
+                <Gravatar
+                    id={"gravatar"}
+                    email={"blahblah@blah.com"}
+                    size={150}
+                    rating={"pg"}
+                />
                 <h1>
                     {userInfos &&
                         userInfos.name.charAt(0).toUpperCase() +

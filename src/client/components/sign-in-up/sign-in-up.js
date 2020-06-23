@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
 import {CirclePicker} from "react-color";
+import Gravatar from "react-gravatar";
 import "./sign-in-up.scss";
 
 const SignInUp = () => {
@@ -202,9 +203,10 @@ const SignInUp = () => {
                     <h1>{"Connexion"}</h1>
 
                     <div className={"bg-icone"}>
-                        <i
-                            id={"icon"}
-                            className={"fas fa-user-alt avatar__icon"}
+                        <Gravatar
+                            email={"blahblah@blah.com"}
+                            size={150}
+                            rating={"pg"}
                         />
                     </div>
 
