@@ -204,8 +204,9 @@ const SignInUp = () => {
 
                     <div className={"bg-icone"}>
                         <Gravatar
+                            id={"gravatar"}
                             email={"blahblah@blah.com"}
-                            size={150}
+                            size={120}
                             rating={"pg"}
                         />
                     </div>
