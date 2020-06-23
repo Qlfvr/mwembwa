@@ -127,3 +127,16 @@
         }
     }
 }
+@media all and (max-device-width: 480px){
+    .signInUp{
+        flex-direction: column;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-top: 200px;
+        
+            
+            .formConnexion{
+                margin:0px;
+            }
+    }
+}
