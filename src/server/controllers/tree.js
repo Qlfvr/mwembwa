@@ -5,60 +5,63 @@ const mongoose = require("mongoose");
 
 import {getTreeValue} from "../helpers/index";
 
-const queryPopulateUser = () => ({
-    $lookup: {
-        from: "users",
-        localField: "owner",
-        foreignField: "_id",
-        as: "ownerTree",
-    },
-});
+// const queryPopulateUser = () => ({
+//     $lookup: {
+//         from: "users",
+//         localField: "owner",
+//         foreignField: "_id",
+//         as: "ownerTree",
+//     },
+// });
 
-const queryPopulateComment = () => ({
-    $lookup: {
-        from: "users",
-        localField: "comments.owner",
-        foreignField: "_id",
-        as: "ownerComment",
-    },
-});
+// const queryPopulateComment = () => ({
+//     $lookup: {
+//         from: "users",
+//         localField: "comments.owner",
+//         foreignField: "_id",
+//         as: "ownerComment",
+//     },
+// });
 
-const queryGetAllTrees = () => ({
-    $project: {
-        _id: 1,
-        name: 1,
-        location: 1,
-        diameter: 1,
-        height: 1,
-        owner: "$ownerTree",
-        isLocked: 1,
-        comments: {
-            _id: 1,
-            content: 1,
-            ownerComment: "$ownerComment",
-            createdAt: 1,
-        },
-    },
-});
+// const queryGetAllTrees = () => ({
+//     $project: {
+//         _id: 1,
+//         name: 1,
+//         location: 1,
+//         diameter: 1,
+//         height: 1,
+//         owner: "$ownerTree",
+//         isLocked: 1,
+//         comments: {
+//             _id: 1,
+//             content: 1,
+//             ownerComment: "$ownerComment",
+//             createdAt: 1,
+//         },
+//     },
+// });
 
-exports.getAllTrees = async (req, res) => {
-    try {
-        const responseGetAllTrees = await Tree.aggregate([
-            queryPopulateUser(),
-            {$unwind: "$ownerTree"},
-            queryPopulateComment(),
-            queryGetAllTrees(),
-        ]).exec();
+exports.getAllTrees = (req, res) => {
+    Tree.find()
+        .then(tree => res.status(200).json(tree))
+        .catch(error => res.status(404).json({error}));
+    // try {
+    //     const responseGetAllTrees = await Tree.aggregate([
+    //         queryPopulateUser(),
+    //         {$unwind: "$ownerTree"},
+    //         queryPopulateComment(),
+    //         queryGetAllTrees(),
+    //     ]).exec();
 
-        // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
-        // console.log(responseGetAllTrees);
+    //     // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
+    //     // console.log(responseGetAllTrees);
 
-        const allTrees = responseGetAllTrees;
+    //     const allTrees = responseGetAllTrees;
 
-        return res.status(200).json(allTrees);
-    } catch (error) {
-        return res.status(500).json({error});
-    }
+    //     return res.status(200).json(allTrees);
+    // } catch (error) {
+    //     return res.status(500).json({error});
+    // }
 };
 
 exports.setRandomTrees = (req, res) => {
