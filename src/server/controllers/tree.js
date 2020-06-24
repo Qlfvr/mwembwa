@@ -148,121 +148,111 @@ exports.buyOne = async (req, res) => {
         if (!tree) {
             return res.status(404).json({error: "tree not found"});
         }
-        const currentOwner = tree.owner;
-        let treeValue = 0;
 
         // Calcul du prix
-
-        const valueTargettedPlayersTreeWithin100m = await Tree.aggregate([
-            queryGeolocTrees100MeterRadius(tree),
-            {
-                $match: {owner: mongoose.Types.ObjectId(currentOwner)},
-            },
-            groupSumOfTreeDefaultValues(),
-        ]);
-
-        const amountOfTreesWithin100m = await Tree.aggregate([
-            queryGeolocTrees100MeterRadius(tree),
-            {$group: {_id: null, count: {$sum: 1}}},
-        ]);
-
-        const amountOfTreesTargettedPlayerWithin100m = await Tree.aggregate([
-            queryGeolocTrees100MeterRadius(tree),
-            {
-                $match: {owner: mongoose.Types.ObjectId(currentOwner)},
-            },
-            {$group: {_id: null, count: {$sum: 1}}},
-        ]);
-
-        const valueOtherPeopleTreesWithin100m = await Tree.aggregate([
-            queryGeolocTrees100MeterRadius(tree),
-            {
-                $match: {
-                    $and: [
-                        {owner: {$ne: mongoose.Types.ObjectId(currentOwner)}},
-                        {owner: {$type: "objectId"}},
-                    ],
+        let treeValue = 0;
+        if (tree.owner !== null) {
+            const currentOwner = tree.owner;
+            treeValue = 0;
+            const valueTargettedPlayersTreeWithin100m = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {
+                    $match: {owner: mongoose.Types.ObjectId(currentOwner)},
                 },
-            },
+                groupSumOfTreeDefaultValues(),
+            ]);
 
-            groupSumOfTreeDefaultValues(),
-        ]);
+            const amountOfTreesWithin100m = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {$group: {_id: null, count: {$sum: 1}}},
+            ]);
 
-        //     value of all your tree in 100m radius
-        const valueOfCurrentPlayerTrees = await Tree.aggregate([
-            queryGeolocTrees100MeterRadius(tree),
-            {
-                $match: {owner: mongoose.Types.ObjectId(userId)},
-            },
-            groupSumOfTreeDefaultValues(),
-        ]);
+            const amountOfTreesTargettedPlayerWithin100m = await Tree.aggregate(
+                [
+                    queryGeolocTrees100MeterRadius(tree),
+                    {
+                        $match: {owner: mongoose.Types.ObjectId(currentOwner)},
+                    },
+                    {$group: {_id: null, count: {$sum: 1}}},
+                ],
+            );
 
-        if (currentOwner === null) {
-            treeValue = tree.diameter * tree.height;
+            const valueOtherPeopleTreesWithin100m = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {
+                    $match: {
+                        $and: [
+                            {
+                                owner: {
+                                    $ne: mongoose.Types.ObjectId(currentOwner),
+                                },
+                            },
+                            {owner: {$type: "objectId"}},
+                        ],
+                    },
+                },
 
-            console.log("current owner is null");
-            console.log(`default tree value applied : ${treeValue}`);
+                groupSumOfTreeDefaultValues(),
+            ]);
+
+            //     value of all your tree in 100m radius
+            const valueOfCurrentPlayerTrees = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {
+                    $match: {owner: mongoose.Types.ObjectId(userId)},
+                },
+                groupSumOfTreeDefaultValues(),
+            ]);
+
+            if (currentOwner === null) {
+                treeValue = tree.diameter * tree.height;
+            } else {
+                treeValue =
+                    getTreeValue(tree) +
+                    valueTargettedPlayersTreeWithin100m[0].treeValue *
+                        (amountOfTreesWithin100m[0].count /
+                            amountOfTreesTargettedPlayerWithin100m[0].count) +
+                    valueOtherPeopleTreesWithin100m[0].treeValue -
+                    valueOfCurrentPlayerTrees[0].treeValue;
+            }
         } else {
-            console.log(currentOwner);
+            treeValue = getTreeValue(tree);
+        }
 
-            treeValue =
-                getTreeValue(tree) +
-                valueTargettedPlayersTreeWithin100m[0].treeValue *
-                    (amountOfTreesWithin100m[0].count /
-                        amountOfTreesTargettedPlayerWithin100m[0].count) +
-                valueOtherPeopleTreesWithin100m[0].treeValue -
-                valueOfCurrentPlayerTrees[0].treeValue;
+        if (tree.owner === null || tree.owner.toString() !== userId) {
+            if (tree.isLocked !== true) {
+                if (user.leaves > treeValue) {
+                    Tree.updateOne(
+                        {_id: treeId},
+                        {
+                            color: user.color,
+                            owner: userId,
+                        },
+                    )
+                        .then(() => res.status(201).json())
+                        .catch(error => res.status(404).json(error));
 
-            console.log(treeValue);
-            console.log("tree owned previously");
-            console.log(`treeValue : ${treeValue}`);
-
-            console.log(typeof toString(tree.owner));
-            console.log(typeof userId);
-
-            if (toString(tree.owner) !== userId) {
-                if (tree.isLocked !== true) {
-                    if (user.leaves > treeValue) {
-                        Tree.updateOne(
-                            {_id: treeId},
-                            {
-                                color: user.color,
-                                owner: userId,
-                            },
-                        )
-                            .then(() => res.status(201).json())
-                            .catch(error => res.status(404).json(error));
-
-                        User.updateOne(
-                            {_id: userId},
-                            {
-                                leaves: Math.ceil(user.leaves - treeValue),
-                            },
-                        )
-                            .then(() => res.status(201).json())
-                            .catch(error => res.status(404).json(error));
-
-                        console.log(`you paid : ${treeValue}`);
-                    } else {
-                        return res
-                            .status(403)
-                            .json({message: "you don't have enough leaves"});
-                    }
+                    User.updateOne(
+                        {_id: userId},
+                        {
+                            leaves: Math.ceil(user.leaves - treeValue),
+                        },
+                    )
+                        .then(() => res.status(201).json())
+                        .catch(error => res.status(404).json(error));
                 } else {
                     return res
                         .status(403)
-                        .json({message: "this tree is locked"});
+                        .json({message: "you don't have enough leaves"});
                 }
             } else {
-                return res
-                    .status(403)
-                    .json({message: "you already own this tree"});
+                return res.status(403).json({message: "this tree is locked"});
             }
+        } else {
+            return res.status(403).json({message: "you already own this tree"});
         }
     } catch (error) {
         res.status(500).json({error});
-
-        console.log(error);
     }
     return res.status(201).json({message: "Successfull transaction"});
 };
