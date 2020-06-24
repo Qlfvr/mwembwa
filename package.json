@@ -6,6 +6,9 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "start": "node src/server/index.js",
     "lint": "npx eslint --fix --cache --ignore-pattern 'docs/*' src",
