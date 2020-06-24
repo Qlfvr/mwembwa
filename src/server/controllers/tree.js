@@ -5,10 +5,44 @@ const mongoose = require("mongoose");
 
 import {getTreeValue} from "../helpers/index";
 
-exports.getAllTrees = (req, res) => {
-    Tree.find()
-        .then((tree) => res.status(200).json(tree))
-        .catch((error) => res.status(404).json({error}));
+const queryPopulateUser = () => ({
+    $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerTree",
+    },
+});
+
+const queryGetAllTrees = () => ({
+    $project: {
+        _id: 1,
+        name: 1,
+        location: 1,
+        diameter: 1,
+        height: 1,
+        owner: "$ownerTree",
+        isLocked: 1,
+        comments: 1,
+    },
+});
+
+exports.getAllTrees = async (req, res) => {
+    try {
+        const responseGetAllTrees = await Tree.aggregate([
+            queryPopulateUser(),
+            {$unwind: "$ownerTree"},
+            queryGetAllTrees(),
+        ]).exec();
+
+        // console.log(responseGetAllTrees);
+
+        const allTrees = responseGetAllTrees;
+
+        return res.status(200).json(allTrees);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
 };
 
 exports.setRandomTrees = (req, res) => {
