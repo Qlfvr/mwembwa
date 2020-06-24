@@ -13,7 +13,7 @@ const MarkerPopup = ({tree}) => {
     };
 
     const [commentToWrite, setCommentToWrite] = useState("");
-    const handleChangeCommentToWrite = (e) => {
+    const handleChangeCommentToWrite = e => {
         setCommentToWrite(e.target.value);
     };
 
@@ -21,24 +21,26 @@ const MarkerPopup = ({tree}) => {
 
     const handleClickSubmitComment = () => {
         // console.log(commentToWrite);
-        axios
-            .post(
-                `/api/tree/comment/${tree._id}`,
-                {content: commentToWrite},
-                {
-                    headers: {Authorization: `Bearer ${currentUser.token}`},
-                },
-            )
-            // eslint-disable-next-line no-unused-vars
-            .then((response) => {
-                // handle success
-                //  console.log(response);
-            })
-            // eslint-disable-next-line no-unused-vars
-            .catch((error) => {
-                // handle error
-                //console.log(error);
-            });
+        if (commentToWrite) {
+            axios
+                .post(
+                    `/api/tree/comment/${tree._id}`,
+                    {content: commentToWrite},
+                    {
+                        headers: {Authorization: `Bearer ${currentUser.token}`},
+                    },
+                )
+                // eslint-disable-next-line no-unused-vars
+                .then(response => {
+                    // handle success
+                    //  console.log(response);
+                })
+                // eslint-disable-next-line no-unused-vars
+                .catch(error => {
+                    // handle error
+                    //console.log(error);
+                });
+        }
     };
 
     function handleClick() {
@@ -51,12 +53,12 @@ const MarkerPopup = ({tree}) => {
                 },
             )
             // eslint-disable-next-line no-unused-vars
-            .then((response) => {
+            .then(response => {
                 // handle success
                 //  console.log(response);
             })
             // eslint-disable-next-line no-unused-vars
-            .catch((error) => {
+            .catch(error => {
                 // handle error
                 //console.log(error);
             });
@@ -321,10 +323,10 @@ const MarkerPopup = ({tree}) => {
                             </div>
                             <div className={"lineTree"} />
                             <div className={"commentBody"}>
-                                {tree.comments.map((comment) => {
-                                    return (
+                                {tree.comments &&
+                                    tree.comments.map(comment => (
                                         <div key={comment._id}>
-                                            <div>
+                                            <div className={"commentDate"}>
                                                 {new Date(
                                                     comment.createdAt,
                                                 ).toLocaleDateString("fr-BE", {
@@ -333,17 +335,29 @@ const MarkerPopup = ({tree}) => {
                                                     second: "numeric",
                                                 })}
                                             </div>
-                                            <div className={"commentUser"}>
-                                                <i
+                                            <div className={"commentContainer"}>
+                                                <div className={"commentUser"}>
+                                                    <i
+                                                        className={
+                                                            "fas fa-user-alt avatar__icon"
+                                                        }
+                                                    />
+                                                    <div>
+                                                        {
+                                                            comment.ownerComment
+                                                                .name
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div
                                                     className={
-                                                        "fas fa-user-alt avatar__icon"
-                                                    }
-                                                />
-                                                <p>{comment.content}</p>
+                                                        "commentContent"
+                                                    }>
+                                                    <p>{comment.content}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    );
-                                })}
+                                    ))}
                             </div>
                         </div>
                     )}
