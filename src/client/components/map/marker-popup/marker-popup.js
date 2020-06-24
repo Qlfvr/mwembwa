@@ -323,7 +323,7 @@ const MarkerPopup = ({tree}) => {
                             <div className={"commentBody"}>
                                 {tree.comments.map((comment) => {
                                     return (
-                                        <>
+                                        <div key={comment._id}>
                                             <div>
                                                 {new Date(
                                                     comment.createdAt,
@@ -333,9 +333,7 @@ const MarkerPopup = ({tree}) => {
                                                     second: "numeric",
                                                 })}
                                             </div>
-                                            <div
-                                                className={"commentUser"}
-                                                key={comment._id}>
+                                            <div className={"commentUser"}>
                                                 <i
                                                     className={
                                                         "fas fa-user-alt avatar__icon"
@@ -343,7 +341,7 @@ const MarkerPopup = ({tree}) => {
                                                 />
                                                 <p>{comment.content}</p>
                                             </div>
-                                        </>
+                                        </div>
                                     );
                                 })}
                             </div>
