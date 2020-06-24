@@ -6,11 +6,13 @@ const userRoutes = require("./routes/user");
 const bodyParser = require("body-parser");
 
 mongoose
-    .connect("mongodb://dev:dev@mongo:27017/", {
-        dbName: "mwenbwa",
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(
+        "mongodb://dev:LPa7b2khYDr4Z69@ds161790.mlab.com:61790/heroku_p1m9d8cl",
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        },
+    )
     .then(() => console.log("Connection to MongoDB successful"))
     .catch(() => console.log("Connection to MongoDB failed"));
 
@@ -29,7 +31,7 @@ app.get("/*", (req, res) => {
     // eslint-disable-next-line no-sequences
     res.sendFile(
         path.resolve(__dirname, "../../bin/client/index.html"),
-        (err) => {
+        err => {
             if (err) {
                 res.status(500).send(err);
             }
