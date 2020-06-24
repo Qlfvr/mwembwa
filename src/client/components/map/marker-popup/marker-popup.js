@@ -323,7 +323,7 @@ const MarkerPopup = ({tree}) => {
                             </div>
                             <div className={"lineTree"} />
                             <div className={"commentBody"}>
-                                {tree.comments &&
+                                {tree.comments.length &&
                                     tree.comments.map(comment => (
                                         <div key={comment._id}>
                                             <div className={"commentDate"}>

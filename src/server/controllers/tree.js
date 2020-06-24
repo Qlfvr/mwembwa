@@ -51,7 +51,8 @@ exports.getAllTrees = async (req, res) => {
         ]).exec();
 
         // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
-        console.log(responseGetAllTrees);
+        // console.log(responseGetAllTrees);
+
         const allTrees = responseGetAllTrees;
 
         return res.status(200).json(allTrees);
