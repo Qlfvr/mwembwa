@@ -47,12 +47,11 @@ exports.getAllTrees = async (req, res) => {
             queryPopulateUser(),
             {$unwind: "$ownerTree"},
             queryPopulateComment(),
-            {$unwind: "$ownerComment"},
             queryGetAllTrees(),
         ]).exec();
 
         // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
-
+        console.log(responseGetAllTrees);
         const allTrees = responseGetAllTrees;
 
         return res.status(200).json(allTrees);
