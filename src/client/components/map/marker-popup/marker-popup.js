@@ -326,15 +326,6 @@ const MarkerPopup = ({tree}) => {
                                 {tree.comments.length &&
                                     tree.comments.map(comment => (
                                         <div key={comment._id}>
-                                            <div className={"commentDate"}>
-                                                {new Date(
-                                                    comment.createdAt,
-                                                ).toLocaleDateString("fr-BE", {
-                                                    hour: "numeric",
-                                                    minute: "numeric",
-                                                    second: "numeric",
-                                                })}
-                                            </div>
                                             <div className={"commentContainer"}>
                                                 <div className={"commentUser"}>
                                                     <i
@@ -354,6 +345,23 @@ const MarkerPopup = ({tree}) => {
                                                         "commentContent"
                                                     }>
                                                     <p>{comment.content}</p>
+                                                    <div
+                                                        className={
+                                                            "commentDate"
+                                                        }>
+                                                        {new Date(
+                                                            comment.createdAt,
+                                                        ).toLocaleDateString(
+                                                            "fr-BE",
+                                                            {
+                                                                hour: "numeric",
+                                                                minute:
+                                                                    "numeric",
+                                                                second:
+                                                                    "numeric",
+                                                            },
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
