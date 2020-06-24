@@ -14,6 +14,15 @@ const queryPopulateUser = () => ({
     },
 });
 
+const queryPopulateComment = () => ({
+    $lookup: {
+        from: "users",
+        localField: "comments.owner",
+        foreignField: "_id",
+        as: "ownerComment",
+    },
+});
+
 const queryGetAllTrees = () => ({
     $project: {
         _id: 1,
@@ -23,7 +32,12 @@ const queryGetAllTrees = () => ({
         height: 1,
         owner: "$ownerTree",
         isLocked: 1,
-        comments: 1,
+        comments: {
+            _id: 1,
+            content: 1,
+            ownerComment: "$ownerComment",
+            createdAt: 1,
+        },
     },
 });
 
@@ -32,10 +46,12 @@ exports.getAllTrees = async (req, res) => {
         const responseGetAllTrees = await Tree.aggregate([
             queryPopulateUser(),
             {$unwind: "$ownerTree"},
+            queryPopulateComment(),
+            {$unwind: "$ownerComment"},
             queryGetAllTrees(),
         ]).exec();
 
-        // console.log(responseGetAllTrees);
+        // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
 
         const allTrees = responseGetAllTrees;
 
@@ -47,27 +63,27 @@ exports.getAllTrees = async (req, res) => {
 
 exports.setRandomTrees = (req, res) => {
     User.findOne({_id: req.userId})
-        .then((user) => {
+        .then(user => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
             }
 
             Tree.aggregate([{$match: {owner: null}}, {$sample: {size: 3}}])
-                .then((trees) => {
+                .then(trees => {
                     for (const tree of trees) {
                         Tree.updateOne(
                             {_id: tree._id},
                             {owner: user._id, color: user.color},
                         )
                             .then(() => res.status(201).end())
-                            .catch((error) => res.status(404).json({error}));
+                            .catch(error => res.status(404).json({error}));
                     }
                     return true;
                 })
-                .catch((error) => res.status(404).json({error}));
+                .catch(error => res.status(404).json({error}));
             return true;
         })
-        .catch((error) => res.status(404).json({error}));
+        .catch(error => res.status(404).json({error}));
     return true;
 };
 
@@ -181,9 +197,9 @@ exports.buyOne = (req, res) => {
     // get user data
 
     User.findById(userId)
-        .then((user) => {
+        .then(user => {
             Tree.findById(treeId)
-                .then((tree) => {
+                .then(tree => {
                     const treeValue = getTreeValue(tree);
 
                     if (
@@ -198,7 +214,7 @@ exports.buyOne = (req, res) => {
                             },
                         )
                             .then(() => res.status(201).json())
-                            .catch((error) => res.status(404).json(error));
+                            .catch(error => res.status(404).json(error));
 
                         User.updateOne(
                             {_id: userId},
@@ -207,16 +223,17 @@ exports.buyOne = (req, res) => {
                             },
                         )
                             .then(() => res.status(201).json())
-                            .catch((error) => res.status(404).json(error));
+                            .catch(error => res.status(404).json(error));
                     } else {
                         res.send(
                             "Can't buy this tree : not enough leaves or is lock or you already own it",
                         );
                     }
                 })
-                .catch((error) => res.status(404).json(error));
+                .catch(error => res.status(404).json(error));
         })
-        .catch((error) => res.status(404).json({error}));
+        .catch(error => res.status(404).json({error}));
+    return true;
 };
 
 exports.addComment = async (req, res) => {
@@ -239,7 +256,9 @@ exports.addComment = async (req, res) => {
         );
 
         res.status(201).send("Comment added");
+        // eslint-disable-next-line no-unused-vars
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
+    return true;
 };
