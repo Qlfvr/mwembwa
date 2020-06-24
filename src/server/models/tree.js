@@ -11,18 +11,12 @@ const treeSchema = mongoose.Schema({
     diameter: {
         type: Number,
     },
-    circumference: {
-        type: Number,
-    },
     height: {
         type: Number,
     },
     owner: {
         type: "ObjectId",
         ref: "User",
-    },
-    color: {
-        type: String,
     },
     isLocked: {
         type: Boolean,
