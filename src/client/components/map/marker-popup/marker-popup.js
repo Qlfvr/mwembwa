@@ -163,9 +163,16 @@ const MarkerPopup = ({tree}) => {
                                     </svg>
                                 </div>
                                 <div className={"middleHeader"}>
-                                    <h2>{"Name of the tree"}</h2>
-                                    <h3>{"Name of the buyer"}</h3>
-                                    <a>{"Wikipedia Link"}</a>
+                                    <h2>{tree.name && tree.name}</h2>
+                                    <h3>{tree.owner && tree.owner[0].name}</h3>
+                                    <a
+                                        target={"_blank"}
+                                        rel={"noreferrer"}
+                                        href={`https://fr.wikipedia.org/wiki/${
+                                            tree.name != null ? tree.name : ""
+                                        }`}>
+                                        {"Wikipedia"}
+                                    </a>
                                 </div>
                                 <div className={"iconPaper"}>
                                     <button>
