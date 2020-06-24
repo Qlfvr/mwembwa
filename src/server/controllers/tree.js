@@ -1,38 +1,73 @@
 const Tree = require("../models/tree");
 const User = require("../models/user");
 const helpers = require("../helpers/index");
+const mongoose = require("mongoose");
 
 import {getTreeValue} from "../helpers/index";
 
-exports.getAllTrees = (req, res) => {
-    Tree.find()
-        .then(tree => res.status(200).json(tree))
-        .catch(error => res.status(404).json({error}));
+const queryPopulateUser = () => ({
+    $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerTree",
+    },
+});
+
+const queryGetAllTrees = () => ({
+    $project: {
+        _id: 1,
+        name: 1,
+        location: 1,
+        diameter: 1,
+        height: 1,
+        owner: "$ownerTree",
+        isLocked: 1,
+        comments: 1,
+    },
+});
+
+exports.getAllTrees = async (req, res) => {
+    try {
+        const responseGetAllTrees = await Tree.aggregate([
+            queryPopulateUser(),
+            {$unwind: "$ownerTree"},
+            queryGetAllTrees(),
+        ]).exec();
+
+        // console.log(responseGetAllTrees);
+
+        const allTrees = responseGetAllTrees;
+
+        return res.status(200).json(allTrees);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
 };
 
 exports.setRandomTrees = (req, res) => {
     User.findOne({_id: req.userId})
-        .then(user => {
+        .then((user) => {
             if (!user) {
                 return res.status(401).json({error: "User not found"});
             }
 
             Tree.aggregate([{$match: {owner: null}}, {$sample: {size: 3}}])
-                .then(trees => {
+                .then((trees) => {
                     for (const tree of trees) {
                         Tree.updateOne(
                             {_id: tree._id},
                             {owner: user._id, color: user.color},
                         )
                             .then(() => res.status(201).end())
-                            .catch(error => res.status(404).json({error}));
+                            .catch((error) => res.status(404).json({error}));
                     }
                     return true;
                 })
-                .catch(error => res.status(404).json({error}));
+                .catch((error) => res.status(404).json({error}));
             return true;
         })
-        .catch(error => res.status(404).json({error}));
+        .catch((error) => res.status(404).json({error}));
     return true;
 };
 
@@ -146,9 +181,9 @@ exports.buyOne = (req, res) => {
     // get user data
 
     User.findById(userId)
-        .then(user => {
+        .then((user) => {
             Tree.findById(treeId)
-                .then(tree => {
+                .then((tree) => {
                     const treeValue = getTreeValue(tree);
 
                     if (
@@ -163,7 +198,7 @@ exports.buyOne = (req, res) => {
                             },
                         )
                             .then(() => res.status(201).json())
-                            .catch(error => res.status(404).json(error));
+                            .catch((error) => res.status(404).json(error));
 
                         User.updateOne(
                             {_id: userId},
@@ -172,14 +207,39 @@ exports.buyOne = (req, res) => {
                             },
                         )
                             .then(() => res.status(201).json())
-                            .catch(error => res.status(404).json(error));
+                            .catch((error) => res.status(404).json(error));
                     } else {
                         res.send(
                             "Can't buy this tree : not enough leaves or is lock or you already own it",
                         );
                     }
                 })
-                .catch(error => res.status(404).json(error));
+                .catch((error) => res.status(404).json(error));
         })
-        .catch(error => res.status(404).json({error}));
+        .catch((error) => res.status(404).json({error}));
+};
+
+exports.addComment = async (req, res) => {
+    try {
+        const tree = await Tree.findOne({_id: req.params.treeId});
+        if (!tree) {
+            return res.status(404).json({error: "Tree not found"});
+        }
+
+        await Tree.updateOne(
+            {_id: tree._id},
+            {
+                $push: {
+                    comments: {
+                        content: req.body.content,
+                        owner: mongoose.Types.ObjectId(req.userId),
+                    },
+                },
+            },
+        );
+
+        res.status(201).send("Comment added");
+    } catch (error) {
+        console.log(error);
+    }
 };

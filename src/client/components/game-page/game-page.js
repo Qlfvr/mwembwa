@@ -179,7 +179,7 @@ const GamePage = () => {
 
                 <Gravatar
                     id={"gravatar"}
-                    email={"blahblah@blah.com"}
+                    email={userInfos && userInfos.email}
                     size={150}
                     rating={"pg"}
                 />
