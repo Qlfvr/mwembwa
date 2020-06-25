@@ -2,7 +2,7 @@ const Tree = require("../models/tree");
 const User = require("../models/user");
 const helpers = require("../helpers/index");
 
-import {getTreeValue} from "../helpers/index";
+const getTreeValue = require("../helpers/index");
 
 exports.getAllTrees = (req, res) => {
     Tree.find()
