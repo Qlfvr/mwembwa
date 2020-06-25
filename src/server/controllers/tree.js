@@ -45,7 +45,6 @@ exports.getAllTrees = async (req, res) => {
     try {
         const responseGetAllTrees = await Tree.aggregate([
             queryPopulateUser(),
-            {$unwind: "$ownerTree"},
             queryPopulateComment(),
             queryGetAllTrees(),
         ]).exec();
