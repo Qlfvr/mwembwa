@@ -12,7 +12,7 @@
     border: solid 10px #85375c;
     z-index: 2;
     position: relative;
-
+    
     h1 {
         font-size: 50px;
         margin-top: 0px;
@@ -61,4 +61,27 @@
 .leaderboard::-webkit-scrollbar-track-piece:start {
     background: transparent;
     margin-top: 30px;
+}
+
+@media all and (max-device-width: 480px){
+
+    .leaderboard{
+        width:300px ;
+        h1{
+            font-size: 35px;
+            .closePage {
+            position: relative;
+            left: 30px;
+            font-size: 30px;
+            cursor: pointer;
+            }
+        }
+        table{
+            th{
+                width: 350px;
+                font-size: 18px;
+            }
+        }
+        
+    }
 }
