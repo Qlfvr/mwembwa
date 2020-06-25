@@ -1,8 +1,8 @@
 const Tree = require("../models/tree");
 const User = require("../models/user");
 const helpers = require("../helpers/index");
-import {getTreeValue} from "../helpers/index";
-import mongoose from "mongoose";
+const getTreeValue = require("../helpers/index");
+const mongoose = require("mongoose");
 
 const queryGeolocTrees100MeterRadius = tree => ({
     $geoNear: {
