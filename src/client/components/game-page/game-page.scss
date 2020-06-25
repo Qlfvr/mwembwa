@@ -27,7 +27,7 @@
         border-radius: 20px;
         width: 60px;
         height: 80px;
-        margin: 0 10px 20px 0;
+        margin: 0 10px 50px 0;
         outline: none;
         border: none;
     }
@@ -99,17 +99,18 @@
     }
 }
 @media all and (max-device-width: 480px){
-    .profile{
-        right: 25px;
+    .gamePage{
+        .profile{
+        
+        right: 10px;
         #gravatar{
         width: 80px;
         height: 80px;
         border: solid 5px #f4c287;;
         }
         h1{
-            font-size: 25px;
-            color: white;
-            text-shadow: 1px 1px 3px black;
+            font-size: 18px;
+            
         }
         #buttonSettings{
             width: 30px;
@@ -117,10 +118,13 @@
         }
     }
     .assets{
+        left: 10px;
+
         
         #buttonL{
             width: 40px;
             height: 60px;
+            margin-bottom: 20px;
             
             #iconL{
                 height: 40px;
@@ -145,4 +149,6 @@
             width:40px;
         }
     }
+    }
+    
 }
