@@ -28,9 +28,10 @@
                   cursor: pointer;
                   }
             }
-            i{
-                  text-align: center;
+            #gravatar{
                   font-size: 150px;
+                  margin: auto;
+                  border-radius: 80px;
             }
             form{
                   display: flex;
@@ -60,18 +61,21 @@
                   margin: 10px 40px 10px 40px;
                   font-family: "Amaranth", sans-serif;
                   font-size: 20px;
-            }
-            .info{
-                  display: flex;
-                  justify-content: space-around;
-                  
-                  p{
-                        font-size: 20px;
-                        margin-bottom: 0px;
-                  }
                   i{
                         font-size: 20px;
                   }
+            }
+            .info{
+                  display: flex;
+                  justify-content: space-evenly;
+                  
+                  p{
+                        margin-bottom: 0px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                  }
+                  
             }
             
 }

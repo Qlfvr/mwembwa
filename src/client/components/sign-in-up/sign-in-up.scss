@@ -1,5 +1,4 @@
 .signInUp {
-    z-index: 1;
     position: relative;
     display: flex;
     justify-content: center;
@@ -16,6 +15,16 @@
         display: flex;
         justify-content: center;
         text-align: center;
+    }
+
+    .error {
+        color: #a94442;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    input {
+        padding-left: 10px;
     }
 
     .formInscription {
@@ -76,22 +85,16 @@
             align-items: center;
             text-align: center;
             margin: auto;
-            height: 120px;
-            width: 120px;
-            background-color: white;
+            
             border-radius: 100px;
             position: relative;
             margin-bottom: 10px;
-            margin-left: 65px;
-        }
-        i {
-            padding-left: 35px;
-            font-size: 50px;
-
-            #icon {
-                text-align: center;
+            #gravatar{
+                border-radius: 100px;
+                
             }
         }
+        
     }
 
     .inputInscription:valid {
@@ -104,6 +107,7 @@
     .line {
         height: 300px;
         width: 10px;
+        min-width: 10px;
         background-color: #bde6d2;
         box-shadow: 5px 5px 20px black;
         border-radius: 5px;
@@ -112,6 +116,8 @@
         display: flex;
         flex-direction: row;
         width: 225px;
+        margin: auto;
+        margin-bottom: -8px;
         .randomColor {
             height: 50px;
             width: 50px;
@@ -119,5 +125,18 @@
             margin-bottom: 15px;
             border-radius: 25px;
         }
+    }
+}
+@media all and (max-device-width: 480px){
+    .signInUp{
+        flex-direction: column;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding-top: 200px;
+        
+            
+            .formConnexion{
+                margin:0px;
+            }
     }
 }

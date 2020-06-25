@@ -28,7 +28,6 @@
         width: 60px;
         height: 80px;
         margin: 0 10px 0px 0;
-        cursor: pointer;
         outline: none;
         border: none;
     }
@@ -60,9 +59,6 @@
     }
     h2 {
         position: absolute;
-        width: 50px;
-        height: 50px;
-
         margin-top: -10px;
         margin-left: 20px;
         border-radius: 40px;
@@ -71,6 +67,7 @@
         font-size: 25px;
         line-height: 50px;
         color: #ffffff;
+        padding: 0px 15px 0px 15px;
     }
 
     #buttonSettings {
@@ -80,17 +77,17 @@
         background-color: #85355c;
         color: white;
         border-radius: 30px;
-        margin-left: 40px;
+        
         cursor: pointer;
         outline: none;
         border: none;
     }
-    #profilePicture {
-        height: 150px;
-        width: 150px;
+    #gravatar {
         background-color: white;
         border-radius: 100px;
         border: solid 15px #f4c287;
+        width: 150px;
+        height: 150px;
     }
     #iconR {
         text-align: center;
@@ -99,5 +96,47 @@
         height: 0px;
         width: 0px;
         font-size: 20px;
+    }
+}
+@media all and (max-device-width: 480px){
+    .profile{
+        right: 25px;
+        #gravatar{
+        width: 80px;
+        height: 80px;
+        border: solid 5px #f4c287;;
+        }
+        h1{
+            font-size: 25px;
+            color: white;
+            text-shadow: 1px 1px 3px black;
+        }
+        #buttonSettings{
+            width: 30px;
+            height: 30px;
+        }
+    }
+    .assets{
+        height: 60%;
+        #buttonL{
+            width: 30px;
+            height: 40px;
+            svg{
+                width: 80%;
+                height: 80%;
+            }
+            h2{
+                position: absolute;
+                
+                margin-left: 10px;
+                border-radius: 40px;
+                background: #85355c;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+                font-size: 12px;
+                line-height: normal;
+                color: #ffffff;
+                padding: 0px 7px 0px 7px;
+            }
+        }
     }
 }

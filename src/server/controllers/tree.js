@@ -11,7 +11,7 @@ const queryGeolocTrees100MeterRadius = tree => ({
             coordinates: tree.location.coordinates,
         },
         distanceField: "distance.calculated",
-        maxDistance: 10000,
+        maxDistance: 100,
     },
 });
 const groupSumOfTreeDefaultValues = () => ({
@@ -27,10 +27,59 @@ const groupSumOfTreeDefaultValues = () => ({
     },
 });
 
-exports.getAllTrees = (req, res) => {
-    Tree.find()
-        .then(tree => res.status(200).json(tree))
-        .catch(error => res.status(404).json({error}));
+const queryPopulateUser = () => ({
+    $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerTree",
+    },
+});
+
+const queryPopulateComment = () => ({
+    $lookup: {
+        from: "users",
+        localField: "comments.owner",
+        foreignField: "_id",
+        as: "ownerComment",
+    },
+});
+
+const queryGetAllTrees = () => ({
+    $project: {
+        _id: 1,
+        name: 1,
+        location: 1,
+        diameter: 1,
+        height: 1,
+        owner: "$ownerTree",
+        isLocked: 1,
+        comments: {
+            _id: 1,
+            content: 1,
+            ownerComment: "$ownerComment",
+            createdAt: 1,
+        },
+    },
+});
+
+exports.getAllTrees = async (req, res) => {
+    try {
+        const responseGetAllTrees = await Tree.aggregate([
+            queryPopulateUser(),
+            queryPopulateComment(),
+            queryGetAllTrees(),
+        ]).exec();
+
+        // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
+        // console.log(responseGetAllTrees);
+
+        const allTrees = responseGetAllTrees;
+
+        return res.status(200).json(allTrees);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
 };
 
 exports.setRandomTrees = (req, res) => {
@@ -43,10 +92,11 @@ exports.setRandomTrees = (req, res) => {
             Tree.aggregate([{$match: {owner: null}}, {$sample: {size: 3}}])
                 .then(trees => {
                     for (const tree of trees) {
-                        Tree.updateOne({_id: tree._id}, {owner: user._id})
-                            .then(() =>
-                                res.json({message: "Random trees generated"}),
-                            )
+                        Tree.updateOne(
+                            {_id: tree._id},
+                            {owner: user._id, color: user.color},
+                        )
+                            .then(() => res.status(201).end())
                             .catch(error => res.status(404).json({error}));
                     }
                     return true;
@@ -113,11 +163,11 @@ exports.lockTree = async (req, res) => {
             valueTrees100MeterRadius * amountPlayers100MeterRadius -
             valuePlayersTrees100MeterRadius / amountPlayers100MeterRadius;
 
-        const isPlayerHaveEnoughLeavesToBuy =
+        const isPlayerHaveEnoughLeavesToLock =
             user.leaves >= leavesToPay ? true : false;
-        if (!isPlayerHaveEnoughLeavesToBuy) {
+        if (!isPlayerHaveEnoughLeavesToLock) {
             return res.status(401).json({
-                error: "The user doesn't have enough leaves to buy this tree",
+                error: "The user doesn't have enough leaves to lock this tree",
             });
         }
 
@@ -135,7 +185,7 @@ exports.lockTree = async (req, res) => {
 };
 
 exports.buyOne = async (req, res) => {
-    const treeId = req.params.id;
+    const treeId = req.params.treeId;
     const userId = req.userId;
     // get user data
 
@@ -255,4 +305,30 @@ exports.buyOne = async (req, res) => {
         res.status(500).json({error});
     }
     return res.status(201).json({message: "Successfull transaction"});
+};
+exports.addComment = async (req, res) => {
+    try {
+        const tree = await Tree.findOne({_id: req.params.treeId});
+        if (!tree) {
+            return res.status(404).json({error: "Tree not found"});
+        }
+
+        await Tree.updateOne(
+            {_id: tree._id},
+            {
+                $push: {
+                    comments: {
+                        content: req.body.content,
+                        owner: mongoose.Types.ObjectId(req.userId),
+                    },
+                },
+            },
+        );
+
+        res.status(201).send("Comment added");
+        // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+        // console.log(error);
+    }
+    return true;
 };
