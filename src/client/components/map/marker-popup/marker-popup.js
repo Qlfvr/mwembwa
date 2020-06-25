@@ -389,7 +389,8 @@ const MarkerPopup = ({tree}) => {
                                                     />
                                                     <div>
                                                         {
-                                                            comment.ownerComment
+                                                            comment
+                                                                .ownerComment[0]
                                                                 .name
                                                         }
                                                     </div>
