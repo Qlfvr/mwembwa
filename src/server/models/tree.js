@@ -17,6 +17,7 @@ const treeSchema = mongoose.Schema({
     owner: {
         type: "ObjectId",
         ref: "User",
+        default: null,
     },
     isLocked: {
         type: Boolean,

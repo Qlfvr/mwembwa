@@ -164,7 +164,9 @@ const MarkerPopup = ({tree}) => {
                                 </div>
                                 <div className={"middleHeader"}>
                                     <h2>{tree.name && tree.name}</h2>
-                                    <h3>{tree.owner && tree.owner[0].name}</h3>
+                                    <h3>
+                                        {tree.owner[0] && tree.owner[0].name}
+                                    </h3>
                                     <a
                                         target={"_blank"}
                                         rel={"noreferrer"}
