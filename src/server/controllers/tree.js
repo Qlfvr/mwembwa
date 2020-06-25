@@ -1,13 +1,85 @@
 const Tree = require("../models/tree");
 const User = require("../models/user");
 const helpers = require("../helpers/index");
-
 const getTreeValue = require("../helpers/index");
+const mongoose = require("mongoose");
 
-exports.getAllTrees = (req, res) => {
-    Tree.find()
-        .then(tree => res.status(200).json(tree))
-        .catch(error => res.status(404).json({error}));
+const queryGeolocTrees100MeterRadius = tree => ({
+    $geoNear: {
+        near: {
+            type: "Point",
+            coordinates: tree.location.coordinates,
+        },
+        distanceField: "distance.calculated",
+        maxDistance: 100,
+    },
+});
+const groupSumOfTreeDefaultValues = () => ({
+    $group: {
+        _id: null,
+        treeValue: {
+            $sum: {
+                $ceil: {
+                    $multiply: ["$diameter", "$height"],
+                },
+            },
+        },
+    },
+});
+
+const queryPopulateUser = () => ({
+    $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerTree",
+    },
+});
+
+const queryPopulateComment = () => ({
+    $lookup: {
+        from: "users",
+        localField: "comments.owner",
+        foreignField: "_id",
+        as: "ownerComment",
+    },
+});
+
+const queryGetAllTrees = () => ({
+    $project: {
+        _id: 1,
+        name: 1,
+        location: 1,
+        diameter: 1,
+        height: 1,
+        owner: "$ownerTree",
+        isLocked: 1,
+        comments: {
+            _id: 1,
+            content: 1,
+            ownerComment: "$ownerComment",
+            createdAt: 1,
+        },
+    },
+});
+
+exports.getAllTrees = async (req, res) => {
+    try {
+        const responseGetAllTrees = await Tree.aggregate([
+            queryPopulateUser(),
+            queryPopulateComment(),
+            queryGetAllTrees(),
+        ]).exec();
+
+        // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
+        // console.log(responseGetAllTrees);
+
+        const allTrees = responseGetAllTrees;
+
+        return res.status(200).json(allTrees);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
 };
 
 exports.setRandomTrees = (req, res) => {
@@ -64,48 +136,20 @@ exports.lockTree = async (req, res) => {
 
         const treeValue = helpers.getTreeValue(tree);
 
-        const queryGeolocTrees100MeterRadius = () => ({
-            $geoNear: {
-                near: {
-                    type: "Point",
-                    coordinates: tree.location.coordinates,
-                },
-                distanceField: "distance.calculated",
-                maxDistance: 100,
-            },
-        });
-
         const queryValueTrees100MeterRadius = await Tree.aggregate([
-            queryGeolocTrees100MeterRadius(),
-            {
-                $group: {
-                    _id: null,
-                    treeValue: {
-                        $sum: {$ceil: {$multiply: ["$diameter", "$height"]}},
-                    },
-                },
-            },
+            queryGeolocTrees100MeterRadius(tree),
+            groupSumOfTreeDefaultValues(),
         ]);
         const valueTrees100MeterRadius =
             queryValueTrees100MeterRadius[0].treeValue;
 
         const queryAmountPlayersAndValuePlayersTrees100MeterRadius = await Tree.aggregate(
             [
-                queryGeolocTrees100MeterRadius(),
+                queryGeolocTrees100MeterRadius(tree),
                 {
                     $match: {owner: {$ne: null}},
                 },
-                {
-                    $group: {
-                        _id: null,
-                        amountPlayers: {$sum: 1},
-                        treeValue: {
-                            $sum: {
-                                $ceil: {$multiply: ["$diameter", "$height"]},
-                            },
-                        },
-                    },
-                },
+                groupSumOfTreeDefaultValues(),
             ],
         );
         const amountPlayers100MeterRadius =
@@ -140,46 +184,151 @@ exports.lockTree = async (req, res) => {
     return true;
 };
 
-exports.buyOne = (req, res) => {
-    const treeId = req.params.id;
+exports.buyOne = async (req, res) => {
+    const treeId = req.params.treeId;
     const userId = req.userId;
     // get user data
 
-    User.findById(userId)
-        .then(user => {
-            Tree.findById(treeId)
-                .then(tree => {
-                    const treeValue = getTreeValue(tree);
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({error: "User not found"});
+        }
+        const tree = await Tree.findById(treeId);
+        if (!tree) {
+            return res.status(404).json({error: "tree not found"});
+        }
 
-                    if (
-                        user.leaves > treeValue &&
-                        tree.owner !== user._id /*&& tree.isLocked == false*/
-                    ) {
-                        Tree.updateOne(
-                            {_id: treeId},
-                            {
-                                color: user.color,
-                                owner: user._id,
-                            },
-                        )
-                            .then(() => res.status(201).json())
-                            .catch(error => res.status(404).json(error));
+        // Calcul du prix
+        let treeValue = 0;
+        if (tree.owner !== null) {
+            const currentOwner = tree.owner;
+            treeValue = 0;
+            const valueTargettedPlayersTreeWithin100m = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {
+                    $match: {owner: mongoose.Types.ObjectId(currentOwner)},
+                },
+                groupSumOfTreeDefaultValues(),
+            ]);
 
-                        User.updateOne(
-                            {_id: userId},
+            const amountOfTreesWithin100m = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {$group: {_id: null, count: {$sum: 1}}},
+            ]);
+
+            const amountOfTreesTargettedPlayerWithin100m = await Tree.aggregate(
+                [
+                    queryGeolocTrees100MeterRadius(tree),
+                    {
+                        $match: {owner: mongoose.Types.ObjectId(currentOwner)},
+                    },
+                    {$group: {_id: null, count: {$sum: 1}}},
+                ],
+            );
+
+            const valueOtherPeopleTreesWithin100m = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {
+                    $match: {
+                        $and: [
                             {
-                                leaves: Math.ceil(user.leaves - treeValue),
+                                owner: {
+                                    $ne: mongoose.Types.ObjectId(currentOwner),
+                                },
                             },
-                        )
-                            .then(() => res.status(201).json())
-                            .catch(error => res.status(404).json(error));
-                    } else {
-                        res.send(
-                            "Can't buy this tree : not enough leaves or is lock or you already own it",
-                        );
-                    }
-                })
-                .catch(error => res.status(404).json(error));
-        })
-        .catch(error => res.status(404).json({error}));
+                            {owner: {$type: "objectId"}},
+                        ],
+                    },
+                },
+
+                groupSumOfTreeDefaultValues(),
+            ]);
+
+            //     value of all your tree in 100m radius
+            const valueOfCurrentPlayerTrees = await Tree.aggregate([
+                queryGeolocTrees100MeterRadius(tree),
+                {
+                    $match: {owner: mongoose.Types.ObjectId(userId)},
+                },
+                groupSumOfTreeDefaultValues(),
+            ]);
+
+            if (currentOwner === null) {
+                treeValue = tree.diameter * tree.height;
+            } else {
+                treeValue =
+                    getTreeValue(tree) +
+                    valueTargettedPlayersTreeWithin100m[0].treeValue *
+                        (amountOfTreesWithin100m[0].count /
+                            amountOfTreesTargettedPlayerWithin100m[0].count) +
+                    valueOtherPeopleTreesWithin100m[0].treeValue -
+                    valueOfCurrentPlayerTrees[0].treeValue;
+            }
+        } else {
+            treeValue = getTreeValue(tree);
+        }
+
+        if (tree.owner === null || tree.owner.toString() !== userId) {
+            if (tree.isLocked !== true) {
+                if (user.leaves > treeValue) {
+                    Tree.updateOne(
+                        {_id: treeId},
+                        {
+                            color: user.color,
+                            owner: userId,
+                        },
+                    )
+                        .then(() => res.status(201).json())
+                        .catch(error => res.status(404).json(error));
+
+                    User.updateOne(
+                        {_id: userId},
+                        {
+                            leaves: Math.ceil(user.leaves - treeValue),
+                        },
+                    )
+                        .then(() => res.status(201).json())
+                        .catch(error => res.status(404).json(error));
+                } else {
+                    return res
+                        .status(403)
+                        .json({message: "you don't have enough leaves"});
+                }
+            } else {
+                return res.status(403).json({message: "this tree is locked"});
+            }
+        } else {
+            return res.status(403).json({message: "you already own this tree"});
+        }
+    } catch (error) {
+        res.status(500).json({error});
+    }
+    return res.status(201).json({message: "Successfull transaction"});
+};
+exports.addComment = async (req, res) => {
+    try {
+        const tree = await Tree.findOne({_id: req.params.treeId});
+        if (!tree) {
+            return res.status(404).json({error: "Tree not found"});
+        }
+
+        await Tree.updateOne(
+            {_id: tree._id},
+            {
+                $push: {
+                    comments: {
+                        content: req.body.content,
+                        owner: mongoose.Types.ObjectId(req.userId),
+                    },
+                },
+            },
+        );
+
+        res.status(201).send("Comment added");
+        // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+        // console.log(error);
+    }
+    return true;
 };

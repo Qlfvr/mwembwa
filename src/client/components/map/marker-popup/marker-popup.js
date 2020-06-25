@@ -3,21 +3,50 @@ import {Popup} from "react-leaflet";
 import "./marker-popup.scss";
 import axios from "axios";
 
-const MarkerPopup = props => {
+const MarkerPopup = ({tree}) => {
     const [stateOnglet, setStateOnglet] = useState(1);
-    const infos = () => {
+    const displaySectionInfos = () => {
         setStateOnglet(1);
     };
-    const comments = () => {
+    const displaySectionComments = () => {
         setStateOnglet(2);
     };
 
-    function handleClick() {
-        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const [commentToWrite, setCommentToWrite] = useState("");
+    const handleChangeCommentToWrite = e => {
+        setCommentToWrite(e.target.value);
+    };
 
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    const handleClickSubmitComment = () => {
+        // console.log(commentToWrite);
+        if (commentToWrite) {
+            axios
+                .post(
+                    `/api/tree/comment/${tree._id}`,
+                    {content: commentToWrite},
+                    {
+                        headers: {Authorization: `Bearer ${currentUser.token}`},
+                    },
+                )
+                // eslint-disable-next-line no-unused-vars
+                .then(response => {
+                    // handle success
+                    //  console.log(response);
+                })
+                // eslint-disable-next-line no-unused-vars
+                .catch(error => {
+                    // handle error
+                    //console.log(error);
+                });
+        }
+    };
+
+    function handleClick() {
         axios
             .post(
-                `/api/tree/buy-one/${props.tree._id}`,
+                `/api/tree/buy-one/${tree._id}`,
                 {},
                 {
                     headers: {Authorization: `Bearer ${currentUser.token}`},
@@ -40,14 +69,14 @@ const MarkerPopup = props => {
                 <div className={"popupTree"}>
                     <div className={"ongletB"}>
                         <div
-                            onClick={infos}
+                            onClick={displaySectionInfos}
                             className={`onglet ${
                                 stateOnglet === 1 ? "active" : ""
                             }`}>
                             {"Infos"}
                         </div>
                         <div
-                            onClick={comments}
+                            onClick={displaySectionComments}
                             className={`onglet ${
                                 stateOnglet === 2 ? "active" : ""
                             }`}>
@@ -57,7 +86,7 @@ const MarkerPopup = props => {
                     <div className={"lineTree"} />
 
                     {stateOnglet === 1 ? (
-                        <div className={"infos"}>
+                        <div className={"displaySectionInfos"}>
                             <div className={"headPopupTree"}>
                                 <div className={"iconTree"}>
                                     <svg
@@ -134,9 +163,18 @@ const MarkerPopup = props => {
                                     </svg>
                                 </div>
                                 <div className={"middleHeader"}>
-                                    <h2>{"Name of the tree"}</h2>
-                                    <h3>{"Name of the buyer"}</h3>
-                                    <a>{"Wikipedia Link"}</a>
+                                    <h2>{tree.name && tree.name}</h2>
+                                    <h3>
+                                        {tree.owner[0] && tree.owner[0].name}
+                                    </h3>
+                                    <a
+                                        target={"_blank"}
+                                        rel={"noreferrer"}
+                                        href={`https://fr.wikipedia.org/wiki/${
+                                            tree.name != null ? tree.name : ""
+                                        }`}>
+                                        {"Wikipedia"}
+                                    </a>
                                 </div>
                                 <div className={"iconPaper"}>
                                     <button>
@@ -278,57 +316,57 @@ const MarkerPopup = props => {
                             </div>
                         </div>
                     ) : (
-                        <div className={"comment"}>
+                        <div className={"displaySectionComments"}>
                             <h1>{"Comments"}</h1>
                             <div className={"commentHead"}>
                                 <input
                                     type={"text"}
                                     placeholder={"Write a comment"}
+                                    value={commentToWrite}
+                                    onChange={handleChangeCommentToWrite}
                                 />
-                                <i className={"fas fa-plus-circle"} />
+                                <i
+                                    className={"fas fa-plus-circle"}
+                                    onClick={handleClickSubmitComment}
+                                />
                             </div>
                             <div className={"lineTree"} />
                             <div className={"commentBody"}>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
-                                <div className={"commentUser"}>
-                                    <i
-                                        className={
-                                            "fas fa-user-alt avatar__icon"
-                                        }
-                                    />
-                                    <p>{"Comment"}</p>
-                                </div>
+                                {tree.comments.length &&
+                                    tree.comments.map(comment => (
+                                        <div key={comment._id}>
+                                            <div className={"commentDate"}>
+                                                {new Date(
+                                                    comment.createdAt,
+                                                ).toLocaleDateString("fr-BE", {
+                                                    hour: "numeric",
+                                                    minute: "numeric",
+                                                    second: "numeric",
+                                                })}
+                                            </div>
+                                            <div className={"commentContainer"}>
+                                                <div className={"commentUser"}>
+                                                    <i
+                                                        className={
+                                                            "fas fa-user-alt avatar__icon"
+                                                        }
+                                                    />
+                                                    <div>
+                                                        {
+                                                            comment.ownerComment
+                                                                .name
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className={
+                                                        "commentContent"
+                                                    }>
+                                                    <p>{comment.content}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                             </div>
                         </div>
                     )}

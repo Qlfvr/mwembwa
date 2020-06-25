@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 210px;
+        //height: 210px;
     }
     .profile {
         position: fixed;
@@ -27,7 +27,7 @@
         border-radius: 20px;
         width: 60px;
         height: 80px;
-        margin: 0 10px 0px 0;
+        margin: 0 10px 20px 0;
         outline: none;
         border: none;
     }
@@ -86,6 +86,8 @@
         background-color: white;
         border-radius: 100px;
         border: solid 15px #f4c287;
+        width: 150px;
+        height: 150px;
     }
     #iconR {
         text-align: center;
@@ -94,5 +96,53 @@
         height: 0px;
         width: 0px;
         font-size: 20px;
+    }
+}
+@media all and (max-device-width: 480px){
+    .profile{
+        right: 25px;
+        #gravatar{
+        width: 80px;
+        height: 80px;
+        border: solid 5px #f4c287;;
+        }
+        h1{
+            font-size: 25px;
+            color: white;
+            text-shadow: 1px 1px 3px black;
+        }
+        #buttonSettings{
+            width: 30px;
+            height: 30px;
+        }
+    }
+    .assets{
+        
+        #buttonL{
+            width: 40px;
+            height: 60px;
+            
+            #iconL{
+                height: 40px;
+                width: 35px;
+            }
+            h2{
+                position: absolute;
+                margin-left: 10px;
+                border-radius: 40px;
+                background: #85355c;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+                font-size: 12px;
+                line-height: normal;
+                color: #ffffff;
+                padding: 0px 7px 0px 7px;
+            }
+        }
+    }
+    .actions{
+        #buttonF{
+            height: 40px;
+            width:40px;
+        }
     }
 }

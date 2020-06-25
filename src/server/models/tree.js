@@ -11,29 +11,27 @@ const treeSchema = mongoose.Schema({
     diameter: {
         type: Number,
     },
-    circumference: {
-        type: Number,
-    },
     height: {
         type: Number,
     },
     owner: {
         type: "ObjectId",
         ref: "User",
-    },
-    color: {
-        type: String,
+        default: null,
     },
     isLocked: {
         type: Boolean,
     },
-    comments: {
-        content: {type: String},
-        owner: {
-            type: "ObjectId",
-            ref: "User",
+    comments: [
+        {
+            content: {type: String},
+            owner: {
+                type: "ObjectId",
+                ref: "User",
+            },
+            createdAt: {type: Date, default: Date.now},
         },
-    },
+    ],
 });
 
 treeSchema.index({location: "2dsphere"});

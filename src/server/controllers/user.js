@@ -87,6 +87,7 @@ const queryGetUsersInfos = () => ({
     $project: {
         _id: 1,
         name: 1,
+        email: 1,
         totalTrees: {$size: "$trees"},
         leaves: 1,
     },
