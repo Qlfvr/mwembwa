@@ -43,6 +43,28 @@ const MarkerPopup = ({tree}) => {
         }
     };
 
+    const handleClickLock = treeId => {
+        console.log(treeId);
+        axios
+            .post(
+                `/api/tree/lock-tree/${treeId}`,
+                {},
+                {
+                    headers: {Authorization: `Bearer ${currentUser.token}`},
+                },
+            )
+            // eslint-disable-next-line no-unused-vars
+            .then(response => {
+                // handle success
+                console.log(response);
+            })
+            // eslint-disable-next-line no-unused-vars
+            .catch(error => {
+                // handle error
+                console.log(error);
+            });
+    };
+
     function handleClick() {
         axios
             .post(
@@ -63,6 +85,11 @@ const MarkerPopup = ({tree}) => {
                 //console.log(error);
             });
     }
+
+    const isTreeBelongToCurrentUser =
+        tree.owner[0]._id === currentUser.userId ? true : false;
+    const isTreeAlreadyLocked = tree.isLocked ? true : false;
+
     return (
         <>
             <Popup>
@@ -272,12 +299,21 @@ const MarkerPopup = ({tree}) => {
                                     onClick={handleClick}>
                                     {"Buy!"}
                                 </button>
-                                <button
-                                    className={"btnBL"}
-                                    type={"submit"}
-                                    onClick={handleClick}>
-                                    {"Lock!"}
-                                </button>
+                                {isTreeBelongToCurrentUser &&
+                                    !isTreeAlreadyLocked && (
+                                        <button
+                                            className={"btnBL"}
+                                            type={"submit"}
+                                            onClick={() =>
+                                                handleClickLock(tree._id)
+                                            }>
+                                            {"Lock!"}
+                                        </button>
+                                    )}
+
+                                {isTreeAlreadyLocked && (
+                                    <div>{"Tree is locked"}</div>
+                                )}
                             </div>
                             <div className={"lineTree"} />
                             <div className={"previousBuy"}>
