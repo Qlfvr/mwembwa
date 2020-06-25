@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        height: 210px;
+        //height: 210px;
     }
     .profile {
         position: fixed;
@@ -27,7 +27,7 @@
         border-radius: 20px;
         width: 60px;
         height: 80px;
-        margin: 0 10px 0px 0;
+        margin: 0 10px 20px 0;
         outline: none;
         border: none;
     }
@@ -117,17 +117,17 @@
         }
     }
     .assets{
-        height: 60%;
+        
         #buttonL{
-            width: 30px;
-            height: 40px;
-            svg{
-                width: 80%;
-                height: 80%;
+            width: 40px;
+            height: 60px;
+            
+            #iconL{
+                height: 40px;
+                width: 35px;
             }
             h2{
                 position: absolute;
-                
                 margin-left: 10px;
                 border-radius: 40px;
                 background: #85355c;
@@ -137,6 +137,12 @@
                 color: #ffffff;
                 padding: 0px 7px 0px 7px;
             }
+        }
+    }
+    .actions{
+        #buttonF{
+            height: 40px;
+            width:40px;
         }
     }
 }
