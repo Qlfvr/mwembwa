@@ -1,7 +1,7 @@
 const Tree = require("../models/tree");
 const User = require("../models/user");
 const helpers = require("../helpers/index");
-const getTreeValue = require("../helpers/index");
+const calculatePrice = require("../helpers/index").calculatePrice;
 const mongoose = require("mongoose");
 
 const queryGeolocTrees100MeterRadius = tree => ({
@@ -199,79 +199,11 @@ exports.buyOne = async (req, res) => {
             return res.status(404).json({error: "tree not found"});
         }
 
-        // Calcul du prix
-        let treeValue = 0;
-        if (tree.owner !== null) {
-            const currentOwner = tree.owner;
-            treeValue = 0;
-            const valueTargettedPlayersTreeWithin100m = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {
-                    $match: {owner: mongoose.Types.ObjectId(currentOwner)},
-                },
-                groupSumOfTreeDefaultValues(),
-            ]);
-
-            const amountOfTreesWithin100m = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {$group: {_id: null, count: {$sum: 1}}},
-            ]);
-
-            const amountOfTreesTargettedPlayerWithin100m = await Tree.aggregate(
-                [
-                    queryGeolocTrees100MeterRadius(tree),
-                    {
-                        $match: {owner: mongoose.Types.ObjectId(currentOwner)},
-                    },
-                    {$group: {_id: null, count: {$sum: 1}}},
-                ],
-            );
-
-            const valueOtherPeopleTreesWithin100m = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {
-                    $match: {
-                        $and: [
-                            {
-                                owner: {
-                                    $ne: mongoose.Types.ObjectId(currentOwner),
-                                },
-                            },
-                            {owner: {$type: "objectId"}},
-                        ],
-                    },
-                },
-
-                groupSumOfTreeDefaultValues(),
-            ]);
-
-            //     value of all your tree in 100m radius
-            const valueOfCurrentPlayerTrees = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {
-                    $match: {owner: mongoose.Types.ObjectId(userId)},
-                },
-                groupSumOfTreeDefaultValues(),
-            ]);
-
-            if (currentOwner === null) {
-                treeValue = tree.diameter * tree.height;
-            } else {
-                treeValue =
-                    getTreeValue(tree) +
-                    valueTargettedPlayersTreeWithin100m[0].treeValue *
-                        (amountOfTreesWithin100m[0].count /
-                            amountOfTreesTargettedPlayerWithin100m[0].count) +
-                    valueOtherPeopleTreesWithin100m[0].treeValue -
-                    valueOfCurrentPlayerTrees[0].treeValue;
-            }
-        } else {
-            treeValue = getTreeValue(tree);
-        }
+        const treePrice = calculatePrice(tree, userId);
 
         if (tree.owner === null || tree.owner.toString() !== userId) {
             if (tree.isLocked !== true) {
-                if (user.leaves > treeValue) {
+                if (user.leaves > treePrice) {
                     Tree.updateOne(
                         {_id: treeId},
                         {
@@ -285,7 +217,7 @@ exports.buyOne = async (req, res) => {
                     User.updateOne(
                         {_id: userId},
                         {
-                            leaves: Math.ceil(user.leaves - treeValue),
+                            leaves: Math.ceil(user.leaves - treePrice),
                         },
                     )
                         .then(() => res.status(201).json())
