@@ -293,12 +293,14 @@ const MarkerPopup = ({tree}) => {
                                 </div>
                             </div>
                             <div className={"BLbutton"}>
-                                <button
-                                    className={"btnBL"}
-                                    type={"submit"}
-                                    onClick={handleClick}>
-                                    {"Buy!"}
-                                </button>
+                                {!isTreeBelongToCurrentUser && (
+                                    <button
+                                        className={"btnBL"}
+                                        type={"submit"}
+                                        onClick={handleClick}>
+                                        {"Buy!"}
+                                    </button>
+                                )}
                                 {isTreeBelongToCurrentUser &&
                                     !isTreeAlreadyLocked && (
                                         <button
