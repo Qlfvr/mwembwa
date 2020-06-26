@@ -3,6 +3,7 @@ const User = require("../models/user");
 const calculatePrice = require("../helpers/index").calculatePrice;
 const calculateLockPrice = require("../helpers/index").calculateLockPrice;
 const mongoose = require("mongoose");
+const log = require("./log");
 
 const queryPopulateUser = () => ({
     $lookup: {
@@ -127,6 +128,7 @@ exports.lockTree = async (req, res) => {
             {_id: user._id},
             {leaves: user.leaves - lockPrice},
         );
+        log.add({action: "Tree locked", createdBy: req.userId});
 
         return res.status(201).json("Tree successfully locked");
     } catch (error) {
@@ -188,6 +190,9 @@ exports.buyOne = async (req, res) => {
     } catch (error) {
         res.status(500).json({error});
     }
+
+    log.add({action: "Tree purchased", createdBy: userId});
+
     return res.status(201).json({message: "Successfull transaction"});
 };
 exports.addComment = async (req, res) => {
@@ -210,6 +215,9 @@ exports.addComment = async (req, res) => {
         );
 
         res.status(201).send("Comment added");
+
+        log.add({action: "Add comment", createdBy: req.userId});
+
         // eslint-disable-next-line no-unused-vars
     } catch (error) {
         // console.log(error);
