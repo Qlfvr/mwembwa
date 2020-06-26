@@ -91,5 +91,51 @@ exports.calculatePrice = async function (tree, userId) {
                 valueOfCurrentPlayerTrees[0].treeValue;
         }
     }
+    console.log(treePrice);
+
     return treePrice;
+};
+
+exports.calculateLockPrice = async function (tree) {
+    const treeValue = Math.ceil(tree.diameter * tree.height);
+
+    const queryValueTrees100MeterRadius = await Tree.aggregate([
+        queryGeolocTrees100MeterRadius(tree),
+        groupSumOfTreeDefaultValues(),
+    ]);
+    const valueTrees100MeterRadius = queryValueTrees100MeterRadius[0].treeValue;
+
+    const queryAmountPlayersAndValuePlayersTrees100MeterRadius = await Tree.aggregate(
+        [
+            queryGeolocTrees100MeterRadius(tree),
+            {
+                $match: {owner: {$ne: null}},
+            },
+            {
+                $group: {
+                    _id: null,
+                    amountPlayers: {$sum: 1},
+                    treeValue: {
+                        $sum: {
+                            $ceil: {$multiply: ["$diameter", "$height"]},
+                        },
+                    },
+                },
+            },
+        ],
+    );
+    const amountPlayers100MeterRadius =
+        queryAmountPlayersAndValuePlayersTrees100MeterRadius[0].amountPlayers;
+    const valuePlayersTrees100MeterRadius =
+        queryAmountPlayersAndValuePlayersTrees100MeterRadius[0].treeValue;
+
+    const lockPrice = Math.ceil(
+        treeValue * 10 +
+            valueTrees100MeterRadius * amountPlayers100MeterRadius -
+            valuePlayersTrees100MeterRadius / amountPlayers100MeterRadius,
+    );
+
+    console.log(lockPrice);
+
+    return lockPrice;
 };

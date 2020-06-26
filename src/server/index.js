@@ -29,7 +29,7 @@ app.get("/*", (req, res) => {
     // eslint-disable-next-line no-sequences
     res.sendFile(
         path.resolve(__dirname, "../../bin/client/index.html"),
-        (err) => {
+        err => {
             if (err) {
                 res.status(500).send(err);
             }
