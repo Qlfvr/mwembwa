@@ -1,6 +1,7 @@
 const Tree = require("../models/tree");
 const User = require("../models/user");
 const helpers = require("../helpers/index");
+const log = require("./log");
 import {getTreeValue} from "../helpers/index";
 import mongoose from "mongoose";
 
@@ -177,6 +178,8 @@ exports.lockTree = async (req, res) => {
             {_id: user._id},
             {leaves: user.leaves - leavesToPay},
         );
+
+        log.add({action: "Tree locked", createdBy: req.userId});
     } catch (error) {
         res.status(500).json({error});
     }
@@ -304,6 +307,9 @@ exports.buyOne = async (req, res) => {
     } catch (error) {
         res.status(500).json({error});
     }
+
+    log.add({action: "Tree purchased", createdBy: userId});
+
     return res.status(201).json({message: "Successfull transaction"});
 };
 exports.addComment = async (req, res) => {
@@ -326,6 +332,9 @@ exports.addComment = async (req, res) => {
         );
 
         res.status(201).send("Comment added");
+
+        log.add({action: "Add comment", createdBy: req.userId});
+
         // eslint-disable-next-line no-unused-vars
     } catch (error) {
         // console.log(error);
