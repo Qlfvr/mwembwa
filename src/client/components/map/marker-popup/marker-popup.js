@@ -17,7 +17,9 @@ const MarkerPopup = ({tree}) => {
         setCommentToWrite(e.target.value);
     };
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = localStorage.getItem("currentUser")
+        ? JSON.parse(localStorage.getItem("currentUser"))
+        : null;
 
     const handleClickSubmitComment = () => {
         // console.log(commentToWrite);
@@ -86,8 +88,11 @@ const MarkerPopup = ({tree}) => {
             });
     }
 
-    const isTreeBelongToCurrentUser =
-        tree.owner[0]._id === currentUser.userId ? true : false;
+    let isTreeBelongToCurrentUser = false;
+    if (currentUser !== null && tree.owner[0]) {
+        isTreeBelongToCurrentUser =
+            tree.owner[0]._id === currentUser.userId ? true : false;
+    }
     const isTreeAlreadyLocked = tree.isLocked ? true : false;
 
     return (
