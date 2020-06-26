@@ -153,10 +153,10 @@ exports.buyOne = async (req, res) => {
             return res.status(404).json({error: "tree not found"});
         }
 
-        const treePrice = await calculatePrice(tree, userId);
-
         if (tree.owner === null || tree.owner.toString() !== userId) {
             if (tree.isLocked !== true) {
+                const treePrice = await calculatePrice(tree, userId);
+
                 if (user.leaves > treePrice) {
                     Tree.updateOne(
                         {_id: treeId},
@@ -190,7 +190,6 @@ exports.buyOne = async (req, res) => {
     } catch (error) {
         res.status(500).json({error});
     }
-
     log.add({action: "Tree purchased", createdBy: userId});
 
     return res.status(201).json({message: "Successfull transaction"});
@@ -214,9 +213,9 @@ exports.addComment = async (req, res) => {
             },
         );
 
-        res.status(201).send("Comment added");
-
         log.add({action: "Add comment", createdBy: req.userId});
+
+        res.status(201).send("Comment added");
 
         // eslint-disable-next-line no-unused-vars
     } catch (error) {

@@ -91,7 +91,6 @@ exports.calculatePrice = async function (tree, userId) {
                 valueOfCurrentPlayerTrees[0].treeValue;
         }
     }
-    console.log(treePrice);
 
     return treePrice;
 };
