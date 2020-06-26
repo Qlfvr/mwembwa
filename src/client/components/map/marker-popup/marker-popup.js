@@ -87,7 +87,9 @@ const MarkerPopup = ({tree}) => {
     }
 
     const isTreeBelongToCurrentUser =
-        tree.owner[0]._id === currentUser.userId ? true : false;
+        tree.owner[0] && tree.owner[0]._id === currentUser.userId
+            ? true
+            : false;
     const isTreeAlreadyLocked = tree.isLocked ? true : false;
 
     return (
