@@ -135,7 +135,5 @@ exports.calculateLockPrice = async function (tree) {
             valuePlayersTrees100MeterRadius / amountPlayers100MeterRadius,
     );
 
-    console.log(lockPrice);
-
     return lockPrice;
 };
