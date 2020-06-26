@@ -20,7 +20,6 @@ const MarkerPopup = ({tree}) => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     const handleClickSubmitComment = () => {
-        // console.log(commentToWrite);
         if (commentToWrite) {
             axios
                 .post(
@@ -44,7 +43,6 @@ const MarkerPopup = ({tree}) => {
     };
 
     const handleClickLock = treeId => {
-        console.log(treeId);
         axios
             .post(
                 `/api/tree/lock-tree/${treeId}`,
@@ -56,12 +54,12 @@ const MarkerPopup = ({tree}) => {
             // eslint-disable-next-line no-unused-vars
             .then(response => {
                 // handle success
-                console.log(response);
+                // console.log(response);
             })
             // eslint-disable-next-line no-unused-vars
             .catch(error => {
                 // handle error
-                console.log(error);
+                // console.log(error);
             });
     };
 
