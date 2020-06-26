@@ -22,7 +22,6 @@ const MarkerPopup = ({tree}) => {
         : null;
 
     const handleClickSubmitComment = () => {
-        // console.log(commentToWrite);
         if (commentToWrite) {
             axios
                 .post(
@@ -46,7 +45,6 @@ const MarkerPopup = ({tree}) => {
     };
 
     const handleClickLock = treeId => {
-        console.log(treeId);
         axios
             .post(
                 `/api/tree/lock-tree/${treeId}`,
@@ -58,12 +56,12 @@ const MarkerPopup = ({tree}) => {
             // eslint-disable-next-line no-unused-vars
             .then(response => {
                 // handle success
-                console.log(response);
+                // console.log(response);
             })
             // eslint-disable-next-line no-unused-vars
             .catch(error => {
                 // handle error
-                console.log(error);
+                // console.log(error);
             });
     };
 
@@ -88,11 +86,12 @@ const MarkerPopup = ({tree}) => {
             });
     }
 
-    let isTreeBelongToCurrentUser = false;
-    if (currentUser !== null && tree.owner[0]) {
-        isTreeBelongToCurrentUser =
-            tree.owner[0]._id === currentUser.userId ? true : false;
-    }
+    const isTreeBelongToCurrentUser =
+        tree.owner[0] &&
+        currentUser !== null &&
+        tree.owner[0]._id === currentUser.userId
+            ? true
+            : false;
     const isTreeAlreadyLocked = tree.isLocked ? true : false;
 
     return (
@@ -298,12 +297,14 @@ const MarkerPopup = ({tree}) => {
                                 </div>
                             </div>
                             <div className={"BLbutton"}>
-                                <button
-                                    className={"btnBL"}
-                                    type={"submit"}
-                                    onClick={handleClick}>
-                                    {"Buy!"}
-                                </button>
+                                {!isTreeBelongToCurrentUser && (
+                                    <button
+                                        className={"btnBL"}
+                                        type={"submit"}
+                                        onClick={handleClick}>
+                                        {"Buy!"}
+                                    </button>
+                                )}
                                 {isTreeBelongToCurrentUser &&
                                     !isTreeAlreadyLocked && (
                                         <button

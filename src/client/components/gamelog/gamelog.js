@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import GamePage from "../game-page/game-page";
 import "./gamelog.scss";
 
@@ -7,7 +7,7 @@ const Gamelog = () => {
     const history = useHistory();
 
     const routeChange = () => {
-        let path = `/game-page`;
+        const path = `/game-page`;
         history.push(path);
     };
 
