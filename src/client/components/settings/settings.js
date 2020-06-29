@@ -37,7 +37,7 @@ const Settings = () => {
     return (
         <>
             <GamePage />
-            <div className={"container"} onClick={routeChange}>
+            <div className={"container"}>
                 <div className={"settings"}>
                     <h1>
                         {"Settings"}
@@ -194,9 +194,16 @@ const Settings = () => {
                     </div>
                     <form>
                         <h2>{"Username"}</h2>
-                        <input type={"text"} />
+                        <input
+                            type={"text"}
+                            placeholder={
+                                userInfos &&
+                                userInfos.name.charAt(0).toUpperCase() +
+                                    userInfos.name.slice(1)
+                            }
+                        />
                         <h2>{"Password"}</h2>
-                        <input type={"text"} placeholder={"**********"} />
+                        <input type={"password"} />
                         <button type={"submit"}>{"Save changes"}</button>
                         <button type={"submit"}>
                             <i className={"fas fa-power-off"} />
