@@ -2,6 +2,7 @@ const Tree = require("../models/tree");
 const User = require("../models/user");
 const calculatePrice = require("../helpers/index").calculatePrice;
 const calculateLockPrice = require("../helpers/index").calculateLockPrice;
+const getTreeValue = require("../helpers/index").getTreeValue;
 const mongoose = require("mongoose");
 const log = require("./log");
 
@@ -222,4 +223,30 @@ exports.addComment = async (req, res) => {
         // console.log(error);
     }
     return true;
+};
+
+exports.payroll = async (req, res) => {
+    const currentUser = await User.findOne({_id: req.params.userId});
+    const trees = await Tree.find({owner: req.params.userId});
+
+    let userLeaves = currentUser.leaves;
+    let totalLeavesTrees = 0;
+    console.log(currentUser);
+
+    trees.forEach(tree => {
+        //leaves on the tree = diameter* height  rounded up
+        const leavesOnTree = getTreeValue(tree);
+        totalLeavesTrees = totalLeavesTrees + leavesOnTree;
+    });
+    userLeaves = userLeaves + totalLeavesTrees;
+
+    User.updateOne(
+        {_id: req.params.userId},
+        {leaves: userLeaves},
+        (error, result) => {
+            console.log(result);
+        },
+    );
+
+    return res.status(201).json();
 };

@@ -9,4 +9,6 @@ router.post("/lock-tree/:treeId", auth, treeCtrl.lockTree);
 router.post("/comment/:treeId/", auth, treeCtrl.addComment);
 router.post("/buy-one/:treeId/", auth, treeCtrl.buyOne);
 
+router.post("/payroll/:userId", auth, treeCtrl.payroll);
+
 module.exports = router;
