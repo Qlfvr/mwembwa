@@ -63,6 +63,7 @@ const MarkerPopup = ({tree}) => {
                 //console.log(error);
             });
     }
+
     return (
         <>
             <Popup>
@@ -283,35 +284,9 @@ const MarkerPopup = ({tree}) => {
                             <div className={"previousBuy"}>
                                 <div className={"buyerTreeUser"}>
                                     <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
+                                    <h3>
+                                        {tree.owner[0] && tree.owner[0].name}
+                                    </h3>
                                 </div>
                             </div>
                         </div>
@@ -319,7 +294,7 @@ const MarkerPopup = ({tree}) => {
                         <div className={"displaySectionComments"}>
                             <h1>{"Comments"}</h1>
                             <div className={"commentHead"}>
-                                <input
+                                <textarea
                                     type={"text"}
                                     placeholder={"Write a comment"}
                                     value={commentToWrite}
