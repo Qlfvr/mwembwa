@@ -338,7 +338,7 @@ const MarkerPopup = ({tree}) => {
                                     )}
 
                                 {isTreeAlreadyLocked && (
-                                    <div>{"Tree is locked"}</div>
+                                    <i className={"fas fa-lock"} />
                                 )}
                             </div>
                             <div className={"lineTree"} />
