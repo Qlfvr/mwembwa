@@ -21,7 +21,7 @@ const TreeMarker = ({trees}) => {
             const icon = L.icon({
                 iconUrl,
                 //shadowUrl: 'tree.png',
-                iconSize: [60, 60], // size of the icon
+                iconSize: [30, 30], // size of the icon
                 // shadowSize:   [50, 64], // size of the shadow
                 iconAnchor: [40, 40], // point of the icon which will correspond to marker's location
                 // shadowAnchor: [4, 62],  // the same for the shadow
