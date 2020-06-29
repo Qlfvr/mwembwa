@@ -12,6 +12,7 @@ const Settings = () => {
         const path = `/game-page`;
         history.push(path);
     };
+
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const [userInfos, setUserInfos] = useState(null);
 
@@ -47,7 +48,7 @@ const Settings = () => {
                     </h1>
                     <Gravatar
                         id={"gravatar"}
-                        email={"blahblah@blah.com"}
+                        email={currentUser && currentUser.email}
                         size={150}
                         rating={"pg"}
                     />

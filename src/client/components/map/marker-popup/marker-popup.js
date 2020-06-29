@@ -17,10 +17,11 @@ const MarkerPopup = ({tree}) => {
         setCommentToWrite(e.target.value);
     };
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = localStorage.getItem("currentUser")
+        ? JSON.parse(localStorage.getItem("currentUser"))
+        : null;
 
     const handleClickSubmitComment = () => {
-        // console.log(commentToWrite);
         if (commentToWrite) {
             axios
                 .post(
@@ -43,6 +44,27 @@ const MarkerPopup = ({tree}) => {
         }
     };
 
+    const handleClickLock = treeId => {
+        axios
+            .post(
+                `/api/tree/lock-tree/${treeId}`,
+                {},
+                {
+                    headers: {Authorization: `Bearer ${currentUser.token}`},
+                },
+            )
+            // eslint-disable-next-line no-unused-vars
+            .then(response => {
+                // handle success
+                // console.log(response);
+            })
+            // eslint-disable-next-line no-unused-vars
+            .catch(error => {
+                // handle error
+                // console.log(error);
+            });
+    };
+
     function handleClick() {
         axios
             .post(
@@ -63,6 +85,14 @@ const MarkerPopup = ({tree}) => {
                 //console.log(error);
             });
     }
+
+    const isTreeBelongToCurrentUser =
+        tree.owner[0] &&
+        currentUser !== null &&
+        tree.owner[0]._id === currentUser.userId
+            ? true
+            : false;
+    const isTreeAlreadyLocked = tree.isLocked ? true : false;
 
     return (
         <>
@@ -267,18 +297,29 @@ const MarkerPopup = ({tree}) => {
                                 </div>
                             </div>
                             <div className={"BLbutton"}>
-                                <button
-                                    className={"btnBL"}
-                                    type={"submit"}
-                                    onClick={handleClick}>
-                                    {"Buy!"}
-                                </button>
-                                <button
-                                    className={"btnBL"}
-                                    type={"submit"}
-                                    onClick={handleClick}>
-                                    {"Lock!"}
-                                </button>
+                                {!isTreeBelongToCurrentUser && (
+                                    <button
+                                        className={"btnBL"}
+                                        type={"submit"}
+                                        onClick={handleClick}>
+                                        {"Buy!"}
+                                    </button>
+                                )}
+                                {isTreeBelongToCurrentUser &&
+                                    !isTreeAlreadyLocked && (
+                                        <button
+                                            className={"btnBL"}
+                                            type={"submit"}
+                                            onClick={() =>
+                                                handleClickLock(tree._id)
+                                            }>
+                                            {"Lock!"}
+                                        </button>
+                                    )}
+
+                                {isTreeAlreadyLocked && (
+                                    <div>{"Tree is locked"}</div>
+                                )}
                             </div>
                             <div className={"lineTree"} />
                             <div className={"previousBuy"}>
@@ -319,7 +360,8 @@ const MarkerPopup = ({tree}) => {
                                                     />
                                                     <div>
                                                         {
-                                                            comment.ownerComment
+                                                            comment
+                                                                .ownerComment[0]
                                                                 .name
                                                         }
                                                     </div>

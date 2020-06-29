@@ -118,130 +118,142 @@ const SignInUp = () => {
     return (
         <div className={"container"}>
             <div className={"signInUp"}>
-                <form
-                    key={1}
-                    className={"formInscription"}
-                    onSubmit={handleSubmit(onSubmitRegister)}>
-                    <h1>{"Inscription"}</h1>
-                    {errorsSignUp.emailRegister && (
-                        <p className={"error"}>{"Email incorrect"}</p>
-                    )}
-                    <label className={"inputLabel"}>{"Email"}</label>
-                    <input
-                        type={"text"}
-                        className={"inputInscription"}
-                        name={"emailRegister"}
-                        ref={register({
-                            pattern: {
-                                value: /\S+@\S+\.\S+/,
-                            },
-                        })}
-                        required
-                    />
-
-                    {errorsSignUp.nameRegister && (
-                        <p className={"error"}>{"Nom est requis"}</p>
-                    )}
-                    <label className={"inputLabel"}>{"Nom"}</label>
-                    <input
-                        className={"inputInscription"}
-                        name={"nameRegister"}
-                        ref={register({required: true})}
-                        required
-                    />
-
-                    {errorsSignUp.passwordRegister && (
-                        <p className={"error"}>{"Mot de passe requis"}</p>
-                    )}
-                    <label className={"inputLabel"}>{"Mot de passe"}</label>
-                    <input
-                        className={"inputInscription"}
-                        type={"password"}
-                        name={"passwordRegister"}
-                        ref={register({required: true})}
-                        required
-                    />
-
-                    <div className={"formRandomColor"}>
-                        <span
-                            onClick={e => handleClickColor(e)}
-                            className={"randomColor"}>
-                            <CirclePicker colors={[getRandomColor()]} />
-                        </span>
-                        <span
-                            onClick={e => handleClickColor(e)}
-                            className={"randomColor"}>
-                            <CirclePicker colors={[getRandomColor()]} />
-                        </span>
-                        <span
-                            onClick={e => handleClickColor(e)}
-                            className={"randomColor"}>
-                            <CirclePicker colors={[getRandomColor()]} />
-                        </span>
-                        <span
-                            onClick={e => handleClickColor(e)}
-                            className={"randomColor"}>
-                            <CirclePicker colors={[getRandomColor()]} />
-                        </span>
-                        <span
-                            onClick={e => handleClickColor(e)}
-                            className={"randomColor"}>
-                            <CirclePicker colors={[getRandomColor()]} />
-                        </span>
-                    </div>
-                    <button className={"btn"} type={"submit"}>
-                        {"Go !"}
-                    </button>
-                </form>
-
-                <div className={"line"} />
-
-                <form
-                    key={2}
-                    className={"formConnexion"}
-                    onSubmit={handleSubmitSignUp(onSubmitLogin)}>
-                    <h1>{"Connexion"}</h1>
-
-                    <div className={"bg-icone"}>
-                        <Gravatar
-                            id={"gravatar"}
-                            email={"blahblah@blah.com"}
-                            size={120}
-                            rating={"pg"}
+                <div className={"anchor-container"}>
+                    <a href={"#inscription"}>
+                        <button>{"Inscription"}</button>
+                    </a>
+                    <a href={"#connexion"}>
+                        <button>{"Connexion"}</button>
+                    </a>
+                </div>
+                <div className={"form-container"}>
+                    <form
+                        id={"inscription"}
+                        key={1}
+                        className={"formInscription"}
+                        onSubmit={handleSubmit(onSubmitRegister)}>
+                        <h1>{"Inscription"}</h1>
+                        {errorsSignUp.emailRegister && (
+                            <p className={"error"}>{"Email incorrect"}</p>
+                        )}
+                        <label className={"inputLabel"}>{"Email"}</label>
+                        <input
+                            type={"text"}
+                            className={"inputInscription"}
+                            name={"emailRegister"}
+                            ref={register({
+                                pattern: {
+                                    value: /\S+@\S+\.\S+/,
+                                },
+                            })}
+                            required
                         />
-                    </div>
 
-                    {errors.emailLogin && (
-                        <p className={"error"}>{"Email incorrect"}</p>
-                    )}
-                    <label className={"inputLabel"}>{"Email"}</label>
-                    <input
-                        className={"inputConnexion"}
-                        name={"emailLogin"}
-                        ref={registerSignUp({
-                            pattern: {
-                                value: /\S+@\S+\.\S+/,
-                            },
-                        })}
-                        required
-                    />
+                        {errorsSignUp.nameRegister && (
+                            <p className={"error"}>{"Nom est requis"}</p>
+                        )}
+                        <label className={"inputLabel"}>{"Nom"}</label>
+                        <input
+                            className={"inputInscription"}
+                            name={"nameRegister"}
+                            ref={register({required: true})}
+                            required
+                        />
 
-                    {errors.passwordLogin && (
-                        <p className={"error"}>{"Mot de passe requis"}</p>
-                    )}
-                    <label className={"inputLabel"}>{"Mot de passe"}</label>
-                    <input
-                        className={"inputConnexion"}
-                        type={"password"}
-                        name={"passwordLogin"}
-                        ref={registerSignUp({required: true})}
-                        required
-                    />
+                        {errorsSignUp.passwordRegister && (
+                            <p className={"error"}>{"Mot de passe requis"}</p>
+                        )}
+                        <label className={"inputLabel"}>{"Mot de passe"}</label>
+                        <input
+                            className={"inputInscription"}
+                            type={"password"}
+                            name={"passwordRegister"}
+                            ref={register({required: true})}
+                            required
+                        />
 
-                    <button className={"btn"} type={"submit"}>
-                        {"Go !"}
-                    </button>
-                </form>
+                        <div className={"formRandomColor"}>
+                            <span
+                                onClick={e => handleClickColor(e)}
+                                className={"randomColor"}>
+                                <CirclePicker colors={[getRandomColor()]} />
+                            </span>
+                            <span
+                                onClick={e => handleClickColor(e)}
+                                className={"randomColor"}>
+                                <CirclePicker colors={[getRandomColor()]} />
+                            </span>
+                            <span
+                                onClick={e => handleClickColor(e)}
+                                className={"randomColor"}>
+                                <CirclePicker colors={[getRandomColor()]} />
+                            </span>
+                            <span
+                                onClick={e => handleClickColor(e)}
+                                className={"randomColor"}>
+                                <CirclePicker colors={[getRandomColor()]} />
+                            </span>
+                            <span
+                                onClick={e => handleClickColor(e)}
+                                className={"randomColor"}>
+                                <CirclePicker colors={[getRandomColor()]} />
+                            </span>
+                        </div>
+                        <button className={"btn"} type={"submit"}>
+                            {"Go !"}
+                        </button>
+                    </form>
+
+                    <div className={"line"} />
+
+                    <form
+                        id={"connexion"}
+                        key={2}
+                        className={"formConnexion"}
+                        onSubmit={handleSubmitSignUp(onSubmitLogin)}>
+                        <h1>{"Connexion"}</h1>
+
+                        <div className={"bg-icone"}>
+                            <Gravatar
+                                id={"gravatar"}
+                                email={"blahblah@blah.com"}
+                                size={120}
+                                rating={"pg"}
+                            />
+                        </div>
+
+                        {errors.emailLogin && (
+                            <p className={"error"}>{"Email incorrect"}</p>
+                        )}
+                        <label className={"inputLabel"}>{"Email"}</label>
+                        <input
+                            className={"inputConnexion"}
+                            name={"emailLogin"}
+                            ref={registerSignUp({
+                                pattern: {
+                                    value: /\S+@\S+\.\S+/,
+                                },
+                            })}
+                            required
+                        />
+
+                        {errors.passwordLogin && (
+                            <p className={"error"}>{"Mot de passe requis"}</p>
+                        )}
+                        <label className={"inputLabel"}>{"Mot de passe"}</label>
+                        <input
+                            className={"inputConnexion"}
+                            type={"password"}
+                            name={"passwordLogin"}
+                            ref={registerSignUp({required: true})}
+                            required
+                        />
+
+                        <button className={"btn"} type={"submit"}>
+                            {"Go !"}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );
