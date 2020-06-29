@@ -21,6 +21,26 @@ const MarkerPopup = ({tree}) => {
         ? JSON.parse(localStorage.getItem("currentUser"))
         : null;
 
+    /*const [userInfos, setUserInfos] = useState(null);
+        useEffect(() => {
+            setTimeout(() => {
+                (async () => {
+                    try {
+                        const response = await axios.get("/api/auth/user-infos", {
+                            headers: {
+                                Authorization: `Bearer ${currentUser.token}`,
+                            },
+                        });
+                        setUserInfos(response.data);
+                        // eslint-disable-next-line no-unused-vars
+                    } catch (error) {
+                        //    console.log(error);
+                    }
+                })();
+            }, 500);
+        }, []);
+        */
+
     const handleClickSubmitComment = () => {
         if (commentToWrite) {
             axios
@@ -328,6 +348,7 @@ const MarkerPopup = ({tree}) => {
                                     <h3>
                                         {tree.owner[0] && tree.owner[0].name}
                                     </h3>
+                                    <h3 />
                                 </div>
                             </div>
                         </div>
