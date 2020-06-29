@@ -13,17 +13,17 @@
     }
      .tooltip{
             padding: 0.5rem 1rem;
-    font-size: 15px;
-    width: max-content;
-    position: absolute;
-    margin-top: -26px;
-    margin-left: -3px;
-    color: #85375C;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 20px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    line-height: normal;
+            font-size: 15px;
+            width: max-content;
+            position: absolute;
+            margin-top: -26px;
+            margin-left: -3px;
+            color: #85375C;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            line-height: normal;
         }
         h2:hover .tooltip, h2:focus .tooltip{
             transform:scale(1) rotate(0);
