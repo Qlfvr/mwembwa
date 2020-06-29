@@ -226,8 +226,8 @@ exports.addComment = async (req, res) => {
 };
 
 exports.payroll = async (req, res) => {
-    const currentUser = await User.findOne({_id: req.params.userId});
-    const trees = await Tree.find({owner: req.params.userId});
+    const currentUser = await User.findOne({_id: req.userId});
+    const trees = await Tree.find({owner: req.userId});
 
     let userLeaves = currentUser.leaves;
     let totalLeavesTrees = 0;
@@ -240,9 +240,20 @@ exports.payroll = async (req, res) => {
     });
     userLeaves = userLeaves + totalLeavesTrees;
 
+    User.updateOne({_id: req.userId}, {leaves: userLeaves}, (error, result) => {
+        console.log(result);
+    });
+
+    return res.status(201).json();
+};
+
+exports.leavesLoss = async (req, res) => {
+    const currentUser = await User.findOne({_id: req.userId});
+
+    const newAmountLeaves = currentUser.leaves / 2;
     User.updateOne(
-        {_id: req.params.userId},
-        {leaves: userLeaves},
+        {_id: req.userId},
+        {leaves: newAmountLeaves},
         (error, result) => {
             console.log(result);
         },

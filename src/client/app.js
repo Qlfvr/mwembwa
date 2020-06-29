@@ -34,13 +34,34 @@ function receiveLeaves() {
         .catch(error => {
             // handle error
 
-            console.log("damned");
+            console.log(error);
+        });
+}
+function leavesLoss() {
+    axios
+        .post(
+            `/api/tree/leaves-loss/${currentUser.userId}`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${currentUser.token}`,
+                },
+            },
+        )
+        .then(response => {
+            // handle success
 
+            console.log(response);
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(error => {
+            // handle error
             console.log(error);
         });
 }
 
 setInterval(receiveLeaves, 900000);
+setInterval(leavesLoss, 3600000);
 
 ReactDOM.render(
     <>
