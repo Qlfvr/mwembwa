@@ -24,8 +24,10 @@
             box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
             opacity: 0;
             line-height: normal;
+            transform:scale(0) rotate(-10deg);
+            transition:all .25s;
         }
-        h2:hover .tooltip, h2:focus .tooltip{
+        h2:hover .tooltip{
             transform:scale(1) rotate(0);
             opacity:1;    
         }
