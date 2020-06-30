@@ -17,7 +17,7 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 function receiveLeaves() {
     axios
         .post(
-            `/api/tree/payroll/${currentUser.userId}`,
+            `/api/tree/payroll/`,
             {},
             {
                 headers: {
@@ -37,7 +37,7 @@ function receiveLeaves() {
             console.log(error);
         });
 }
-function leavesLoss() {
+function looseLeaves() {
     axios
         .post(
             `/api/tree/leaves-loss/${currentUser.userId}`,
@@ -60,8 +60,8 @@ function leavesLoss() {
         });
 }
 
-setInterval(receiveLeaves, 900000);
-setInterval(leavesLoss, 3600000);
+setInterval(receiveLeaves, 3000); //900000
+setInterval(looseLeaves, 3600000);
 
 ReactDOM.render(
     <>

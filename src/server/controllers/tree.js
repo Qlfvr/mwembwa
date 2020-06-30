@@ -240,9 +240,13 @@ exports.payroll = async (req, res) => {
     });
     userLeaves = userLeaves + totalLeavesTrees;
 
-    User.updateOne({_id: req.userId}, {leaves: userLeaves}, (error, result) => {
-        console.log(result);
-    });
+    User.updateOne(
+        {_id: req.userId},
+        {leaves: userLeaves, lastPay: Date.now()},
+        (error, result) => {
+            console.log(result);
+        },
+    );
 
     return res.status(201).json();
 };
