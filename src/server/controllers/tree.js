@@ -249,6 +249,10 @@ exports.payroll = async (req, res) => {
     payment = totalLeavesTrees * missedPay;
     userLeaves = userLeaves + payment;
 
+    if (missedPay >= 4) {
+        userLeaves = userLeaves / 2;
+    }
+
     console.log(payment);
 
     User.update(
