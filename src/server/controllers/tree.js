@@ -226,13 +226,17 @@ exports.addComment = async (req, res) => {
 };
 
 exports.payroll = async (req, res) => {
+    console.log(req.params);
+
     const time = Date.now();
     const currentUser = await User.findOne({_id: req.userId});
     const trees = await Tree.find({owner: req.userId});
     let userLeaves = currentUser.leaves;
     let totalLeavesTrees = 0;
 
-    const missedPay = Math.round((time - currentUser.lastPay) / 900000); //period of 15 minutes missed
+    const missedPay = Math.round(
+        (time - currentUser.lastPay) / req.params.interval,
+    ); //period of 15 minutes missed
 
     console.log(`time : ${time}`);
     console.log(`lastPay : ${currentUser.lastPay}`);

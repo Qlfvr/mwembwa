@@ -14,10 +14,10 @@ import "./styles/main.scss";
 
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-function receiveLeaves() {
+function receiveLeaves(interval) {
     axios
         .post(
-            `/api/tree/payroll/`,
+            `/api/tree/payroll/${interval}`,
             {},
             {
                 headers: {
@@ -60,8 +60,12 @@ function looseLeaves() {
         });
 }
 
-setInterval(receiveLeaves, 900000); //900000
-setInterval(looseLeaves, 3600000);
+const payInterval = 900000;
+
+setInterval(() => {
+    receiveLeaves(payInterval);
+}, payInterval); //900000
+setInterval(looseLeaves, 9000);
 
 ReactDOM.render(
     <>
