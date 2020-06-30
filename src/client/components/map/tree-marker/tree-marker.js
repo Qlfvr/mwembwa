@@ -2,8 +2,42 @@ import React from "react";
 import {Marker} from "react-leaflet";
 import L from "leaflet"; // Necessary to use custom icons because not included in react-leaflet
 import MarkerPopup from "../marker-popup/marker-popup";
+import axios from "axios";
 
-const TreeMarker = ({trees}) => {
+const TreeMarker = ({trees, wrapperSetTrees}) => {
+    const handleClickMarker = treeId => {
+        const currentUser = localStorage.getItem("currentUser")
+            ? JSON.parse(localStorage.getItem("currentUser"))
+            : null;
+
+        axios
+            .get(`/api/tree/${treeId}`, {
+                headers: {Authorization: `Bearer ${currentUser.token}`},
+            })
+            .then(response => {
+                // handle success
+
+                const foundIndex = trees.findIndex(
+                    tree => tree._id === response.data._id,
+                );
+                trees[foundIndex] = response.data;
+
+                // const treesUpdated = trees.map((tree) =>
+                //     tree._id === response.data._id
+                //         ? Object.assign({}, tree)
+                //         : tree,
+                // );
+            })
+            .then(() => {
+                wrapperSetTrees(trees);
+            })
+            // eslint-disable-next-line no-unused-vars
+            .catch(error => {
+                // handle error
+                // console.log(error);
+            });
+    };
+
     let treeMarkers = [];
     // eslint-disable-next-line no-undefined
     if (trees !== undefined) {
@@ -47,7 +81,10 @@ const TreeMarker = ({trees}) => {
                         tree.location.coordinates[0],
                         tree.location.coordinates[1],
                     ]}
-                    key={tree._id}>
+                    key={tree._id}
+                    onClick={() => {
+                        handleClickMarker(tree._id);
+                    }}>
                     <MarkerPopup tree={tree} />
                 </Marker>
             );

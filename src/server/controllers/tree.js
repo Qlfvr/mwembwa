@@ -49,12 +49,26 @@ exports.getAllTrees = async (req, res) => {
             queryGetAllTrees(),
         ]).exec();
 
-        // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
-        // console.log(responseGetAllTrees);
-
         const allTrees = responseGetAllTrees;
 
         return res.status(200).json(allTrees);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
+};
+
+exports.getOneTree = async (req, res) => {
+    try {
+        const responseGetOneTree = await Tree.aggregate([
+            {$match: {_id: mongoose.Types.ObjectId(req.params.treeId)}},
+            queryPopulateUser(),
+            queryPopulateComment(),
+            queryGetAllTrees(),
+        ]).exec();
+
+        const oneTree = responseGetOneTree[0];
+
+        return res.status(200).json(oneTree);
     } catch (error) {
         return res.status(500).json({error});
     }

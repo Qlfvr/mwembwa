@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Map, TileLayer} from "react-leaflet";
 import axios from "axios";
 import MarkerCluster from "../marker-cluster/marker-cluster.js";
@@ -22,6 +22,10 @@ const GameMap = () => {
             });
     }, []);
 
+    const wrapperSetTrees = treesUpdated => {
+        setTrees(treesUpdated);
+    };
+
     let displayLoading = "";
     if (loading) {
         displayLoading = (
@@ -42,7 +46,10 @@ const GameMap = () => {
                         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }
                 />
-                <MarkerCluster trees={trees && trees} />
+                <MarkerCluster
+                    trees={trees && trees}
+                    wrapperSetTrees={wrapperSetTrees}
+                />
             </Map>
         </>
     );
