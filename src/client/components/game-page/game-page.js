@@ -167,7 +167,12 @@ const GamePage = () => {
                         </defs>
                     </svg>
 
-                    <h2>{userInfos && userInfos.leaves.toFixed(2) | 0}</h2>
+                    <h2>
+                        {userInfos && userInfos.leaves.toFixed(2) | 0}
+                        <span className={"tooltip"}>
+                            {"Formule arbe X feuilles"}
+                        </span>
+                    </h2>
                 </button>
             </div>
             <div className={"profile"}>
