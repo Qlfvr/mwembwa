@@ -226,23 +226,34 @@ exports.addComment = async (req, res) => {
 };
 
 exports.payroll = async (req, res) => {
+    const time = Date.now();
     const currentUser = await User.findOne({_id: req.userId});
     const trees = await Tree.find({owner: req.userId});
-
     let userLeaves = currentUser.leaves;
     let totalLeavesTrees = 0;
-    console.log(currentUser);
+
+    const missedPay = Math.round((time - currentUser.lastPay) / 900000); //period of 15 minutes missed
+
+    console.log(`time : ${time}`);
+    console.log(`lastPay : ${currentUser.lastPay}`);
+    console.log(`time since last pay  : ${missedPay}`);
+    console.log(`time since last pay  : ${time - currentUser.lastPay}`);
+
+    let payment = 0;
 
     trees.forEach(tree => {
         //leaves on the tree = diameter* height  rounded up
         const leavesOnTree = getTreeValue(tree);
         totalLeavesTrees = totalLeavesTrees + leavesOnTree;
     });
-    userLeaves = userLeaves + totalLeavesTrees;
+    payment = totalLeavesTrees * missedPay;
+    userLeaves = userLeaves + payment;
 
-    User.updateOne(
+    console.log(payment);
+
+    User.update(
         {_id: req.userId},
-        {leaves: userLeaves, lastPay: Date.now()},
+        {leaves: userLeaves, lastPay: time},
         (error, result) => {
             console.log(result);
         },

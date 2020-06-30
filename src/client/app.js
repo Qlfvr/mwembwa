@@ -60,7 +60,7 @@ function looseLeaves() {
         });
 }
 
-setInterval(receiveLeaves, 3000); //900000
+setInterval(receiveLeaves, 900000); //900000
 setInterval(looseLeaves, 3600000);
 
 ReactDOM.render(
