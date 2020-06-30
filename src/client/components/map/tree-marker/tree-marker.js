@@ -15,25 +15,17 @@ const TreeMarker = ({trees, wrapperSetTrees}) => {
                 headers: {Authorization: `Bearer ${currentUser.token}`},
             })
             .then(response => {
-                // handle success
+                const treeUpdated = response.data;
 
-                const foundIndex = trees.findIndex(
-                    tree => tree._id === response.data._id,
+                // eslint-disable-next-line no-confusing-arrow
+                const treesUpdated = trees.map(tree =>
+                    tree._id === treeUpdated._id ? {...treeUpdated} : tree,
                 );
-                trees[foundIndex] = response.data;
 
-                // const treesUpdated = trees.map((tree) =>
-                //     tree._id === response.data._id
-                //         ? Object.assign({}, tree)
-                //         : tree,
-                // );
-            })
-            .then(() => {
-                wrapperSetTrees(trees);
+                wrapperSetTrees(treesUpdated);
             })
             // eslint-disable-next-line no-unused-vars
             .catch(error => {
-                // handle error
                 // console.log(error);
             });
     };
