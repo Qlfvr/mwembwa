@@ -21,6 +21,26 @@ const MarkerPopup = ({tree}) => {
         ? JSON.parse(localStorage.getItem("currentUser"))
         : null;
 
+    /*const [userInfos, setUserInfos] = useState(null);
+        useEffect(() => {
+            setTimeout(() => {
+                (async () => {
+                    try {
+                        const response = await axios.get("/api/auth/user-infos", {
+                            headers: {
+                                Authorization: `Bearer ${currentUser.token}`,
+                            },
+                        });
+                        setUserInfos(response.data);
+                        // eslint-disable-next-line no-unused-vars
+                    } catch (error) {
+                        //    console.log(error);
+                    }
+                })();
+            }, 500);
+        }, []);
+        */
+
     const handleClickSubmitComment = () => {
         if (commentToWrite) {
             axios
@@ -305,6 +325,7 @@ const MarkerPopup = ({tree}) => {
                                         {"Buy!"}
                                     </button>
                                 )}
+
                                 {isTreeBelongToCurrentUser &&
                                     !isTreeAlreadyLocked && (
                                         <button
@@ -318,7 +339,7 @@ const MarkerPopup = ({tree}) => {
                                     )}
 
                                 {isTreeAlreadyLocked && (
-                                    <div>{"Tree is locked"}</div>
+                                    <i className={"fas fa-lock"} />
                                 )}
                             </div>
                             <div className={"lineTree"} />
