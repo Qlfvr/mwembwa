@@ -325,35 +325,9 @@ const MarkerPopup = ({tree}) => {
                             <div className={"previousBuy"}>
                                 <div className={"buyerTreeUser"}>
                                     <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
+                                    <h3>
+                                        {tree.owner[0] && tree.owner[0].name}
+                                    </h3>
                                 </div>
                             </div>
                         </div>
@@ -361,7 +335,7 @@ const MarkerPopup = ({tree}) => {
                         <div className={"displaySectionComments"}>
                             <h1>{"Comments"}</h1>
                             <div className={"commentHead"}>
-                                <input
+                                <textarea
                                     type={"text"}
                                     placeholder={"Write a comment"}
                                     value={commentToWrite}
@@ -377,15 +351,6 @@ const MarkerPopup = ({tree}) => {
                                 {tree.comments.length &&
                                     tree.comments.map(comment => (
                                         <div key={comment._id}>
-                                            <div className={"commentDate"}>
-                                                {new Date(
-                                                    comment.createdAt,
-                                                ).toLocaleDateString("fr-BE", {
-                                                    hour: "numeric",
-                                                    minute: "numeric",
-                                                    second: "numeric",
-                                                })}
-                                            </div>
                                             <div className={"commentContainer"}>
                                                 <div className={"commentUser"}>
                                                     <i
@@ -406,6 +371,23 @@ const MarkerPopup = ({tree}) => {
                                                         "commentContent"
                                                     }>
                                                     <p>{comment.content}</p>
+                                                    <div
+                                                        className={
+                                                            "commentDate"
+                                                        }>
+                                                        {new Date(
+                                                            comment.createdAt,
+                                                        ).toLocaleDateString(
+                                                            "fr-BE",
+                                                            {
+                                                                hour: "numeric",
+                                                                minute:
+                                                                    "numeric",
+                                                                second:
+                                                                    "numeric",
+                                                            },
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

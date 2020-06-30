@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import {useHistory} from "react-router-dom";
 import GamePage from "../game-page/game-page";
 import Gravatar from "react-gravatar";
@@ -13,11 +14,30 @@ const Settings = () => {
     };
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const [userInfos, setUserInfos] = useState(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            (async () => {
+                try {
+                    const response = await axios.get("/api/auth/user-infos", {
+                        headers: {
+                            Authorization: `Bearer ${currentUser.token}`,
+                        },
+                    });
+                    setUserInfos(response.data);
+                    // eslint-disable-next-line no-unused-vars
+                } catch (error) {
+                    //    console.log(error);
+                }
+            })();
+        }, 500);
+    }, []);
 
     return (
         <>
             <GamePage />
-            <div className={"container"} onClick={routeChange}>
+            <div className={"container"}>
                 <div className={"settings"}>
                     <h1>
                         {"Settings"}
@@ -99,7 +119,7 @@ const Settings = () => {
                                     </filter>
                                 </defs>
                             </svg>{" "}
-                            {"12 Trees"}
+                            <h3>{userInfos && userInfos.totalTrees | 0}</h3>
                         </p>
                         <p>
                             <svg
@@ -167,14 +187,23 @@ const Settings = () => {
                                     </filter>
                                 </defs>
                             </svg>{" "}
-                            {"300 Leafs"}
+                            <h3>
+                                {userInfos && userInfos.leaves.toFixed(2) | 0}
+                            </h3>
                         </p>
                     </div>
                     <form>
                         <h2>{"Username"}</h2>
-                        <input type={"text"} />
+                        <input
+                            type={"text"}
+                            placeholder={
+                                userInfos &&
+                                userInfos.name.charAt(0).toUpperCase() +
+                                    userInfos.name.slice(1)
+                            }
+                        />
                         <h2>{"Password"}</h2>
-                        <input type={"text"} placeholder={"**********"} />
+                        <input type={"password"} />
                         <button type={"submit"}>{"Save changes"}</button>
                         <button type={"submit"}>
                             <i className={"fas fa-power-off"} />
