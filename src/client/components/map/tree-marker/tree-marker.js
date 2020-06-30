@@ -42,7 +42,9 @@ const TreeMarker = ({trees, wrapperSetTrees}) => {
     // eslint-disable-next-line no-undefined
     if (trees !== undefined) {
         treeMarkers = trees.map(tree => {
-            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'><path d='M2,111 h300 l-242.7,176.3 92.7,-285.3 92.7,285.3 z' fill='${tree.owner[0].color}'/></svg>`;
+            const markerColor = tree.owner[0] ? tree.owner[0].color : "#000000";
+
+            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='1000'><path d='M2,111 h300 l-242.7,176.3 92.7,-285.3 92.7,285.3 z' fill='${markerColor}'/></svg>`;
             const iconUrl = encodeURI(`data:image/svg+xml,${svg}`).replace(
                 "#",
                 "%23",
