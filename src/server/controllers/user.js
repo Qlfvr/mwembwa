@@ -19,6 +19,7 @@ const queryGetUsersInfos = () => ({
         email: 1,
         totalTrees: {$size: "$trees"},
         leaves: 1,
+        color: 1,
     },
 });
 
