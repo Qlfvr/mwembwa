@@ -42,8 +42,8 @@ const queryGetAllTrees = () => ({
 });
 
 exports.getAllTrees = async (req, res) => {
-    console.log(req.query);
     const coordinateCenterMap = JSON.parse(req.query.coordinateCenterMap);
+
     try {
         const responseGetAllTrees = await Tree.aggregate([
             {
@@ -56,7 +56,7 @@ exports.getAllTrees = async (req, res) => {
                         ],
                     },
                     distanceField: "distance.calculated",
-                    maxDistance: 200,
+                    maxDistance: 300,
                 },
             },
             queryPopulateUser(),

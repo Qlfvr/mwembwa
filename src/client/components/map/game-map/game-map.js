@@ -28,6 +28,7 @@ const GameMap = () => {
 
     const onMove = e => {
         coordinateCenterMap = e.target.getCenter();
+
         getTreesByCoordinateCenterMap(coordinateCenterMap);
     };
 
@@ -54,7 +55,8 @@ const GameMap = () => {
             {displayLoading}
             <Map
                 center={[coordinateCenterMap.lat, coordinateCenterMap.lng]}
-                zoom={20}
+                zoom={18}
+                minZoom={17}
                 onMoveEnd={e => {
                     onMove(e);
                 }}>
