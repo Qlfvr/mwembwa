@@ -81,9 +81,11 @@ exports.getOneTree = async (req, res) => {
             queryGetAllTrees(),
         ]).exec();
 
-        const oneTree = responseGetOneTree[0];
+        const tree = responseGetOneTree[0];
 
-        return res.status(200).json(oneTree);
+        tree.price = await calculatePrice(tree, req.userId);
+
+        return res.status(200).json(tree);
     } catch (error) {
         return res.status(500).json({error});
     }

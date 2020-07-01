@@ -312,7 +312,7 @@ const MarkerPopup = ({tree}) => {
                                                 </filter>
                                             </defs>
                                         </svg>
-                                        <p>{"15"}</p>
+                                        <p>{tree.price && tree.price}</p>
                                     </button>
                                 </div>
                             </div>

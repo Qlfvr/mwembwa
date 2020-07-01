@@ -28,7 +28,6 @@ const GameMap = () => {
 
     const onMove = e => {
         coordinateCenterMap = e.target.getCenter();
-
         getTreesByCoordinateCenterMap(coordinateCenterMap);
     };
 
