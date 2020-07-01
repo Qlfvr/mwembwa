@@ -1,26 +1,44 @@
-import React, {useEffect, useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Map, TileLayer} from "react-leaflet";
 import axios from "axios";
 import MarkerCluster from "../marker-cluster/marker-cluster.js";
 
 const GameMap = () => {
+    let coordinateCenterMap = {lat: 50.62978, lng: 5.575254};
+
     const [loading, setLoading] = useState(true);
-    const [trees, setTrees] = useState();
-    useEffect(() => {
+    const [trees, setTrees] = useState([]);
+
+    const getTreesByCoordinateCenterMap = () => {
         axios
-            .get("/api/tree/")
+            .get("/api/tree/", {
+                params: {
+                    coordinateCenterMap,
+                },
+            })
             .then(response => {
-                // handle success
                 setTrees(response.data);
                 setLoading(false);
-                // console.log(response);
             })
             // eslint-disable-next-line no-unused-vars
             .catch(error => {
-                // handle error
                 // console.log(error);
             });
+    };
+
+    const onMove = e => {
+        coordinateCenterMap = e.target.getCenter();
+
+        getTreesByCoordinateCenterMap(coordinateCenterMap);
+    };
+
+    useEffect(() => {
+        getTreesByCoordinateCenterMap();
     }, []);
+
+    const wrapperSetTrees = treesUpdated => {
+        setTrees(treesUpdated);
+    };
 
     let displayLoading = "";
     if (loading) {
@@ -35,14 +53,23 @@ const GameMap = () => {
     return (
         <>
             {displayLoading}
-            <Map center={[50.6246191, 5.5290555]} zoom={12}>
+            <Map
+                center={[coordinateCenterMap.lat, coordinateCenterMap.lng]}
+                zoom={18}
+                minZoom={17}
+                onMoveEnd={e => {
+                    onMove(e);
+                }}>
                 <TileLayer
                     url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                     attribution={
                         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }
                 />
-                <MarkerCluster trees={trees && trees} />
+                <MarkerCluster
+                    trees={trees && trees}
+                    wrapperSetTrees={wrapperSetTrees}
+                />
             </Map>
         </>
     );
