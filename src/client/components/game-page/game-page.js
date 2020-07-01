@@ -26,6 +26,7 @@ const GamePage = () => {
             })();
         }, 500);
     }, []);
+    console.log(userInfos);
 
     return (
         <div className={"gamePage"}>
@@ -181,13 +182,21 @@ const GamePage = () => {
                         <i id={"iconR"} className={"fas fa-user-cog"} />
                     </button>
                 </Link>
+                <div
+                    className={"borderGravatar"}
+                    style={{
+                        border: `10px solid ${
+                            userInfos ? userInfos.color : "#000000"
+                        }`,
+                    }}>
+                    <Gravatar
+                        id={"gravatar"}
+                        email={currentUser && currentUser.email}
+                        size={150}
+                        rating={"pg"}
+                    />
+                </div>
 
-                <Gravatar
-                    id={"gravatar"}
-                    email={currentUser && currentUser.email}
-                    size={150}
-                    rating={"pg"}
-                />
                 <h1>
                     {userInfos &&
                         userInfos.name.charAt(0).toUpperCase() +
