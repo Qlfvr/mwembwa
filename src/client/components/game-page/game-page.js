@@ -26,7 +26,6 @@ const GamePage = () => {
             })();
         }, 500);
     }, []);
-    console.log(userInfos);
 
     return (
         <div className={"gamePage"}>
