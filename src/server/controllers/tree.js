@@ -42,8 +42,23 @@ const queryGetAllTrees = () => ({
 });
 
 exports.getAllTrees = async (req, res) => {
+    console.log(req.query);
+    const coordinateCenterMap = JSON.parse(req.query.coordinateCenterMap);
     try {
         const responseGetAllTrees = await Tree.aggregate([
+            {
+                $geoNear: {
+                    near: {
+                        type: "Point",
+                        coordinates: [
+                            coordinateCenterMap.lat,
+                            coordinateCenterMap.lng,
+                        ],
+                    },
+                    distanceField: "distance.calculated",
+                    maxDistance: 200,
+                },
+            },
             queryPopulateUser(),
             queryPopulateComment(),
             queryGetAllTrees(),

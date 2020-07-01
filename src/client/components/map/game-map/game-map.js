@@ -4,22 +4,35 @@ import axios from "axios";
 import MarkerCluster from "../marker-cluster/marker-cluster.js";
 
 const GameMap = () => {
+    let coordinateCenterMap = {lat: 50.62978, lng: 5.575254};
+
     const [loading, setLoading] = useState(true);
-    const [trees, setTrees] = useState();
-    useEffect(() => {
+    const [trees, setTrees] = useState([]);
+
+    const getTreesByCoordinateCenterMap = () => {
         axios
-            .get("/api/tree/")
+            .get("/api/tree/", {
+                params: {
+                    coordinateCenterMap,
+                },
+            })
             .then(response => {
-                // handle success
                 setTrees(response.data);
                 setLoading(false);
-                // console.log(response);
             })
             // eslint-disable-next-line no-unused-vars
             .catch(error => {
-                // handle error
                 // console.log(error);
             });
+    };
+
+    const onMove = e => {
+        coordinateCenterMap = e.target.getCenter();
+        getTreesByCoordinateCenterMap(coordinateCenterMap);
+    };
+
+    useEffect(() => {
+        getTreesByCoordinateCenterMap();
     }, []);
 
     const wrapperSetTrees = treesUpdated => {
@@ -39,7 +52,12 @@ const GameMap = () => {
     return (
         <>
             {displayLoading}
-            <Map center={[50.6246191, 5.5290555]} zoom={12}>
+            <Map
+                center={[coordinateCenterMap.lat, coordinateCenterMap.lng]}
+                zoom={20}
+                onMoveEnd={e => {
+                    onMove(e);
+                }}>
                 <TileLayer
                     url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                     attribution={
