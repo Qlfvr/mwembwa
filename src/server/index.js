@@ -3,6 +3,7 @@ import path from "path";
 const mongoose = require("mongoose");
 const treeRoutes = require("./routes/tree");
 const userRoutes = require("./routes/user");
+const logRoutes = require("./routes/log");
 const bodyParser = require("body-parser");
 const Tree = require("./models/tree");
 const User = require("./models/user");
@@ -18,10 +19,14 @@ mongoose
 
 const {APP_PORT} = process.env;
 const app = express();
+
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 app.use(bodyParser.json());
+
 app.use("/api/auth", userRoutes);
 app.use("/api/tree", treeRoutes);
+app.use("/api/log", logRoutes);
+
 app.get("/*", (req, res) => {
     // eslint-disable-next-line no-sequences
     res.sendFile(
