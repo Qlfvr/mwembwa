@@ -23,9 +23,11 @@ const GamePage = () => {
                 } catch (error) {
                     //    console.log(error);
                 }
+
+                console.log("component updated");
             })();
-        }, 500);
-    }, []);
+        }, 3000);
+    });
 
     return (
         <div className={"gamePage"}>
