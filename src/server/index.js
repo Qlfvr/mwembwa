@@ -45,7 +45,7 @@ async function payroll() {
     usersQuery.forEach(async user => {
         const previousLeaves = user.leaves;
 
-        const missedPay = Math.round((time - user.lastPay) / 3000); //period of 15 minutes missed
+        const missedPay = Math.round((time - user.lastPay) / 900000); //period of 15 minutes missed
         let newLeaves = 0;
         let totalLeaves = 0;
         const treeQuery = await Tree.find({owner: user._id});
@@ -81,5 +81,5 @@ async function leavesLoss() {
     });
 }
 
-setInterval(payroll, 3000);
-setInterval(leavesLoss, 12000);
+setInterval(payroll, 900000);
+setInterval(leavesLoss, 3600000);
