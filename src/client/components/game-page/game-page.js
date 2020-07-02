@@ -23,8 +23,6 @@ const GamePage = () => {
                 } catch (error) {
                     //    console.log(error);
                 }
-
-                console.log("component updated");
             })();
         }, 3000);
     });
