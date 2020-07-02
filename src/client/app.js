@@ -10,59 +10,6 @@ import Gamelog from "./components/gamelog/gamelog";
 import Settings from "./components/settings/settings";
 import "./styles/main.scss";
 
-// function receiveLeaves(interval) {
-//     axios
-//         .post(
-//             `/api/tree/payroll/${interval}`,
-//             {},
-//             {
-//                 headers: {
-//                     Authorization: `Bearer ${currentUser.token}`,
-//                 },
-//             },
-//         )
-//         .then(response => {
-//             // handle success
-
-//             console.log(response);
-//         })
-//         // eslint-disable-next-line no-unused-vars
-//         .catch(error => {
-//             // handle error
-
-//             console.log(error);
-//         });
-// }
-// function looseLeaves() {
-//     axios
-//         .post(
-//             `/api/tree/leaves-loss/${currentUser.userId}`,
-//             {},
-//             {
-//                 headers: {
-//                     Authorization: `Bearer ${currentUser.token}`,
-//                 },
-//             },
-//         )
-//         .then(response => {
-//             // handle success
-
-//             console.log(response);
-//         })
-//         // eslint-disable-next-line no-unused-vars
-//         .catch(error => {
-//             // handle error
-//             console.log(error);
-//         });
-// }
-
-// const payInterval = 900000;
-
-// setInterval(() => {
-//     receiveLeaves(payInterval);
-// }, payInterval); //900000
-// setInterval(looseLeaves, 9000);
-
 ReactDOM.render(
     <>
         <GameMap />
