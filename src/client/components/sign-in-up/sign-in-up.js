@@ -113,8 +113,10 @@ const SignInUp = () => {
         });
 
     if (redirect) {
+        //  authentification.onAuthentification();
         return <Redirect to={"/game-page"} />;
     }
+
     return (
         <div className={"container"}>
             <div className={"signInUp"}>
