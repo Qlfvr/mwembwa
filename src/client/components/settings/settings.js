@@ -53,7 +53,7 @@ const Settings = () => {
                         rating={"pg"}
                     />
                     <div className={"info"}>
-                        <p>
+                        <div className={"infos"}>
                             <svg
                                 id={"iconL"}
                                 width={"29"}
@@ -120,8 +120,8 @@ const Settings = () => {
                                 </defs>
                             </svg>{" "}
                             <h3>{userInfos && userInfos.totalTrees | 0}</h3>
-                        </p>
-                        <p>
+                        </div>
+                        <div className={"infos"}>
                             <svg
                                 id={"iconL"}
                                 width={"29"}
@@ -190,7 +190,7 @@ const Settings = () => {
                             <h3>
                                 {userInfos && userInfos.leaves.toFixed(2) | 0}
                             </h3>
-                        </p>
+                        </div>
                     </div>
                     <form>
                         <h2>{"Username"}</h2>

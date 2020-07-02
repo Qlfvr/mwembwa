@@ -4,6 +4,7 @@ const treeCtrl = require("../controllers/tree");
 const auth = require("../middleware/auth");
 
 router.get("/", treeCtrl.getAllTrees);
+router.get("/:treeId", auth, treeCtrl.getOneTree);
 router.post("/set-random-trees", auth, treeCtrl.setRandomTrees);
 router.post("/lock-tree/:treeId", auth, treeCtrl.lockTree);
 router.post("/comment/:treeId/", auth, treeCtrl.addComment);

@@ -21,6 +21,26 @@ const MarkerPopup = ({tree}) => {
         ? JSON.parse(localStorage.getItem("currentUser"))
         : null;
 
+    /*const [userInfos, setUserInfos] = useState(null);
+        useEffect(() => {
+            setTimeout(() => {
+                (async () => {
+                    try {
+                        const response = await axios.get("/api/auth/user-infos", {
+                            headers: {
+                                Authorization: `Bearer ${currentUser.token}`,
+                            },
+                        });
+                        setUserInfos(response.data);
+                        // eslint-disable-next-line no-unused-vars
+                    } catch (error) {
+                        //    console.log(error);
+                    }
+                })();
+            }, 500);
+        }, []);
+        */
+
     const handleClickSubmitComment = () => {
         if (commentToWrite) {
             axios
@@ -292,7 +312,7 @@ const MarkerPopup = ({tree}) => {
                                                 </filter>
                                             </defs>
                                         </svg>
-                                        <p>{"15"}</p>
+                                        <p>{tree.price && tree.price}</p>
                                     </button>
                                 </div>
                             </div>
@@ -305,6 +325,7 @@ const MarkerPopup = ({tree}) => {
                                         {"Buy!"}
                                     </button>
                                 )}
+
                                 {isTreeBelongToCurrentUser &&
                                     !isTreeAlreadyLocked && (
                                         <button
@@ -318,17 +339,82 @@ const MarkerPopup = ({tree}) => {
                                     )}
 
                                 {isTreeAlreadyLocked && (
-                                    <div>{"Tree is locked"}</div>
+                                    <i className={"fas fa-lock"} />
                                 )}
                             </div>
                             <div className={"lineTree"} />
                             <div className={"previousBuy"}>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>
-                                        {tree.owner[0] && tree.owner[0].name}
-                                    </h3>
-                                </div>
+                                <h3>{"Historique des propriétaires"}</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     ) : (

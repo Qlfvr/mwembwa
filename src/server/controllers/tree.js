@@ -43,19 +43,50 @@ const queryGetAllTrees = () => ({
 });
 
 exports.getAllTrees = async (req, res) => {
+    const coordinateCenterMap = JSON.parse(req.query.coordinateCenterMap);
+
     try {
         const responseGetAllTrees = await Tree.aggregate([
+            {
+                $geoNear: {
+                    near: {
+                        type: "Point",
+                        coordinates: [
+                            coordinateCenterMap.lat,
+                            coordinateCenterMap.lng,
+                        ],
+                    },
+                    distanceField: "distance.calculated",
+                    maxDistance: 300,
+                },
+            },
             queryPopulateUser(),
             queryPopulateComment(),
             queryGetAllTrees(),
         ]).exec();
 
-        // console.log(responseGetAllTrees[0].comments[0].ownerComment.name);
-        // console.log(responseGetAllTrees);
-
         const allTrees = responseGetAllTrees;
 
         return res.status(200).json(allTrees);
+    } catch (error) {
+        return res.status(500).json({error});
+    }
+};
+
+exports.getOneTree = async (req, res) => {
+    try {
+        const responseGetOneTree = await Tree.aggregate([
+            {$match: {_id: mongoose.Types.ObjectId(req.params.treeId)}},
+            queryPopulateUser(),
+            queryPopulateComment(),
+            queryGetAllTrees(),
+        ]).exec();
+
+        const tree = responseGetOneTree[0];
+
+        tree.price = await calculatePrice(tree, req.userId);
+
+        return res.status(200).json(tree);
     } catch (error) {
         return res.status(500).json({error});
     }

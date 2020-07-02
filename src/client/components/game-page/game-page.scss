@@ -37,6 +37,13 @@
         top: 45px;
         right: 45px;
         text-align: center;
+        .borderGravatar{
+            height: 150px;
+            width: 150px;
+            border-radius: 150px;
+            //background-color: black;
+            display: inline-block;
+        }
     }
     .actions {
         position: fixed;
@@ -104,12 +111,13 @@
         outline: none;
         border: none;
     }
+    
     #gravatar {
         background-color: white;
         border-radius: 100px;
-        border: solid 15px #f4c287;
         width: 150px;
         height: 150px;
+       // margin-top: 10px;
     }
     #iconR {
         text-align: center;
@@ -125,10 +133,16 @@
         .profile{
         
         right: 10px;
+        .borderGravatar{
+            height: 80px;
+            width: 80px;
+            border-radius: 80px;
+            //background-color: black;
+            display: inline-block;
+        }
         #gravatar{
         width: 80px;
         height: 80px;
-        border: solid 5px #f4c287;;
         }
         h1{
             font-size: 18px;
