@@ -65,10 +65,6 @@ async function payroll() {
             }
         });
 
-        console.log(`missed play ${missedPay}`);
-
-        console.log(newLeaves);
-
         //update leaves value for current user
         await User.updateOne(
             {_id: user._id},
