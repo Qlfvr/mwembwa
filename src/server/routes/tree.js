@@ -10,7 +10,4 @@ router.post("/lock-tree/:treeId", auth, treeCtrl.lockTree);
 router.post("/comment/:treeId/", auth, treeCtrl.addComment);
 router.post("/buy-one/:treeId/", auth, treeCtrl.buyOne);
 
-router.post("/payroll/:interval", auth, treeCtrl.payroll);
-router.post("/leaves-loss/", auth, treeCtrl.leavesLoss);
-
 module.exports = router;

@@ -2,7 +2,6 @@ const Tree = require("../models/tree");
 const User = require("../models/user");
 const calculatePrice = require("../helpers/index").calculatePrice;
 const calculateLockPrice = require("../helpers/index").calculateLockPrice;
-const getTreeValue = require("../helpers/index").getTreeValue;
 const mongoose = require("mongoose");
 const log = require("./log");
 
@@ -190,24 +189,26 @@ exports.buyOne = async (req, res) => {
                 const treePrice = await calculatePrice(tree, userId);
 
                 if (user.leaves > treePrice) {
-                    Tree.updateOne(
-                        {_id: treeId},
-                        {
-                            color: user.color,
-                            owner: userId,
-                        },
-                    )
-                        .then(() => res.status(201).json())
-                        .catch(error => res.status(404).json(error));
+                    try {
+                        await Tree.updateOne(
+                            {_id: treeId},
+                            {
+                                color: user.color,
+                                owner: userId,
+                            },
+                        );
 
-                    User.updateOne(
-                        {_id: userId},
-                        {
-                            leaves: Math.ceil(user.leaves - treePrice),
-                        },
-                    )
-                        .then(() => res.status(201).json())
-                        .catch(error => res.status(404).json(error));
+                        await User.updateOne(
+                            {_id: userId},
+                            {
+                                leaves: Math.ceil(user.leaves - treePrice),
+                            },
+                        );
+
+                        console.log("you bought a tree");
+                    } catch (error) {
+                        console.log(error);
+                    }
                 } else {
                     return res
                         .status(403)
@@ -254,64 +255,4 @@ exports.addComment = async (req, res) => {
         // console.log(error);
     }
     return true;
-};
-
-exports.payroll = async (req, res) => {
-    console.log(req.params);
-
-    const time = Date.now();
-    const currentUser = await User.findOne({_id: req.userId});
-    const trees = await Tree.find({owner: req.userId});
-    let userLeaves = currentUser.leaves;
-    let totalLeavesTrees = 0;
-
-    const missedPay = Math.round(
-        (time - currentUser.lastPay) / req.params.interval,
-    ); //period of 15 minutes missed
-
-    console.log(`time : ${time}`);
-    console.log(`lastPay : ${currentUser.lastPay}`);
-    console.log(`time since last pay  : ${missedPay}`);
-    console.log(`time since last pay  : ${time - currentUser.lastPay}`);
-
-    let payment = 0;
-
-    trees.forEach(tree => {
-        //leaves on the tree = diameter* height  rounded up
-        const leavesOnTree = getTreeValue(tree);
-        totalLeavesTrees = totalLeavesTrees + leavesOnTree;
-    });
-    payment = totalLeavesTrees * missedPay;
-    userLeaves = userLeaves + payment;
-
-    if (missedPay >= 4) {
-        userLeaves = userLeaves / 2;
-    }
-
-    console.log(payment);
-
-    User.update(
-        {_id: req.userId},
-        {leaves: userLeaves, lastPay: time},
-        (error, result) => {
-            console.log(result);
-        },
-    );
-
-    return res.status(201).json();
-};
-
-exports.leavesLoss = async (req, res) => {
-    const currentUser = await User.findOne({_id: req.userId});
-
-    const newAmountLeaves = currentUser.leaves / 2;
-    User.updateOne(
-        {_id: req.userId},
-        {leaves: newAmountLeaves},
-        (error, result) => {
-            console.log(result);
-        },
-    );
-
-    return res.status(201).json();
 };
