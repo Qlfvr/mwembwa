@@ -8,6 +8,7 @@ const userSchema = mongoose.Schema({
     password: {type: String, required: true},
     leaves: {type: Number},
     color: {type: String},
+    lastPay: {type: Number},
 });
 
 userSchema.plugin(uniqueValidator);

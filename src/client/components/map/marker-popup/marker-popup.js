@@ -17,10 +17,31 @@ const MarkerPopup = ({tree}) => {
         setCommentToWrite(e.target.value);
     };
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = localStorage.getItem("currentUser")
+        ? JSON.parse(localStorage.getItem("currentUser"))
+        : null;
+
+    /*const [userInfos, setUserInfos] = useState(null);
+        useEffect(() => {
+            setTimeout(() => {
+                (async () => {
+                    try {
+                        const response = await axios.get("/api/auth/user-infos", {
+                            headers: {
+                                Authorization: `Bearer ${currentUser.token}`,
+                            },
+                        });
+                        setUserInfos(response.data);
+                        // eslint-disable-next-line no-unused-vars
+                    } catch (error) {
+                        //    console.log(error);
+                    }
+                })();
+            }, 500);
+        }, []);
+        */
 
     const handleClickSubmitComment = () => {
-        // console.log(commentToWrite);
         if (commentToWrite) {
             axios
                 .post(
@@ -43,6 +64,27 @@ const MarkerPopup = ({tree}) => {
         }
     };
 
+    const handleClickLock = treeId => {
+        axios
+            .post(
+                `/api/tree/lock-tree/${treeId}`,
+                {},
+                {
+                    headers: {Authorization: `Bearer ${currentUser.token}`},
+                },
+            )
+            // eslint-disable-next-line no-unused-vars
+            .then(response => {
+                // handle success
+                // console.log(response);
+            })
+            // eslint-disable-next-line no-unused-vars
+            .catch(error => {
+                // handle error
+                // console.log(error);
+            });
+    };
+
     function handleClick() {
         axios
             .post(
@@ -63,6 +105,15 @@ const MarkerPopup = ({tree}) => {
                 //console.log(error);
             });
     }
+
+    const isTreeBelongToCurrentUser =
+        tree.owner &&
+        currentUser !== null &&
+        tree.owner._id === currentUser.userId
+            ? true
+            : false;
+    const isTreeAlreadyLocked = tree.isLocked ? true : false;
+
     return (
         <>
             <Popup>
@@ -164,9 +215,7 @@ const MarkerPopup = ({tree}) => {
                                 </div>
                                 <div className={"middleHeader"}>
                                     <h2>{tree.name && tree.name}</h2>
-                                    <h3>
-                                        {tree.owner[0] && tree.owner[0].name}
-                                    </h3>
+                                    <h3>{tree.owner && tree.owner.name}</h3>
                                     <a
                                         target={"_blank"}
                                         rel={"noreferrer"}
@@ -261,65 +310,116 @@ const MarkerPopup = ({tree}) => {
                                                 </filter>
                                             </defs>
                                         </svg>
-                                        <p>{"15"}</p>
+                                        <p>{tree.price && tree.price}</p>
                                     </button>
                                 </div>
                             </div>
                             <div className={"BLbutton"}>
-                                <button
-                                    className={"btnBL"}
-                                    type={"submit"}
-                                    onClick={handleClick}>
-                                    {"Buy!"}
-                                </button>
-                                <button
-                                    className={"btnBL"}
-                                    type={"submit"}
-                                    onClick={handleClick}>
-                                    {"Lock!"}
-                                </button>
+                                {!isTreeBelongToCurrentUser && (
+                                    <button
+                                        className={"btnBL"}
+                                        type={"submit"}
+                                        onClick={handleClick}>
+                                        {"Buy!"}
+                                    </button>
+                                )}
+
+                                {isTreeBelongToCurrentUser &&
+                                    !isTreeAlreadyLocked && (
+                                        <button
+                                            className={"btnBL"}
+                                            type={"submit"}
+                                            onClick={() =>
+                                                handleClickLock(tree._id)
+                                            }>
+                                            {"Lock!"}
+                                        </button>
+                                    )}
+
+                                {isTreeAlreadyLocked && (
+                                    <i className={"fas fa-lock"} />
+                                )}
                             </div>
                             <div className={"lineTree"} />
                             <div className={"previousBuy"}>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
-                                <div className={"buyerTreeUser"}>
-                                    <i className={"fas fa-user-alt"} />
-                                    <h3>{"User name"}</h3>
-                                </div>
+                                <h3>{"Historique des propriétaires"}</h3>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i
+                                                    className={
+                                                        "fas fa-user-alt"
+                                                    }
+                                                />
+                                            </td>
+                                            <td>{"Username"}</td>
+                                            <td>{"Date"}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     ) : (
                         <div className={"displaySectionComments"}>
                             <h1>{"Comments"}</h1>
                             <div className={"commentHead"}>
-                                <input
+                                <textarea
                                     type={"text"}
                                     placeholder={"Write a comment"}
                                     value={commentToWrite}
@@ -335,15 +435,6 @@ const MarkerPopup = ({tree}) => {
                                 {tree.comments.length &&
                                     tree.comments.map(comment => (
                                         <div key={comment._id}>
-                                            <div className={"commentDate"}>
-                                                {new Date(
-                                                    comment.createdAt,
-                                                ).toLocaleDateString("fr-BE", {
-                                                    hour: "numeric",
-                                                    minute: "numeric",
-                                                    second: "numeric",
-                                                })}
-                                            </div>
                                             <div className={"commentContainer"}>
                                                 <div className={"commentUser"}>
                                                     <i
@@ -352,10 +443,7 @@ const MarkerPopup = ({tree}) => {
                                                         }
                                                     />
                                                     <div>
-                                                        {
-                                                            comment.ownerComment
-                                                                .name
-                                                        }
+                                                        {comment.owner.name}
                                                     </div>
                                                 </div>
                                                 <div
@@ -363,6 +451,23 @@ const MarkerPopup = ({tree}) => {
                                                         "commentContent"
                                                     }>
                                                     <p>{comment.content}</p>
+                                                    <div
+                                                        className={
+                                                            "commentDate"
+                                                        }>
+                                                        {new Date(
+                                                            comment.createdAt,
+                                                        ).toLocaleDateString(
+                                                            "fr-BE",
+                                                            {
+                                                                hour: "numeric",
+                                                                minute:
+                                                                    "numeric",
+                                                                second:
+                                                                    "numeric",
+                                                            },
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

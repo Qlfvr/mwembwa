@@ -9,12 +9,41 @@
         flex-direction: column;
         justify-content: space-between;
         //height: 210px;
+      
     }
+     .tooltip{
+            padding: 0.5rem 1rem;
+            font-size: 15px;
+            width: max-content;
+            position: absolute;
+            margin-top: -26px;
+            margin-left: -3px;
+            color: #85375C;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            line-height: normal;
+            transform:scale(0) rotate(-10deg);
+            transition:all .25s;
+        }
+        h2:hover .tooltip{
+            transform:scale(1) rotate(0);
+            opacity:1;    
+        }
+
     .profile {
         position: fixed;
         top: 45px;
         right: 45px;
         text-align: center;
+        .borderGravatar{
+            height: 150px;
+            width: 150px;
+            border-radius: 150px;
+            //background-color: black;
+            display: inline-block;
+        }
     }
     .actions {
         position: fixed;
@@ -27,7 +56,7 @@
         border-radius: 20px;
         width: 60px;
         height: 80px;
-        margin: 0 10px 20px 0;
+        margin: 0 10px 50px 0;
         outline: none;
         border: none;
     }
@@ -82,12 +111,13 @@
         outline: none;
         border: none;
     }
+    
     #gravatar {
         background-color: white;
         border-radius: 100px;
-        border: solid 15px #f4c287;
         width: 150px;
         height: 150px;
+       // margin-top: 10px;
     }
     #iconR {
         text-align: center;
@@ -99,17 +129,24 @@
     }
 }
 @media all and (max-device-width: 480px){
-    .profile{
-        right: 25px;
+    .gamePage{
+        .profile{
+        
+        right: 10px;
+        .borderGravatar{
+            height: 80px;
+            width: 80px;
+            border-radius: 80px;
+            //background-color: black;
+            display: inline-block;
+        }
         #gravatar{
         width: 80px;
         height: 80px;
-        border: solid 5px #f4c287;;
         }
         h1{
-            font-size: 25px;
-            color: white;
-            text-shadow: 1px 1px 3px black;
+            font-size: 18px;
+            
         }
         #buttonSettings{
             width: 30px;
@@ -117,10 +154,13 @@
         }
     }
     .assets{
+        left: 10px;
+
         
         #buttonL{
             width: 40px;
             height: 60px;
+            margin-bottom: 20px;
             
             #iconL{
                 height: 40px;
@@ -140,9 +180,13 @@
         }
     }
     .actions{
+        left: 10px;
         #buttonF{
+            
             height: 40px;
             width:40px;
         }
     }
+    }
+    
 }

@@ -3,6 +3,26 @@ const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 const User = require("../models/user");
 
+const queryPopulateTrees = () => ({
+    $lookup: {
+        from: "trees",
+        localField: "_id",
+        foreignField: "owner",
+        as: "trees",
+    },
+});
+
+const queryGetUsersInfos = () => ({
+    $project: {
+        _id: 1,
+        name: 1,
+        email: 1,
+        totalTrees: {$size: "$trees"},
+        leaves: 1,
+        color: 1,
+    },
+});
+
 exports.signup = (req, res) => {
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         const user = new User({
@@ -32,6 +52,7 @@ exports.login = (req, res) => {
                     }
                     res.status(200).json({
                         userId: user._id,
+                        email: user.email,
                         token: jwt.sign(
                             {userId: user._id},
                             "VMvpi62eztD2fzfw2Wu6mtHeDIsijaoQuuGa2JPv6CRjXL3HXpJLcMOpeEQ68Mt",
@@ -73,25 +94,6 @@ exports.setBonusLeaves = async (req, res) => {
         return res.status(500).json({error});
     }
 };
-
-const queryPopulateTrees = () => ({
-    $lookup: {
-        from: "trees",
-        localField: "_id",
-        foreignField: "owner",
-        as: "trees",
-    },
-});
-
-const queryGetUsersInfos = () => ({
-    $project: {
-        _id: 1,
-        name: 1,
-        email: 1,
-        totalTrees: {$size: "$trees"},
-        leaves: 1,
-    },
-});
 
 exports.getUserInfos = async (req, res) => {
     try {

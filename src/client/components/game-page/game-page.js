@@ -24,8 +24,8 @@ const GamePage = () => {
                     //    console.log(error);
                 }
             })();
-        }, 500);
-    }, []);
+        }, 3000);
+    });
 
     return (
         <div className={"gamePage"}>
@@ -167,7 +167,12 @@ const GamePage = () => {
                         </defs>
                     </svg>
 
-                    <h2>{userInfos && userInfos.leaves.toFixed(2) | 0}</h2>
+                    <h2>
+                        {userInfos && userInfos.leaves.toFixed(2) | 0}
+                        <span className={"tooltip"}>
+                            {"Formule arbe X feuilles"}
+                        </span>
+                    </h2>
                 </button>
             </div>
             <div className={"profile"}>
@@ -176,13 +181,21 @@ const GamePage = () => {
                         <i id={"iconR"} className={"fas fa-user-cog"} />
                     </button>
                 </Link>
+                <div
+                    className={"borderGravatar"}
+                    style={{
+                        border: `10px solid ${
+                            userInfos ? userInfos.color : "#000000"
+                        }`,
+                    }}>
+                    <Gravatar
+                        id={"gravatar"}
+                        email={currentUser && currentUser.email}
+                        size={150}
+                        rating={"pg"}
+                    />
+                </div>
 
-                <Gravatar
-                    id={"gravatar"}
-                    email={userInfos && userInfos.email}
-                    size={150}
-                    rating={"pg"}
-                />
                 <h1>
                     {userInfos &&
                         userInfos.name.charAt(0).toUpperCase() +

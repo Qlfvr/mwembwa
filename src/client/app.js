@@ -8,7 +8,8 @@ import Homepage from "./components/homepage/homepage";
 import Leaderboard from "./components/leaderboard/leaderboard";
 import Gamelog from "./components/gamelog/gamelog";
 import Settings from "./components/settings/settings";
-
+//import PrivateRoute from "./private-route.js";
+//import AuthContext from "./auth.js";
 import "./styles/main.scss";
 
 ReactDOM.render(

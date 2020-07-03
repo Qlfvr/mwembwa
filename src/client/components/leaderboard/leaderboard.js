@@ -58,13 +58,21 @@ const LeaderBoard = () => {
                                     <tr key={leaderboard._id}>
                                         <td>{index + 1}</td>
                                         <td>
-                                            {leaderboard.name
-                                                .charAt(0)
-                                                .toUpperCase() +
-                                                leaderboard.name.slice(1)}
+                                            {leaderboard.name &&
+                                                leaderboard.name
+                                                    .charAt(0)
+                                                    .toUpperCase() +
+                                                    leaderboard.name.slice(1)}
                                         </td>
-                                        <td>{leaderboard.totalTrees}</td>
-                                        <td>{leaderboard.leaves}</td>
+                                        <td>
+                                            {leaderboard.totalTrees &&
+                                                leaderboard.totalTrees}
+                                        </td>
+                                        <td>
+                                            {leaderboard.leaves &&
+                                                leaderboard.leaves.toFixed(2) |
+                                                    0}
+                                        </td>
                                     </tr>
                                 ))}
                         </tbody>
