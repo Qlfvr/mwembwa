@@ -10,5 +10,6 @@ module.exports = {
     extends: "@becode",
     rules: {
         "react/button-has-type": 0,
+        "no-confusing-arrow": ["error", {allowParens: true}],
     },
 };
