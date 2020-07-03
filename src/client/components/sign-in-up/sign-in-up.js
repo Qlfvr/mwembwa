@@ -111,9 +111,18 @@ const SignInUp = () => {
                     // console.log(error);
                 });
         });
-
+    //try redirect route ig logged in or not
+    /*const authentification={
+            isLoggedIn:false,
+            onAuthentification(){
+                this.isLoggedIn=true;
+            },
+            getLogInStatus() {
+                return this.isLoggedIn;
+            }
+        }*/
     if (redirect) {
-        //  authentification.onAuthentification();
+        //authentification.onAuthentification();
         return <Redirect to={"/game-page"} />;
     }
 

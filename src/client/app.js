@@ -8,7 +8,7 @@ import Homepage from "./components/homepage/homepage";
 import Leaderboard from "./components/leaderboard/leaderboard";
 import Gamelog from "./components/gamelog/gamelog";
 import Settings from "./components/settings/settings";
-
+import PrivateRoute from "./private-route.js";
 import "./styles/main.scss";
 
 ReactDOM.render(
@@ -17,10 +17,10 @@ ReactDOM.render(
         <BrowserRouter>
             <Route exact path={"/"} component={Homepage} />
             <Route exact path={"/sign-in-up"} component={SignInUp} />
-            <Route exact path={"/game-page"} component={GamePage} />
-            <Route exact path={"/leaderboard"} component={Leaderboard} />
-            <Route exact path={"/gamelog"} component={Gamelog} />
-            <Route exact path={"/settings"} component={Settings} />
+            <PrivateRoute exact path={"/game-page"} component={GamePage} />
+            <PrivateRoute exact path={"/leaderboard"} component={Leaderboard} />
+            <PrivateRoute exact path={"/gamelog"} component={Gamelog} />
+            <PrivateRoute exact path={"/settings"} component={Settings} />
         </BrowserRouter>
     </>,
     document.querySelector("#app"),
