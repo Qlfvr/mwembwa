@@ -33,67 +33,65 @@ exports.calculatePrice = async function (tree, userId) {
         const treeValue = Math.ceil(tree.diameter * tree.height);
         let treePrice = treeValue;
 
-        if (tree.owner !== null) {
-            const currentOwner = tree.owner;
-
-            const valueTargettedPlayersTreeWithin100m = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {
-                    $match: {owner: mongoose.Types.ObjectId(currentOwner)},
-                },
-                groupSumOfTreeDefaultValues(),
-            ]);
-
-            const amountOfTreesWithin100m = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {$group: {_id: null, count: {$sum: 1}}},
-            ]);
-
-            const amountOfTreesTargettedPlayerWithin100m = await Tree.aggregate(
-                [
-                    queryGeolocTrees100MeterRadius(tree),
-                    {
-                        $match: {owner: mongoose.Types.ObjectId(currentOwner)},
-                    },
-                    {$group: {_id: null, count: {$sum: 1}}},
-                ],
-            );
-
-            const valueOtherPeopleTreesWithin100m = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {
-                    $match: {
-                        $and: [
-                            {
-                                owner: {
-                                    $ne: mongoose.Types.ObjectId(currentOwner),
-                                },
-                            },
-                            {owner: {$type: "objectId"}},
-                        ],
-                    },
-                },
-
-                groupSumOfTreeDefaultValues(),
-            ]);
-
-            //     value of all your tree in 100m radius
-            const valueOfCurrentPlayerTrees = await Tree.aggregate([
-                queryGeolocTrees100MeterRadius(tree),
-                {
-                    $match: {owner: mongoose.Types.ObjectId(userId)},
-                },
-                groupSumOfTreeDefaultValues(),
-            ]);
-
-            treePrice =
-                treeValue +
-                valueTargettedPlayersTreeWithin100m[0].treeValue *
-                    (amountOfTreesWithin100m[0].count /
-                        amountOfTreesTargettedPlayerWithin100m[0].count) +
-                valueOtherPeopleTreesWithin100m[0].treeValue -
-                valueOfCurrentPlayerTrees[0].treeValue;
+        if (tree.owner === null) {
+            return treePrice;
         }
+        const currentOwner = tree.owner;
+        const valueTargettedPlayersTreeWithin100m = await Tree.aggregate([
+            queryGeolocTrees100MeterRadius(tree),
+            {
+                $match: {owner: mongoose.Types.ObjectId(currentOwner)},
+            },
+            groupSumOfTreeDefaultValues(),
+        ]);
+
+        const amountOfTreesWithin100m = await Tree.aggregate([
+            queryGeolocTrees100MeterRadius(tree),
+            {$group: {_id: null, count: {$sum: 1}}},
+        ]);
+
+        const amountOfTreesTargettedPlayerWithin100m = await Tree.aggregate([
+            queryGeolocTrees100MeterRadius(tree),
+            {
+                $match: {owner: mongoose.Types.ObjectId(currentOwner)},
+            },
+            {$group: {_id: null, count: {$sum: 1}}},
+        ]);
+
+        const valueOtherPeopleTreesWithin100m = await Tree.aggregate([
+            queryGeolocTrees100MeterRadius(tree),
+            {
+                $match: {
+                    $and: [
+                        {
+                            owner: {
+                                $ne: mongoose.Types.ObjectId(currentOwner),
+                            },
+                        },
+                        {owner: {$type: "objectId"}},
+                    ],
+                },
+            },
+
+            groupSumOfTreeDefaultValues(),
+        ]);
+
+        //     value of all your tree in 100m radius
+        const valueOfCurrentPlayerTrees = await Tree.aggregate([
+            queryGeolocTrees100MeterRadius(tree),
+            {
+                $match: {owner: mongoose.Types.ObjectId(userId)},
+            },
+            groupSumOfTreeDefaultValues(),
+        ]);
+
+        treePrice =
+            treeValue +
+            valueTargettedPlayersTreeWithin100m[0].treeValue *
+                (amountOfTreesWithin100m[0].count /
+                    amountOfTreesTargettedPlayerWithin100m[0].count) +
+            valueOtherPeopleTreesWithin100m[0].treeValue -
+            valueOfCurrentPlayerTrees[0].treeValue;
 
         return treePrice;
     } catch (error) {
