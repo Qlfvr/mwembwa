@@ -34,6 +34,16 @@ const Settings = () => {
         }, 500);
     }, []);
 
+    function handleDisconnect(event) {
+        event.preventDefault();
+
+        window.localStorage.removeItem("currentUser");
+
+        history.push("/sign-in-up/");
+        // // setRedirect("/game-page" )
+        console.log("youpie");
+    }
+
     return (
         <>
             <GamePage />
@@ -205,7 +215,7 @@ const Settings = () => {
                         <h2>{"Password"}</h2>
                         <input type={"password"} />
                         <button type={"submit"}>{"Save changes"}</button>
-                        <button type={"submit"}>
+                        <button type={"submit"} onClick={handleDisconnect}>
                             <i className={"fas fa-power-off"} />
                         </button>
                     </form>

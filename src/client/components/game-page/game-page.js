@@ -24,8 +24,8 @@ const GamePage = () => {
                     //    console.log(error);
                 }
             })();
-        }, 500);
-    }, []);
+        }, 3000);
+    });
 
     return (
         <div className={"gamePage"}>

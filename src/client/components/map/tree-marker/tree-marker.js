@@ -24,17 +24,16 @@ const TreeMarker = ({trees, wrapperSetTrees}) => {
 
                 wrapperSetTrees(treesUpdated);
             })
-            // eslint-disable-next-line no-unused-vars
             .catch(error => {
-                // console.log(error);
+                console.log(error);
             });
     };
 
     let treeMarkers = [];
-    // eslint-disable-next-line no-undefined
-    if (trees !== undefined) {
+
+    if (trees.length > 0) {
         treeMarkers = trees.map(tree => {
-            const markerColor = tree.owner[0] ? tree.owner[0].color : "#129B12";
+            const markerColor = tree.owner ? tree.owner.color : "#129B12";
 
             const svgPath = `<?xml version="1.0" encoding="UTF-8"?>
 								<svg enable-background="new 0 0 512.001 512.001" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">

@@ -14,6 +14,13 @@ const queryPopulateUser = () => ({
     },
 });
 
+const queryUnwindOwnerTree = () => ({
+    $unwind: {
+        path: "$ownerTree",
+        preserveNullAndEmptyArrays: true,
+    },
+});
+
 const queryPopulateComment = () => ({
     $lookup: {
         from: "users",
@@ -23,6 +30,12 @@ const queryPopulateComment = () => ({
     },
 });
 
+const queryUnwindOwnerComment = () => ({
+    $unwind: {
+        path: "$ownerComment",
+        preserveNullAndEmptyArrays: true,
+    },
+});
 const queryGetAllTrees = () => ({
     $project: {
         _id: 1,
@@ -30,12 +43,16 @@ const queryGetAllTrees = () => ({
         location: 1,
         diameter: 1,
         height: 1,
-        owner: "$ownerTree",
+        owner: {
+            $ifNull: ["$ownerTree", null],
+        },
         isLocked: 1,
         comments: {
             _id: 1,
             content: 1,
-            ownerComment: "$ownerComment",
+            owner: {
+                $ifNull: ["$ownerComment", null],
+            },
             createdAt: 1,
         },
     },
@@ -60,7 +77,10 @@ exports.getAllTrees = async (req, res) => {
                 },
             },
             queryPopulateUser(),
+            queryUnwindOwnerTree(),
             queryPopulateComment(),
+            queryUnwindOwnerComment(),
+
             queryGetAllTrees(),
         ]).exec();
 
@@ -77,11 +97,15 @@ exports.getOneTree = async (req, res) => {
         const responseGetOneTree = await Tree.aggregate([
             {$match: {_id: mongoose.Types.ObjectId(req.params.treeId)}},
             queryPopulateUser(),
+            queryUnwindOwnerTree(),
             queryPopulateComment(),
+            queryUnwindOwnerComment(),
             queryGetAllTrees(),
         ]).exec();
 
         const tree = responseGetOneTree[0];
+
+        // console.log(JSON.stringify(tree));
 
         tree.price = await calculatePrice(tree, req.userId);
 
@@ -187,26 +211,28 @@ exports.buyOne = async (req, res) => {
         if (tree.owner === null || tree.owner.toString() !== userId) {
             if (tree.isLocked !== true) {
                 const treePrice = await calculatePrice(tree, userId);
-
+                console.log(treePrice);
                 if (user.leaves > treePrice) {
-                    Tree.updateOne(
-                        {_id: treeId},
-                        {
-                            color: user.color,
-                            owner: userId,
-                        },
-                    )
-                        .then(() => res.status(201).json())
-                        .catch(error => res.status(404).json(error));
+                    try {
+                        await Tree.updateOne(
+                            {_id: treeId},
+                            {
+                                color: user.color,
+                                owner: userId,
+                            },
+                        );
 
-                    User.updateOne(
-                        {_id: userId},
-                        {
-                            leaves: Math.ceil(user.leaves - treePrice),
-                        },
-                    )
-                        .then(() => res.status(201).json())
-                        .catch(error => res.status(404).json(error));
+                        await User.updateOne(
+                            {_id: userId},
+                            {
+                                leaves: Math.ceil(user.leaves - treePrice),
+                            },
+                        );
+
+                        console.log("you bought a tree");
+                    } catch (error) {
+                        console.log(error);
+                    }
                 } else {
                     return res
                         .status(403)
