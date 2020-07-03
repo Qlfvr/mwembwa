@@ -31,12 +31,14 @@ const queryGetAllTrees = () => ({
         location: 1,
         diameter: 1,
         height: 1,
-        owner: "$ownerTree",
+        owner: {
+            $ifNull: ["$ownerTree", null],
+        },
         isLocked: 1,
         comments: {
             _id: 1,
             content: 1,
-            ownerComment: "$ownerComment",
+            owner: "$ownerComment",
             createdAt: 1,
         },
     },
@@ -61,6 +63,12 @@ exports.getAllTrees = async (req, res) => {
                 },
             },
             queryPopulateUser(),
+            {
+                $unwind: {
+                    path: "$ownerTree",
+                    preserveNullAndEmptyArrays: true,
+                },
+            },
             queryPopulateComment(),
             queryGetAllTrees(),
         ]).exec();
@@ -78,11 +86,19 @@ exports.getOneTree = async (req, res) => {
         const responseGetOneTree = await Tree.aggregate([
             {$match: {_id: mongoose.Types.ObjectId(req.params.treeId)}},
             queryPopulateUser(),
+            {
+                $unwind: {
+                    path: "$ownerTree",
+                    preserveNullAndEmptyArrays: true,
+                },
+            },
             queryPopulateComment(),
             queryGetAllTrees(),
         ]).exec();
 
         const tree = responseGetOneTree[0];
+
+        // console.log(JSON.stringify(tree));
 
         tree.price = await calculatePrice(tree, req.userId);
 
@@ -188,7 +204,7 @@ exports.buyOne = async (req, res) => {
         if (tree.owner === null || tree.owner.toString() !== userId) {
             if (tree.isLocked !== true) {
                 const treePrice = await calculatePrice(tree, userId);
-
+                console.log(treePrice);
                 if (user.leaves > treePrice) {
                     Tree.updateOne(
                         {_id: treeId},
@@ -257,8 +273,6 @@ exports.addComment = async (req, res) => {
 };
 
 exports.payroll = async (req, res) => {
-    console.log(req.params);
-
     const time = Date.now();
     const currentUser = await User.findOne({_id: req.userId});
     const trees = await Tree.find({owner: req.userId});
@@ -268,11 +282,6 @@ exports.payroll = async (req, res) => {
     const missedPay = Math.round(
         (time - currentUser.lastPay) / req.params.interval,
     ); //period of 15 minutes missed
-
-    console.log(`time : ${time}`);
-    console.log(`lastPay : ${currentUser.lastPay}`);
-    console.log(`time since last pay  : ${missedPay}`);
-    console.log(`time since last pay  : ${time - currentUser.lastPay}`);
 
     let payment = 0;
 
@@ -287,8 +296,6 @@ exports.payroll = async (req, res) => {
     if (missedPay >= 4) {
         userLeaves = userLeaves / 2;
     }
-
-    console.log(payment);
 
     User.update(
         {_id: req.userId},

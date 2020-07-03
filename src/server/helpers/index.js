@@ -32,8 +32,10 @@ exports.calculatePrice = async function (tree, userId) {
     try {
         const treeValue = Math.ceil(tree.diameter * tree.height);
         let treePrice = treeValue;
-        if (tree.owner.length > 0) {
+
+        if (tree.owner !== null) {
             const currentOwner = tree.owner;
+
             const valueTargettedPlayersTreeWithin100m = await Tree.aggregate([
                 queryGeolocTrees100MeterRadius(tree),
                 {
@@ -84,15 +86,13 @@ exports.calculatePrice = async function (tree, userId) {
                 groupSumOfTreeDefaultValues(),
             ]);
 
-            if (currentOwner !== null) {
-                treePrice =
-                    treeValue +
-                    valueTargettedPlayersTreeWithin100m[0].treeValue *
-                        (amountOfTreesWithin100m[0].count /
-                            amountOfTreesTargettedPlayerWithin100m[0].count) +
-                    valueOtherPeopleTreesWithin100m[0].treeValue -
-                    valueOfCurrentPlayerTrees[0].treeValue;
-            }
+            treePrice =
+                treeValue +
+                valueTargettedPlayersTreeWithin100m[0].treeValue *
+                    (amountOfTreesWithin100m[0].count /
+                        amountOfTreesTargettedPlayerWithin100m[0].count) +
+                valueOtherPeopleTreesWithin100m[0].treeValue -
+                valueOfCurrentPlayerTrees[0].treeValue;
         }
 
         return treePrice;

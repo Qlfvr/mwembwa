@@ -107,9 +107,9 @@ const MarkerPopup = ({tree}) => {
     }
 
     const isTreeBelongToCurrentUser =
-        tree.owner[0] &&
+        tree.owner &&
         currentUser !== null &&
-        tree.owner[0]._id === currentUser.userId
+        tree.owner._id === currentUser.userId
             ? true
             : false;
     const isTreeAlreadyLocked = tree.isLocked ? true : false;
@@ -215,9 +215,7 @@ const MarkerPopup = ({tree}) => {
                                 </div>
                                 <div className={"middleHeader"}>
                                     <h2>{tree.name && tree.name}</h2>
-                                    <h3>
-                                        {tree.owner[0] && tree.owner[0].name}
-                                    </h3>
+                                    <h3>{tree.owner && tree.owner.name}</h3>
                                     <a
                                         target={"_blank"}
                                         rel={"noreferrer"}
