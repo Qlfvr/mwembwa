@@ -14,6 +14,13 @@ const queryPopulateUser = () => ({
     },
 });
 
+const queryUnwindOwnerTree = () => ({
+    $unwind: {
+        path: "$ownerTree",
+        preserveNullAndEmptyArrays: true,
+    },
+});
+
 const queryPopulateComment = () => ({
     $lookup: {
         from: "users",
@@ -23,6 +30,12 @@ const queryPopulateComment = () => ({
     },
 });
 
+const queryUnwindOwnerComment = () => ({
+    $unwind: {
+        path: "$ownerComment",
+        preserveNullAndEmptyArrays: true,
+    },
+});
 const queryGetAllTrees = () => ({
     $project: {
         _id: 1,
@@ -37,7 +50,9 @@ const queryGetAllTrees = () => ({
         comments: {
             _id: 1,
             content: 1,
-            owner: "$ownerComment",
+            owner: {
+                $ifNull: ["$ownerComment", null],
+            },
             createdAt: 1,
         },
     },
@@ -62,13 +77,10 @@ exports.getAllTrees = async (req, res) => {
                 },
             },
             queryPopulateUser(),
-            {
-                $unwind: {
-                    path: "$ownerTree",
-                    preserveNullAndEmptyArrays: true,
-                },
-            },
+            queryUnwindOwnerTree(),
             queryPopulateComment(),
+            queryUnwindOwnerComment(),
+
             queryGetAllTrees(),
         ]).exec();
 
@@ -85,13 +97,9 @@ exports.getOneTree = async (req, res) => {
         const responseGetOneTree = await Tree.aggregate([
             {$match: {_id: mongoose.Types.ObjectId(req.params.treeId)}},
             queryPopulateUser(),
-            {
-                $unwind: {
-                    path: "$ownerTree",
-                    preserveNullAndEmptyArrays: true,
-                },
-            },
+            queryUnwindOwnerTree(),
             queryPopulateComment(),
+            queryUnwindOwnerComment(),
             queryGetAllTrees(),
         ]).exec();
 
