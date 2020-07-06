@@ -10,7 +10,7 @@ const User = require("./models/user");
 
 mongoose
     .connect(
-        "mongodb://dev:LPa7b2khYDr4Z69@ds161790.mlab.com:61790/heroku_p1m9d8cl",
+        "mongodb+srv://Quentin:UHDstslK7aInO3zq@arbustum-db-gnshi.mongodb.net/mwenbwa?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
